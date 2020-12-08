@@ -26,10 +26,6 @@ generate_power_nc <- function(date_from, date_to, file){
 
   emission_power <- build_emission_power(regulation = 2019, type="new")
 
-  rb.nox <- utils.emission_to_raster_brick(emission_power, r, time_dim, poll="NOx", value_col="emission_g_s")
-  rb.pm <- utils.emission_to_raster_brick(emission_power, r, time_dim, poll="PM", value_col="emission_g_s")
-  rb.so2 <- utils.emission_to_raster_brick(emission_power, r, time_dim, poll="SO2", value_col="emission_g_s")
-
   polls <- c("NOx","PM","SO2")
   rbs <- lapply(polls,
                 function(p){utils.emission_to_raster_brick(emission_power, r, time_dim, poll=p, value_col="emission_g_s")})
@@ -40,9 +36,15 @@ generate_power_nc <- function(date_from, date_to, file){
                    SIMPLIFY = F)
 
   nc <- utils.nc_from_ncvars(file, ncvars, rbs)
-
-  return(nc)
 }
 
 
 generate_power_nc(date_from, date_to, file)
+
+# Upload to GCS (doesn't work yet)
+# remotes::install_github("cloudyr/googleCloudStorageR")
+require(googleCloudStorageR)
+gcs_upload(file,
+           name=file.path("data/studies/202012_jakarta_inventory",file),
+           type="application/x-netcdf",
+           upload_type="simple")
