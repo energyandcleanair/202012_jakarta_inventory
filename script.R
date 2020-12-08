@@ -5,7 +5,7 @@ require(tidyverse)
 require(pbapply)
 
 source('utils.R')
-source('input_power.R')
+source('emission_power.R')
 
 
 date_from <- "2018-01-01"
