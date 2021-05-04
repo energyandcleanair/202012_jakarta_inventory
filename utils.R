@@ -1,3 +1,14 @@
+
+utils.equal_date_weights <- function(frequency="h"){
+  d <- seq(as.POSIXct("2019-01-01", tz="Asia/Jakarta"),
+           as.POSIXct("2019-12-31", tz="Asia/Jakarta"),
+           by=frequency)
+  tibble(date=d,
+         weight=1/length(d))
+}
+
+
+
 utils.date_to_time_dimension <- function(d){
   # $units
   # [1] "hours since 2019-01-01 00:00 +0700"
