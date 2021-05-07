@@ -1,5 +1,9 @@
-data.region_ids <- function(){
-  c("IDN.7_1","IDN.4_1","IDN.9.16_1","IDN.9.5_1","IDN.9.10_1","IDN.9.15_1","IDN.9.4_1")
+data.gid1s <- function(){
+  c("IDN.4_1",
+    "IDN.7_1",
+    "IDN.9_1",
+    "IDN.10_1",
+    "IDN.17_1")
 }
 
 
@@ -12,11 +16,12 @@ data.region_ids <- function(){
 data.gadm <- function(){
   rbind(
     sf::read_sf(file.path("data","boundaries","gadm36_IDN_1.shp")) %>%
+      filter(GID_1 %in% data.gid1s()) %>%
       select(id=GID_1, name=NAME_1, geometry),
     sf::read_sf(file.path("data","boundaries","gadm36_IDN_2.shp")) %>%
+      filter(GID_1 %in% data.gid1s()) %>%
       select(id=GID_2, name=NAME_2, geometry)
-  ) %>%
-    filter(id %in% data.region_ids())
+  )
 }
 
 
