@@ -1,11 +1,10 @@
-data.gid1s <- function(){
-  c("IDN.4_1",
-    "IDN.7_1",
-    "IDN.9_1",
-    "IDN.10_1",
-    "IDN.17_1")
-}
+data.region_ids <- function(gadm=T, bps=T){
+  ids <- c()
+  if(gadm) ids <- c(ids, c("IDN.4_1", "IDN.7_1", "IDN.9_1", "IDN.10_1", "IDN.17_1")
+  if(bps) ids <- c(ids, data.emission_transport() %>% .$region_id)
 
+  return(ids)
+}
 
 #' Build region shapefiles to be used later on.
 #'
@@ -16,12 +15,18 @@ data.gid1s <- function(){
 data.gadm <- function(){
   rbind(
     sf::read_sf(file.path("data","boundaries","gadm36_IDN_1.shp")) %>%
-      filter(GID_1 %in% data.gid1s()) %>%
+      filter(GID_1 %in% data.region_ids()) %>%
       select(id=GID_1, name=NAME_1, geometry),
     sf::read_sf(file.path("data","boundaries","gadm36_IDN_2.shp")) %>%
-      filter(GID_1 %in% data.gid1s()) %>%
+      filter(GID_1 %in% data.region_ids()) %>%
       select(id=GID_2, name=NAME_2, geometry)
   )
+}
+
+data.bps_map <- function(){
+  sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
+    select(id=ADM2_PCODE, name=ADM2_EN, geometry) %>%
+    filter(id %in% data.region_ids())
 }
 
 
