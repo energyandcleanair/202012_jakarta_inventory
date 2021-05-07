@@ -1,6 +1,6 @@
 data.region_ids <- function(gadm=T, bps=T){
   ids <- c()
-  if(gadm) ids <- c(ids, c("IDN.4_1", "IDN.7_1", "IDN.9_1", "IDN.10_1", "IDN.17_1")
+  if(gadm) ids <- c(ids, c("IDN.4_1", "IDN.7_1", "IDN.9_1", "IDN.10_1", "IDN.17_1"))
   if(bps) ids <- c(ids, data.emission_transport() %>% .$region_id)
 
   return(ids)
