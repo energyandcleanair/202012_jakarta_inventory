@@ -45,5 +45,6 @@ data.emission_transport <- function(){
   read.csv("data/transport/traffic_emission_2019_bps.csv") %>%
     tidyr::gather("poll","emission",-c(name, name_local, region_id)) %>%
     mutate(year=2019,
-           unit="tonne")
+           unit="tonne") %>%
+    rename(id=region_id)
 }
