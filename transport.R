@@ -1,15 +1,13 @@
 require(sf)
 require(dplyr)
 require(creainventory)
+require(creahelpers)
 
 source('data.R')
 
 
 # Transport emissions
-emission.d.transport <- read.csv("data/transport/traffic_emission_2019.csv") %>%
-  tidyr::gather("poll","emission",-c(name, name_local, id, id_level)) %>%
-  mutate(year=2019,
-         unit="tonne")
+emission.d.transport <- data.emission_transport()
 support.sp.transport <- sf::read_sf("data/transport/transport_spatial.shp")
 
 # Check

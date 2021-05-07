@@ -1,5 +1,6 @@
 
-#' Build simplified road network, keeping only required levels
+#' Build simplified road network, keeping only required levels, and adding the bps id to it
+#' so that it can be merged with emission data
 #'
 #' @return
 #' @export
@@ -19,10 +20,11 @@ data.build_roads <- function(){
   osm.roads.lite <- osm.roads %>%
     dplyr::filter(fclass %in% names(weights))
 
-  # Add gadm 1 and 2 ids
-  g <- data.gadm()
 
-  # Attaching gadm id to roads
+  # Add the kabupaten map
+  g <- data.bps_map()
+
+  # Attaching region_id (from BPS) to roads
   roads <- osm.roads.lite %>%
     sf::st_join(g, left=F)
 
@@ -37,4 +39,11 @@ data.build_roads <- function(){
 
 data.roads <- function(){
   sf::read_sf("data/transport/transport_spatial.shp")
+}
+
+data.emission_transport <- function(){
+  read.csv("data/transport/traffic_emission_2019_bps.csv") %>%
+    tidyr::gather("poll","emission",-c(name, name_local, region_id)) %>%
+    mutate(year=2019,
+           unit="tonne")
 }
