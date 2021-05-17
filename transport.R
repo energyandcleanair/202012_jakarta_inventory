@@ -32,6 +32,7 @@ raster::plot(r.transport.008)
 saveRDS(r.transport.008, "results/r.transport.008.RDS")
 r.transport.008 <- readRDS("results/r.transport.008.RDS")
 
+
 # Sanity check
 sum.raster <- raster::cellStats(r.transport.1, "sum") %>%
   tibble(value=., poll=names(.))
