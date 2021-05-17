@@ -4,7 +4,7 @@ require(creainventory)
 require(creahelpers)
 
 source('data.R')
-
+source('data.transport.R')
 
 # Transport emissions
 emission.d.transport <- data.emission_transport()
