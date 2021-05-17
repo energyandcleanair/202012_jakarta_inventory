@@ -6,7 +6,6 @@ require(creahelpers)
 source('data.R')
 source('data.transport.R')
 
-
 # Transport emissions
 emission.d.transport <- data.emission_transport()
 support.sp.transport <- sf::read_sf("data/transport/transport_spatial.shp")
