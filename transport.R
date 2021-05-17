@@ -31,6 +31,7 @@ saveRDS(r.transport.04, "results/r.transport.04.RDS")
 r.transport.008 <- creainventory::grid.rasterize(emission.transport, grid.008)
 raster::plot(r.transport.008)
 saveRDS(r.transport.008, "results/r.transport.008.RDS")
+r.transport.008 <- readRDS("results/r.transport.008.RDS")
 
 
 # Sanity check
