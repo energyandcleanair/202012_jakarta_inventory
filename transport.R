@@ -4,6 +4,7 @@ require(creainventory)
 require(creahelpers)
 
 source('data.R')
+source('data.transport.R')
 
 
 # Transport emissions
@@ -24,13 +25,13 @@ grid.008 <- data.grid(0.008, extent=emission.transport)
 
 # Create a single layer representing whole year
 r.transport.04 <- creainventory::grid.rasterize(emission.transport, grid.04)
-r.transport.008 <- creainventory::grid.rasterize(emission.transport, grid.008)
-
 raster::plot(r.transport.04)
-raster::plot(r.transport.008)
-
 saveRDS(r.transport.04, "results/r.transport.04.RDS")
+
+r.transport.008 <- creainventory::grid.rasterize(emission.transport, grid.008)
+raster::plot(r.transport.008)
 saveRDS(r.transport.008, "results/r.transport.008.RDS")
+
 
 # Sanity check
 if(sum(emission.transport$emission) != raster::cellStats(r.transport, "sum")){
