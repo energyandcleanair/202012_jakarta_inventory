@@ -37,14 +37,34 @@ data.build_roads <- function(){
   return(roads)
 }
 
-data.roads <- function(){
+data.transport_support <- function(){
   sf::read_sf("data/transport/transport_spatial.shp")
 }
 
-data.emission_transport <- function(){
-  read.csv("data/transport/traffic_emission_2019_bps.csv") %>%
-    tidyr::gather("poll","emission",-c(name, name_local, region_id)) %>%
-    mutate(year=2019,
-           unit="tonne") %>%
-    rename(id=region_id)
+data.transport_emission <- function(){
+  s <- readxl::read_xlsx("data/Emission-2019-compilation-send.xlsx",
+                         sheet='On-road-transportation',
+                         skip = 1)
+  s <- s %>% rename(location=`Province/Cities`)
+  s <- s %>% filter(!str_detect(location, "total"),
+                    !is.na(location))
+
+
+
+  s <- s %>%
+    tidyr::pivot_longer(names_to="poll",
+                        values_to="emission",
+                        -location) %>%
+    filter(!is.na(emission))
+
+  s$unit <- "tonnes"
+  s$year <- 2019
+
+  s$id <- utils.location_name_to_bps_id(s$location)
+
+  if(nrow(s[is.na(s$id),])>0){
+    stop("Missing ids for regions ", s[is.na(s$bps_id),] %>% distinct(location))
+  }
+
+
 }

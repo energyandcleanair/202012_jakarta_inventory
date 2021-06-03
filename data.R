@@ -1,9 +1,11 @@
 data.region_ids <- function(gadm=T, bps=T){
   ids <- c()
   if(gadm) ids <- c(ids, c("IDN.4_1", "IDN.7_1", "IDN.9_1", "IDN.10_1", "IDN.17_1"))
-  if(bps) ids <- c(ids, data.emission_transport() %>% .$id %>% unique())
+  if(bps) ids <- c(ids,
+                   read_csv("data/region_lookup.csv") %>% pull(ADM2_PCODE) %>% unique()
+                   )
 
-  return(ids)
+  return(unique(ids))
 }
 
 #' Build region shapefiles to be used later on.

@@ -1,3 +1,17 @@
+utils.location_name_to_bps_id <- function(l){
+  r <- read.csv("data/region_lookup.csv")
+
+
+  tibble(id=seq_along(l), name=gsub("[[:space:]]*Regency","",l)) %>%
+    left_join(r) %>% left_join(
+    tibble(id=seq_along(l), name_local=gsub("[[:space:]]*Regency","",l)) %>%
+      left_join(r),
+    by="id") %>%
+    mutate(bps_id=ifelse(is.na(ADM2_PCODE.y), ADM2_PCODE.x, ADM2_PCODE.y)) %>%
+    dplyr::select(id, name=name.x, bps_id) %>%
+    arrange(id) %>%
+    pull(bps_id)
+}
 
 utils.equal_date_weights <- function(frequency="h"){
   d <- seq(as.POSIXct("2019-01-01", tz="Asia/Jakarta"),
