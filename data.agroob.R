@@ -6,6 +6,7 @@
 #' @examples
 data.build_agroob_support <- function(){
 
+  # Get land use with agriculture on it
   lu <- data.land_use(type="agroob") %>%
     mutate(weight=1) %>%
     sf::st_make_valid()
@@ -15,7 +16,14 @@ data.build_agroob_support <- function(){
     sf::st_make_valid()
 
   intersection <- sf::st_intersection(lu, g)
-  intersection$weight <- 1
+
+  # Get fires over that region
+  library(creatrajs)
+
+  creatrajs::fire.download(date_from="2019-01-01",
+                           date_to="2019-12-31"
+                           )
+
 
   sf::write_sf(intersection, "data/agroob/support.shp")
 
