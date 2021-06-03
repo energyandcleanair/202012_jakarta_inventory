@@ -4,9 +4,9 @@
 #' @export
 #'
 #' @examples
-data.build_comres_support <- function(){
+data.build_agroob_support <- function(){
 
-  lu <- data.land_use(type="comres") %>%
+  lu <- data.land_use(type="agroob") %>%
     mutate(weight=1) %>%
     sf::st_make_valid()
 
@@ -17,7 +17,7 @@ data.build_comres_support <- function(){
   intersection <- sf::st_intersection(lu, g)
   intersection$weight <- 1
 
-  sf::write_sf(intersection, "data/comres/support.shp")
+  sf::write_sf(intersection, "data/agroob/support.shp")
 
   return(intersection)
 }
