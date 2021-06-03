@@ -66,5 +66,46 @@ data.grid <- function(res_deg, extent=NULL){
 }
 
 
+data.land_use <- function(type){
+
+  # Available types are
+  en_to_org <- list(
+    "Primary Dryland Forest"= "Hutan Lahan Kering Primer",
+    "Secondary Dryland Forest"= "Hutan Lahan Kering Sekunder",
+    "Open Land"= "Tanah Terbuka",
+    "Plant Forest"= "Hutan Tanaman",
+    "Scrub"= "Belukar",
+    "Plantation"= "Perkebunan",
+    "Settlement"= "Pemukiman",
+    "Secondary Mangrove Forest"= "Hutan Mangrove Sekunder",
+    "Swamp Scrub"= "Belukar Rawa",
+    "Dryland Farming"= "Pertanian Lahan Kering",
+    "Mixed Dry Land Farming"= "Pertanian Lahan Kering Campur",
+    "rice field"= "Sawah",
+    "Pond"= "Tambak",
+    "Airport / Port"= "Bandara / Pelabuhan",
+    "Mining"= "Pertambangan",
+    "Swamp"= "Rawa",
+    "Water body"= "Badan Air",
+    "Primary Mangrove Forest"= "Hutan Mangrove Primer",
+    "Savanna / Grasslands"= "Savana / Padang rumput",
+    "Secondary Swamp Forest"= "Hutan Rawa Sekunder",
+    "Transmigration"= "Transmigrasi"
+  )
+
+
+
+  sector_to_type_en <- list(
+    comres=c("Settlement"),
+    agroob=c("Plantation", "Dryland Farming", "Mixed Dry Land Farming", "rice field")
+  )
+
+  legendas <- unlist(en_to_org[sector_to_type_en[[type]]], use.names = F)
+
+  return(sf::read_sf("data/landuse/land_cover_2019.geojson") %>%
+           filter(Legenda %in% legendas) %>%
+           filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
+}
+
 
 
