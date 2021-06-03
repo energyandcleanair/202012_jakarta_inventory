@@ -42,29 +42,5 @@ data.transport_support <- function(){
 }
 
 data.transport_emission <- function(){
-  s <- readxl::read_xlsx("data/Emission-2019-compilation-send.xlsx",
-                         sheet='On-road-transportation',
-                         skip = 1)
-  s <- s %>% rename(location=`Province/Cities`)
-  s <- s %>% filter(!str_detect(location, "total"),
-                    !is.na(location))
-
-
-
-  s <- s %>%
-    tidyr::pivot_longer(names_to="poll",
-                        values_to="emission",
-                        -location) %>%
-    filter(!is.na(emission))
-
-  s$unit <- "tonnes"
-  s$year <- 2019
-
-  s$id <- utils.location_name_to_bps_id(s$location)
-
-  if(nrow(s[is.na(s$id),])>0){
-    stop("Missing ids for regions ", s[is.na(s$bps_id),] %>% distinct(location))
-  }
-
-
+  data.sheet_to_emissions(sheet_name="On-road-transportation")
 }
