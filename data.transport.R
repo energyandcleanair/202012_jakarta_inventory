@@ -66,5 +66,6 @@ data.transport_emission <- function(){
     stop("Missing ids for regions ", s[is.na(s$bps_id),] %>% distinct(location))
   }
 
+  return(s)
 
 }

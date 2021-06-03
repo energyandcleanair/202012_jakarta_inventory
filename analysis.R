@@ -1,3 +1,5 @@
+# remotes::install_github("energyandcleanair/creainventory")
+# devtools::reload(pkgload::inst("creainventory"))
 library(creainventory)
 library(raster)
 library(sf)
@@ -19,8 +21,9 @@ polls <- "NOx"
 
 lapply(names(sectors), function(s){
 
-  print(s)
+  message("======= ",s," =======")
   emission.data <- sectors[[s]]$emission() %>% filter(poll %in% polls) %>% filter(emission>0)
+  emission_total <- emission.data %>% group_by(poll) %>% summarise_at("emission", sum, na.rm=T)
   support <- sectors[[s]]$support()
 
   # Check
@@ -29,7 +32,7 @@ lapply(names(sectors), function(s){
 
 
   # Combine data with support
-  emission <- creainventory::combine(emission.data, support)
+  emission <- creainventory::combine(emission.data, support) %>% filter(!is.na(emission))
 
 
   # Check all ids are there
@@ -47,14 +50,15 @@ lapply(names(sectors), function(s){
   # Save
   dir.create("results", showWarnings = F)
   lapply(names(emission.raster),function(poll){
-    raster::writeRaster(emission.raster,
-                        file.path("results",sprintf("%s.%s.%s.tiff",s,poll,grid_name)))
+    raster::writeRaster(emission.raster[[poll]],
+                        file.path("results",sprintf("%s.%s.%s.tiff",s,poll,grid_name)),
+                        overwrite=T)
+
+    # Sanity check
+    emission_total_poll <- emission_total[emission_total$poll==poll,"emission"]
+    raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
+    if(emission_total_poll!=raster_total_poll){
+      warning("Emissions not conserved: ",emission_total_poll, " != ", raster_total_poll)
+    }
   })
-
-
-  # Sanity check
-  if(sum(emission.raster$emission) != raster::cellStats(r.comres, "sum")){
-    warning("Emissions not conserved")
-  }
-
 })
