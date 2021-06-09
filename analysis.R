@@ -4,10 +4,11 @@ library(creainventory)
 library(raster)
 library(sf)
 library(tidyverse)
+library(eixport)
 
 lapply(list.files(".", "data.*.R"),source)
 source('utils.R')
-
+source('edgar.R')
 
 sectors <- list(
   power=list(emission=data.power_emission, support=data.power_support),
@@ -30,10 +31,8 @@ lapply(names(sectors), function(s){
   creainventory::check.emission.d(emission.data)
   creainventory::check.support.sp(support)
 
-
   # Combine data with support
   emission <- creainventory::combine(emission.data, support) %>% filter(!is.na(emission))
-
 
   # Check all ids are there
   ids_with_emissions <- unique(emission.data$id[emission.data$emission>0])

@@ -34,7 +34,7 @@ data.build_agroob_support <- function(){
 data.agroob_support <- function(){
   sf::read_sf("data/agroob/support.shp")
 }
-
+q
 
 #' Read Commercial & Residential emission from excel
 #'
