@@ -1,18 +1,20 @@
-# remotes::install_github("energyandcleanair/creainventory")
+# remotes::install_github("energyandcleanair/creainventory", upgrade=F)
 # devtools::reload(pkgload::inst("creainventory"))
 library(creainventory)
 library(raster)
 library(sf)
 library(tidyverse)
+library(creatrajs)
 
 lapply(list.files(".", "data.*.R"),source)
 source('utils.R')
 
 
 sectors <- list(
+  comres=list(emission=data.comres_emission, support=data.comres_support),
   power=list(emission=data.power_emission, support=data.power_support),
   transport=list(emission=data.transport_emission, support=data.transport_support),
-  comres=list(emission=data.comres_emission, support=data.comres_support)
+  agroob=list(emission=data.agroob_emission, support=data.agroob_support)
 )
 
 grid <- data.grid.edgar()
@@ -39,7 +41,7 @@ lapply(names(sectors), function(s){
   ids_with_emissions <- unique(emission.data$id[emission.data$emission>0])
   missing_ids <- setdiff(ids_with_emissions, unique(support$id))
   if(length(missing_ids)>0){
-    warning("Missing support locations: ", missing_ids)
+    warning("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
     emission <- emission %>% filter(!sf::st_is_empty(geometry))
   }
 
