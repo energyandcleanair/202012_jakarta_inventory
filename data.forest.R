@@ -4,7 +4,7 @@
 #' @export
 #'
 #' @examples
-data.build_agroob_support <- function(){
+data.build_forest_support <- function(){
 
   # Taking more than one year to get more
   # representative distribution
@@ -12,8 +12,7 @@ data.build_agroob_support <- function(){
   date_to = "2019-12-31"
 
   # Get land use with agriculture on it
-  lu <- data.land_use(type="agroob") %>%
-  # lu <- data.land_use(type=NULL) %>%
+  lu <- data.land_use(type="forest") %>%
     mutate(weight=1) %>%
     sf::st_make_valid()
 
@@ -41,22 +40,22 @@ data.build_agroob_support <- function(){
 
   # sf::write tooo slow
   library(rgdal)
-  lapply(list.files("data/agroob","support.*", full.names = T), file.remove)
-  writeOGR(as(fires_w_id,"Spatial"), "data/agroob/","support",driver = "ESRI Shapefile")
+  lapply(list.files("data/forest","support.*", full.names = T), file.remove)
+  writeOGR(as(fires_w_id,"Spatial"), "data/forest/","support",driver = "ESRI Shapefile")
 }
 
 
-data.agroob_support <- function(){
-  sf::read_sf("data/agroob/support.shp")
+data.forest_support <- function(){
+  sf::read_sf("data/forest/support.shp")
 }
-q
 
-#' Read Commercial & Residential emission from excel
+
+#' Read forest fire emission from excel
 #'
 #' @return
 #' @export
 #'
 #' @examples
-data.agroob_emission <- function(){
-  data.sheet_to_emissions(sheet_name="Agro-residual-OB")
+data.forest_emission <- function(){
+  data.sheet_to_emissions(sheet_name="Forest Fire")
 }

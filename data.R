@@ -36,7 +36,7 @@ data.grid.edgar <- function(){
   g <- data.bps_map()
   extent <- sf::st_bbox(g)
 
-  raster::raster("data/edgar/ENE/v50_NOx_2015_1_ENE.0.1x0.1.nc") %>%
+  raster::raster("data/edgar/v50_NOx_2015_ENE.0.1x0.1.nc") %>%
     raster::raster() %>%
     raster::crop(extent)
 }
