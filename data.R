@@ -132,6 +132,3 @@ data.land_use <- function(type){
            filter(Legenda %in% legendas) %>%
            filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
 }
-
-
-

@@ -5,6 +5,7 @@ library(raster)
 library(sf)
 library(tidyverse)
 library(eixport)
+library(osmdata)
 
 lapply(list.files(".", "data.*.R"),source)
 source('utils.R')
@@ -13,19 +14,22 @@ source('edgar.R')
 sectors <- list(
   power=list(emission=data.power_emission, support=data.power_support),
   transport=list(emission=data.transport_emission, support=data.transport_support),
-  comres=list(emission=data.comres_emission, support=data.comres_support)
+  comres=list(emission=data.comres_emission, support=data.comres_support),
+  gasdist=list(emission=data.gasdist_emission, support=data.gasdist_support),
+  agroob=list(emission=data.agroob_emission, support=data.agroob_support),
+  landfill=list(emission=data.landfill_emission, support=data.landfill_support)
 )
 
 grid <- data.grid.edgar()
 grid_name <- "edgar"
-polls <- "NOx"
+polls <- "CH4"
 
-lapply(names(sectors), function(s){
+lapply(names(sectors), function(sector){
 
-  message("======= ",s," =======")
-  emission.data <- sectors[[s]]$emission() %>% filter(poll %in% polls) %>% filter(emission>0)
+  message("======= ",sector," =======")
+  emission.data <- sectors[[sector]]$emission() %>% filter(poll %in% polls) %>% filter(emission>0)
   emission_total <- emission.data %>% group_by(poll) %>% summarise_at("emission", sum, na.rm=T)
-  support <- sectors[[s]]$support()
+  support <- sectors[[sector]]$support()
 
   # Check
   creainventory::check.emission.d(emission.data)
@@ -38,7 +42,7 @@ lapply(names(sectors), function(s){
   ids_with_emissions <- unique(emission.data$id[emission.data$emission>0])
   missing_ids <- setdiff(ids_with_emissions, unique(support$id))
   if(length(missing_ids)>0){
-    warning("Missing support locations: ", missing_ids)
+    warning("Missing support locations: ", paste(missing_ids, collapse=", "))
     emission <- emission %>% filter(!sf::st_is_empty(geometry))
   }
 
