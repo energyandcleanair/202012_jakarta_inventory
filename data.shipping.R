@@ -16,18 +16,25 @@ data.build_shipping_support <- function(){
   gsd <- raster::raster("data/shipping/shipdensity_global.tif") %>%
     raster::crop(as(g,"Spatial"))
 
+  gsd[gsd==0] <- NA
+
   gsd.sf <- as(gsd, "SpatialPointsDataFrame") %>%
     sf::st_as_sf()
 
   intersection <- sf::st_intersection(gsd.sf, g)
+  intersection$weight <- intersection$shipdensity_global
 
+  # sf::write tooo slow
+  library(rgdal)
+  lapply(list.files("data/shipping","support.*", full.names = T), file.remove)
+  writeOGR(as(intersection,"Spatial"), "data/shipping/","support",driver = "ESRI Shapefile")
 }
 
 
 data.shipping_support <- function(){
   sf::read_sf("data/shipping/support.shp")
 }
-q
+
 
 #' Read Shipping emissions from Excel
 #'
