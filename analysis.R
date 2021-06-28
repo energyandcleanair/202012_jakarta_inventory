@@ -17,12 +17,14 @@ sectors <- list(
   comres=list(emission=data.comres_emission, support=data.comres_support),
   gasdist=list(emission=data.gasdist_emission, support=data.gasdist_support),
   agroob=list(emission=data.agroob_emission, support=data.agroob_support),
-  landfill=list(emission=data.landfill_emission, support=data.landfill_support)
+  landfill=list(emission=data.landfill_emission, support=data.landfill_support),
+  aviation=list(emission=data.aviation_emission, support=data.aviation_support),
+  shipping=list(emission=data.shipping_emission, support=data.shipping_support)
 )
 
 grid <- data.grid.edgar()
 grid_name <- "edgar"
-polls <- "CH4"
+polls <- "NOx"
 
 lapply(names(sectors), function(sector){
 
