@@ -24,12 +24,12 @@ grid <- data.grid.edgar()
 grid_name <- "edgar"
 polls <- "NOx"
 
-lapply(names(sectors), function(s){
+lapply(names(sectors), function(sector){
 
-  message("======= ",s," =======")
-  emission.data <- sectors[[s]]$emission() %>% filter(poll %in% polls) %>% filter(emission>0)
+  message("======= ",sector," =======")
+  emission.data <- sectors[[sector]]$emission() %>% filter(poll %in% polls) %>% filter(emission>0)
   emission_total <- emission.data %>% group_by(poll) %>% summarise_at("emission", sum, na.rm=T)
-  support <- sectors[[s]]$support()
+  support <- sectors[[sector]]$support()
 
   # Check
   creainventory::check.emission.d(emission.data)
