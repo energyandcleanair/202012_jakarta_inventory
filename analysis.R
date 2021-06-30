@@ -1,9 +1,10 @@
-# remotes::install_github("energyandcleanair/creainventory")
+# remotes::install_github("energyandcleanair/creainventory", upgrade=F)
 # devtools::reload(pkgload::inst("creainventory"))
 library(creainventory)
 library(raster)
 library(sf)
 library(tidyverse)
+library(creatrajs)
 library(eixport)
 library(osmdata)
 
@@ -12,6 +13,7 @@ source('utils.R')
 source('edgar.R')
 
 sectors <- list(
+  comres=list(emission=data.comres_emission, support=data.comres_support),
   power=list(emission=data.power_emission, support=data.power_support),
   transport=list(emission=data.transport_emission, support=data.transport_support),
   comres=list(emission=data.comres_emission, support=data.comres_support),
@@ -19,7 +21,8 @@ sectors <- list(
   agroob=list(emission=data.agroob_emission, support=data.agroob_support),
   landfill=list(emission=data.landfill_emission, support=data.landfill_support),
   aviation=list(emission=data.aviation_emission, support=data.aviation_support),
-  shipping=list(emission=data.shipping_emission, support=data.shipping_support)
+  shipping=list(emission=data.shipping_emission, support=data.shipping_support),
+  forest=list(emission=data.forest_emission, support=data.forest_support)
 )
 
 grid <- data.grid.edgar()
@@ -44,7 +47,7 @@ lapply(names(sectors), function(sector){
   ids_with_emissions <- unique(emission.data$id[emission.data$emission>0])
   missing_ids <- setdiff(ids_with_emissions, unique(support$id))
   if(length(missing_ids)>0){
-    warning("Missing support locations: ", paste(missing_ids, collapse=", "))
+    warning("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
     emission <- emission %>% filter(!sf::st_is_empty(geometry))
   }
 
