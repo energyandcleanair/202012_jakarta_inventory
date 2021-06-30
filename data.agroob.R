@@ -6,8 +6,14 @@
 #' @examples
 data.build_agroob_support <- function(){
 
+  # Taking more than one year to get more
+  # representative distribution
+  date_from = "2019-01-01"
+  date_to = "2019-12-31"
+
   # Get land use with agriculture on it
   lu <- data.land_use(type="agroob") %>%
+  # lu <- data.land_use(type=NULL) %>%
     mutate(weight=1) %>%
     sf::st_make_valid()
 
@@ -16,25 +22,34 @@ data.build_agroob_support <- function(){
     sf::st_make_valid()
 
   intersection <- sf::st_intersection(lu, g)
+  intersection <- intersection %>%
+    filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON"))
+
+  extent.sp <- sf::as_Spatial(intersection$geometry[!sf::st_is_empty(intersection$geometry)])
 
   # Get fires over that region
-  library(creatrajs)
+  creatrajs::fire.download(date_from=date_from,
+                           date_to=date_to)
 
-  creatrajs::fire.download(date_from="2019-01-01",
-                           date_to="2019-12-31"
-                           )
+  fires <- creatrajs::fire.read(date_from=date_from,
+                       date_to=date_to,
+                       extent.sp=extent.sp)
 
+  fires_w_id <- fires %>%
+    sf::st_join(intersection %>% select(id)) %>%
+    rename(weight=frp)
 
-  sf::write_sf(intersection, "data/agroob/support.shp")
-
-  return(intersection)
+  # sf::write tooo slow
+  library(rgdal)
+  lapply(list.files("data/agroob","support.*", full.names = T), file.remove)
+  writeOGR(as(fires_w_id,"Spatial"), "data/agroob/","support",driver = "ESRI Shapefile")
 }
 
 
 data.agroob_support <- function(){
   sf::read_sf("data/agroob/support.shp")
 }
-q
+
 
 #' Read Commercial & Residential emission from excel
 #'
