@@ -1,6 +1,4 @@
-
-#' Build simplified road network, keeping only required levels, and adding the bps id to it
-#' so that it can be merged with emission data
+#' Build support required for Shipping
 #'
 #' @return
 #' @export
@@ -16,6 +14,9 @@ data.build_shipping_support <- function(){
     "Bakauheni Port, Lampung",
     "Merak, Cilegon, Banten"
     )
+
+  # Another option could have been Global ship activity
+  # https://datacatalog.worldbank.org/dataset/global-shipping-traffic-density
 
   locs <- tidygeocoder::geocode(.tbl=tibble(address=harbours), address="address")
 
