@@ -42,6 +42,6 @@ data.shipping_support <- function(){
 #' @export
 #'
 #' @examples
-data.agroob_emission <- function(){
+data.shipping_emission <- function(){
   data.sheet_to_emissions(sheet_name="Shipping")
 }
