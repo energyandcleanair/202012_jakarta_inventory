@@ -7,9 +7,17 @@
 #'
 #' @examples
 edgar.local_to_edgar_sectors <- function(sector){
+  # Table available here:
+  # https://www.nature.com/articles/s41597-020-0462-2/tables/6
+
   list(
     power=c("ENE"),
-    transport=c("TRO_noRES")
+    transport=c("TRO_noRES"),
+    agroob=c("AWB"),
+    shipping=c("TNR_Ship"),
+    air=c("TNR_Aviation_LTO"),
+    forest=NULL,
+    comres=c("RCO")
   )[[sector]]
 }
 
@@ -46,8 +54,8 @@ edgar.emission <- function(sector, poll){
 
   # Convert
   # Edgar: kg substance /m2 /s
-  # Ours: tonnes / m2 / year
-  rs <- rs * raster::area(rs) *1e6/1000*3600*24*365
+  # Ours: tonnes / year (/ km2)
+  rs <- rs * 1e6 / 1000 *3600*24*365
   names(rs) <- sprintf("EDGAR: %s", paste(edgar_sectors, sep="", collapse=", "))
 
   return(rs)
