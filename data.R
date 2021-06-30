@@ -126,9 +126,12 @@ data.land_use <- function(type){
     agroob=c("Plantation", "Dryland Farming", "Mixed Dry Land Farming", "rice field")
   )
 
-  legendas <- unlist(en_to_org[sector_to_type_en[[type]]], use.names = F)
+  lu <- sf::read_sf("data/landuse/land_cover_2019.geojson")
 
-  return(sf::read_sf("data/landuse/land_cover_2019.geojson") %>%
-           filter(Legenda %in% legendas) %>%
-           filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
+  if(!is.null(type)){
+    legendas <- unlist(en_to_org[sector_to_type_en[[type]]], use.names = F)
+    lu <- lu %>% filter(Legenda %in% legendas)
+  }
+
+  return( lu %>% filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
 }
