@@ -12,55 +12,36 @@ data.build_gasdist_support <- function(){
 
   # Get bps map
   g <- data.bps_map()
-  as.vector(sf::st_bbox(g))
+  bbox <- as.vector(sf::st_bbox(g))
 
+  # Combine several OS queries
+  # amenity=fuel
+  stations.sf.1 <- opq(bbox=bbox, timeout=300) %>%
+    add_osm_feature(key = "amenity", value = "fuel", value_exact=F) %>%
+    osmdata_sf()
 
-  # amenity=fuel: stations
-  stations.q.1 <- opq(bbox=as.vector(sf::st_bbox(g))) %>%
-    add_osm_feature(key = "amenity", value = "fuel")
-  stations.xml <- osmdata_xml(stations.q.1, filename = 'data/gasdistrib/gasdistrib.osm')
-  stations.sf <- osmdata_sf(stations.q.1, stations.xml)$osm_points
+  # name=gas station
+  stations.sf.2 <- opq(bbox=bbox, timeout=300) %>%
+    add_osm_feature(key = "name", value = "Gas Station", value_exact=F, match_case=F) %>%
+    osmdata_sf()
 
-  # name=gas station:
-  stations.q.2 <- opq(bbox=as.vector(sf::st_bbox(g)),
-                      timeout = 300) %>%
-    # add_osm_feature(key = "building", value = "yes") %>%
-    add_osm_feature(key = "name", value = "Gas Station", value_exact=F, match_case=F)
-  stations.xml.2 <- osmdata_xml(stations.q.2, filename = 'data/gasdistrib/gasdistrib.2.osm')
-  stations.sf.2 <- osmdata_sf(stations.q.2, stations.xml.2)$osm_points
+  # name:en=gas station
+  stations.sf.3 <- opq(bbox=bbox, timeout=300) %>%
+    add_osm_feature(key = "name:en", value = "Gas Station", value_exact=F, match_case=F) %>%
+    osmdata_sf()
 
-  stations.q.3 <- opq(bbox=as.vector(sf::st_bbox(g)),
-                      timeout = 300) %>%
-    add_osm_feature(key = "name:en", value = "Gas Station", value_exact=F, match_case=F)
-  stations.xml.3 <- osmdata_xml(stations.q.3, filename = 'data/gasdistrib/gasdistrib.3.osm')
-  stations.sf.3 <- osmdata_sf(stations.q.3, stations.xml.3)$osm_points
+  # name=spbu
+  stations.sf.4 <- opq(bbox=bbox, timeout=300) %>%
+    add_osm_feature(key = "name", value = "SPBU", value_exact=F, match_case=F) %>%
+    osmdata_sf()
 
-  stations.sf <- bind_rows(stations.sf,
-                           stations.sf.2,
-                           stations.sf.3,
+  stations.sf <- bind_rows(stations.sf.1$osm_points,
+                           stations.sf.2$osm_points,
+                           stations.sf.3$osm_points,
+                           stations.sf.4$osm_points
                            ) %>%
     dplyr::distinct(osm_id, .keep_all=T)
-  # Google places
-  # Limited to 60 nearest results...
-  # library(googleway)
-  # readRenviron(".Renviron")
-  #
-  # page <- 0
-  # stations.query <- google_places(search_string="Indonesia",
-  #               place_type="gas_station",
-  #               key=Sys.getenv("GOOGLE_PLACES_API_KEY"))
-  # stations <- stations.query$results
-  #
-  # while(!is.null(stations.query$next_page_token)){
-  #   page <- page + 1
-  #   nexttoken <- stations.query$next_page_token
-  #   stations.query <- google_places(search_string="Indonesia",
-  #                                   place_type="gas_station",
-  #                                   page_token=nexttoken,
-  #                                   key=Sys.getenv("GOOGLE_PLACES_API_KEY"))
-  #   stations <- bind_rows(stations.query$results,
-  #                         stations)
-  # }
+
 
   # Attaching region_id (from BPS) to roads
   stations <- stations.sf %>%
@@ -73,6 +54,61 @@ data.build_gasdist_support <- function(){
     sf::write_sf("data/gasdist/gasdist.shp")
 
   return(stations)
+}
+
+
+
+data.build_gasdist_support_google_places <- function(){
+
+  # Google places
+  # Limited to 60 nearest results...
+  library(googleway)
+  library(pbapply)
+  readRenviron(".Renviron")
+
+  g <- data.bps_map()
+
+  centers <- sf::st_make_grid(g,
+                   cellsize = 0.1,
+                   what = "centers") %>%
+    sf::st_intersection(sf::st_make_valid(g))
+
+  sf::write_sf(centers, "data/gasdist/centers_01.shp")
+
+  get_stations <- function(pt){
+    tryCatch({
+      coords <- c(pt[2], pt[1])
+      page <- 0
+      stations.query <- google_places(
+        # search_string =
+        location = coords,
+        radius = 50000,
+        place_type="gas_station",
+        key=Sys.getenv("GOOGLE_PLACES_API_KEY"))
+      stations <- stations.query$results
+
+      while(!is.null(stations.query$next_page_token)){
+        page <- page + 1
+        nexttoken <- stations.query$next_page_token
+        Sys.sleep(3)
+        stations.query <- google_places(
+          location = coords,
+          radius = 50000,
+          place_type="gas_station",
+          page_token=nexttoken,
+          key=Sys.getenv("GOOGLE_PLACES_API_KEY")
+        )
+        stations <- bind_rows(stations.query$results,
+                              stations)
+      }
+      return(stations)
+    }, error=function(e){
+      return(NULL)
+    })
+  }
+
+  stations <- pblapply(centers, get_stations)
+
 }
 
 data.gasdist_support <- function(){

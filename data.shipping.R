@@ -38,6 +38,13 @@ data.shipping_support <- function(){
   sf::read_sf("data/shipping/harbours.shp")
 }
 
+
+#' Read Shipping emissions from Excel
+#'
+#' @return
+#' @export
+#'
+#' @examples
 data.shipping_emission <- function(){
   data.sheet_to_emissions(sheet_name="Shipping")
 }

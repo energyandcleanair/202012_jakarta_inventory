@@ -22,12 +22,13 @@ sectors <- list(
   landfill=list(emission=data.landfill_emission, support=data.landfill_support),
   aviation=list(emission=data.aviation_emission, support=data.aviation_support),
   shipping=list(emission=data.shipping_emission, support=data.shipping_support),
-  forest=list(emission=data.forest_emission, support=data.forest_support)
+  forest=list(emission=data.forest_emission, support=data.forest_support),
+  solidwaste=list(emission=data.solidwaste_emission, support=data.solidwaste_support)
 )
 
 grid <- data.grid.edgar()
 grid_name <- "edgar"
-polls <- "NOx"
+polls <- "NMVOC"
 
 lapply(names(sectors), function(sector){
 
