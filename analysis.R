@@ -7,7 +7,7 @@ library(tidyverse)
 library(creatrajs)
 library(eixport)
 
-lapply(list.files(".", "data.*.R"),source)
+lapply(list.files(".", "data.*.R"), source)
 source('utils.R')
 source('edgar.R')
 

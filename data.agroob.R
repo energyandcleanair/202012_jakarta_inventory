@@ -46,6 +46,8 @@ data.build_agroob_support <- function(){
     sf::st_join(intersection %>% select(id=province)) %>%
     rename(weight=frp)
 
+  fires_w_id$acq_date <- NULL
+
   # sf::write tooo slow
   library(rgdal)
   lapply(list.files("data/agroob","support.*", full.names = T), file.remove)
