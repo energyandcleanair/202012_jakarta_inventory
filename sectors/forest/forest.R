@@ -7,11 +7,8 @@
 
 #' Build support
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_forest_support <- function(){
+#' @return support sf
+forest.build_support <- function(){
 
   # Taking more than one year to get more
   # representative distribution
@@ -48,24 +45,30 @@ data.build_forest_support <- function(){
   fires_w_id$acq_date <- NULL
   # sf::write tooo slow
   library(rgdal)
-  lapply(list.files("data/forest","support.*", full.names = T), file.remove)
-  writeOGR(as(fires_w_id,"Spatial"), "data/forest/","support",driver = "ESRI Shapefile")
+  lapply(list.files("sectors/forest","support.*", full.names = T), file.remove)
+  writeOGR(as(fires_w_id,"Spatial"), "sectors/forest/","support",driver = "ESRI Shapefile")
+
+  return(fires_w_id)
 }
 
 
-data.forest_support <- function(){
-  sf::read_sf("data/forest/support.shp")
+forest.get_support <- function(){
+  sf::read_sf("sectors/forest/support.shp")
 }
 
 
 #' Read forest fire emission from excel
 #' and transform it (required)
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.forest_emission <- function(){
-
+#' @return emission tibble
+forest.get_emission <- function(){
   e <- data.sheet_to_emissions(sheet_name="Forest Fire")
+  g <- data.bps_map() %>%
+    sf::st_make_valid()
+
+  # Using province as id
+  e %>%
+    left_join(g %>% select(id, province)) %>%
+    group_by(id=province, poll, unit, year) %>%
+    summarise_at("emission", sum, na.rm=T)
 }

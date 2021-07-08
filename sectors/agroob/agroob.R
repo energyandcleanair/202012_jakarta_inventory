@@ -1,10 +1,8 @@
-#' Build support required for Commercial & residential
+#' Build support required for Agriculture open burning
+#' using land type intersection with VIIRS fires
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_agroob_support <- function(){
+#' @return support sf
+agroob.build_support <- function(){
 
   # Taking more than one year to get more
   # representative distribution
@@ -41,22 +39,17 @@ data.build_agroob_support <- function(){
 
   # sf::write tooo slow
   library(rgdal)
-  lapply(list.files("data/agroob","support.*", full.names = T), file.remove)
-  writeOGR(as(fires_w_id,"Spatial"), "data/agroob/","support",driver = "ESRI Shapefile")
+  lapply(list.files("sectors/agroob","support.*", full.names = T), file.remove)
+  writeOGR(as(fires_w_id,"Spatial"), "sectors/agroob/","support", driver = "ESRI Shapefile")
+
+  return(fires_w_id)
 }
 
 
-data.agroob_support <- function(){
-  sf::read_sf("data/agroob/support.shp")
+agroob.get_support <- function(){
+  sf::read_sf("sectors/agroob/support.shp")
 }
 
-
-#' Read Commercial & Residential emission from excel
-#'
-#' @return
-#' @export
-#'
-#' @examples
-data.agroob_emission <- function(){
+agroob.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="Agro-residual-OB")
 }

@@ -1,17 +1,17 @@
-
 #' We use population density as support for solid waste open burning
 #'
 #' @return
 #' @export
 #'
 #' @examples
-data.build_solidwaste_support <- function(){
+solidwaste.build_support <- function(){
 
   # Get bps map
   g <- data.bps_map()
 
   # Get population density
-  gis_dir <- "/Volumes/ext1/gis/"
+  # gis_dir <- "/Volumes/ext1/gis/"
+  creahelpers::get_gis_dir()
   gpw.global <- creahelpers::get_population_path("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_2020_30_sec.tif") %>%
     raster::raster()
   gpw <- gpw.global %>% raster::crop(sf::st_bbox(g))
@@ -21,15 +21,17 @@ data.build_solidwaste_support <- function(){
     filter(weight>0) %>%
     sf::st_join(g %>% dplyr::select(id)) %>%
     filter(!is.na(id)) %>%
-    sf::write_sf("data/solidwaste/solidwaste_support.shp")
+    sf::write_sf("sectors/solidwaste/solidwaste_support.shp")
 
   return(stations)
 }
 
-data.solidwaste_support <- function(){
-  sf::read_sf("data/solidwaste/solidwaste_support.shp")
+
+solidwaste.get_support <- function(){
+  sf::read_sf("sectors/solidwaste/solidwaste_support.shp")
 }
 
-data.solidwaste_emission <- function(){
+
+solidwaste.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="Solid Waste OB")
 }

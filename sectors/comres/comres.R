@@ -1,10 +1,7 @@
 #' Build support required for Commercial & residential
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_comres_support <- function(){
+#' @return support sf
+comres.build_support <- function(){
 
   lu <- data.land_use(type="comres") %>%
     mutate(weight=1) %>%
@@ -17,23 +14,23 @@ data.build_comres_support <- function(){
   intersection <- sf::st_intersection(lu, g)
   intersection$weight <- 1
 
-  sf::write_sf(intersection, "data/comres/support.shp")
+  sf::write_sf(intersection, "sectors/comres/support.shp")
 
   return(intersection)
 }
 
 
-data.comres_support <- function(){
-  sf::read_sf("data/comres/support.shp")
+#' Get support for Commercial & Residentisl
+#'
+#' @return support sf
+comres.get_support <- function(){
+  sf::read_sf("sectors/comres/support.shp")
 }
 
 
 #' Read Commercial & Residential emission from excel
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.comres_emission <- function(){
+#' @return emission tibble
+comres.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="Residential and commercial ")
 }

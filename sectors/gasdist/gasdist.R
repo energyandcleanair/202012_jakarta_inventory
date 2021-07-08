@@ -1,12 +1,8 @@
 
-#' Build simplified road network, keeping only required levels, and adding the bps id to it
-#' so that it can be merged with emission data
+#' Build gasdist support (gas stations) using osm data
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_gasdist_support <- function(){
+#' @return support sf
+gasdist.build_support_osm <- function(){
 
   library(osmdata)
 
@@ -51,14 +47,16 @@ data.build_gasdist_support <- function(){
   stations$weight <- 1
 
   sf::st_as_sf(stations) %>%
-    sf::write_sf("data/gasdist/gasdist.shp")
+    sf::write_sf("data/sectors/support_osm.shp")
 
   return(stations)
 }
 
 
-
-data.build_gasdist_support_google_places <- function(){
+#' Build gasdist support (gas stations) using Google Places
+#'
+#' @return support sf
+gasdist.build_support_google <- function(){
 
   # Google places
   # Limited to 60 nearest results...
@@ -73,7 +71,7 @@ data.build_gasdist_support_google_places <- function(){
                    what = "centers") %>%
     sf::st_intersection(sf::st_make_valid(g))
 
-  sf::write_sf(centers, "data/gasdist/centers_01.shp")
+  # sf::write_sf(centers, "data/gasdist/centers_01.shp")
 
   get_stations <- function(pt){
     tryCatch({
@@ -109,12 +107,37 @@ data.build_gasdist_support_google_places <- function(){
 
   stations <- pblapply(centers, get_stations)
 
+  sf::st_as_sf(stations) %>%
+    sf::write_sf("data/sectors/support_google.shp")
+
+  return(stations)
 }
 
-data.gasdist_support <- function(){
-  sf::read_sf("data/gasdist/gasdist.shp")
+
+#' Build gasdist support (gas stations) from both osm and Google Places
+#'
+#' @return support sf
+gasdist.build_support <- function(){
+
+  osm <- gasdist.build_support_osm()
+  google <- gasdist.build_support_google()
+
+  bind_rows(osm, google) %T>%
+    sf::write_sf("sectors/gasdist/support.shp")
 }
 
-data.gasdist_emission <- function(){
+
+#' Return osm + google support
+#'
+#' @return support sf
+gasdist.get_support <- function(){
+  sf::read_sf("sectors/gasdist/support.shp")
+}
+
+
+#' Get emission data for gasdist sector
+#'
+#' @return emissino tibble
+gasdist.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="Gasoline distribution")
 }

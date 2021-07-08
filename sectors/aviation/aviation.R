@@ -1,12 +1,8 @@
 
-#' Build simplified road network, keeping only required levels, and adding the bps id to it
-#' so that it can be merged with emission data
+#' Build support for aviation sector from manual list of airports used in report
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_aviation_support <- function(){
+#' @return support .sf
+aviation.build_support <- function(){
 
   library(tidygeocoder)
 
@@ -32,16 +28,18 @@ data.build_aviation_support <- function(){
     dplyr::select(airport=address, id, geometry) %>%
     mutate(weight=1)
 
-  locs.sf %>% sf::write_sf("data/aviation/airports.shp")
+  locs.sf %>% sf::write_sf("sectors/aviation/airports.shp")
 
   return(locs.sf)
 }
 
-data.aviation_support <- function(){
-  sf::read_sf("data/aviation/airports.shp")
+
+aviation.get_support <- function(){
+  sf::read_sf("sectors/aviation/airports.shp")
 }
 
-data.aviation_emission <- function(){
+
+aviation.get_emission <- function(){
   e <- data.sheet_to_emissions(sheet_name="Air-transportation")
 
   # "Adi Sumarmo airport" Airport region attribution is wrong

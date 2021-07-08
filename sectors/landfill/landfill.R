@@ -1,12 +1,8 @@
 
-#' Build simplified road network, keeping only required levels, and adding the bps id to it
-#' so that it can be merged with emission data
+#' Build support for landfill sector
+#' #TODO: not found relevant dataset yet
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_landfill_support <- function(){
+landfill.build_support <- function(){
 
   library(osmdata)
 
@@ -48,10 +44,12 @@ data.build_landfill_support <- function(){
   return(stations)
 }
 
-data.landfill_support <- function(){
+
+landfill.get_support <- function(){
   sf::read_sf("data/landfill/landfill_support.shp")
 }
 
-data.landfill_emission <- function(){
+
+landfill.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="Methane-landfill")
 }

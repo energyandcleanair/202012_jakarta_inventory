@@ -1,10 +1,7 @@
-#' Build support required for Shipping
+#' Build support for Shipping using manual list of harbours used in report
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_shipping_support <- function(){
+#' @return support sf
+shipping.build_support <- function(){
 
   library(tidygeocoder)
 
@@ -29,22 +26,17 @@ data.build_shipping_support <- function(){
     dplyr::select(airport=address, id, geometry) %>%
     mutate(weight=1)
 
-  locs.sf %>% sf::write_sf("data/shipping/harbours.shp")
+  locs.sf %>% sf::write_sf("sectors/shipping/harbours.shp")
 
   return(locs.sf)
 }
 
-data.shipping_support <- function(){
-  sf::read_sf("data/shipping/harbours.shp")
+
+shipping.get_support <- function(){
+  sf::read_sf("sectors/shipping/harbours.shp")
 }
 
 
-#' Read Shipping emissions from Excel
-#'
-#' @return
-#' @export
-#'
-#' @examples
-data.shipping_emission <- function(){
+shipping.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="Shipping")
 }

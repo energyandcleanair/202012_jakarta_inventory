@@ -1,9 +1,0 @@
-Activity,Geographical area,Variable,SO2,NOx,PM,Hg,Unit,Note,Reference
-Power,Indonesia,Coal-fired power plant emission standards,750,850,150,-,mg/Nm3,Old Plant 2008,National Emission Standards -08
-Power,Indonesia,Coal-fired power plant emission standards,750,750,100,-,mg/Nm3,New Plant 2008,National Emission Standards -08
-Power,Indonesia,Coal-fired power plant emission standards,550,550,100,0.03,mg/Nm3,Old Plant 2019,National Emission Standards -19
-Power,Indonesia,Coal-fired power plant emission standards,200,200,50,0.03,mg/Nm3,New Plant 2019,National Emission Standards -19
-Power,Indonesia,Gas-fired power plant emission standards,150,400,50,-,mg/Nm3,Old Plant 2008,National Emission Standards -08
-Power,Indonesia,Gas-fired power plant emission standards,50,320,30,-,mg/Nm3,New Plant 2008,National Emission Standards -08
-Power,Indonesia,Gas-fired power plant emission standards,50,320,30,-,mg/Nm3,Old Plant 2019,National Emission Standards -19
-Power,Indonesia,Gas-fired power plant emission standards,25,100,10,-,mg/Nm3,New Plant 2019,National Emission Standards -19
