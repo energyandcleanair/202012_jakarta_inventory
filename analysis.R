@@ -16,6 +16,7 @@ lapply(list.files("sectors", "*.R", recursive=T, full.names=T),source)
 
 polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
+
 sectors <- c("agroob",
              "aviation",
              "comres",
