@@ -1,12 +1,11 @@
 # Forest Fires
 # Hubert: The original data used in the report is at a provincial level: http://sipongi.menlhk.go.id/hotspot/luas_kebakaran
 # Prof. Didin probably scaled it down to kota and kabupaten based on some area coverage.
-# However, when looking at VIIRS data (on which is based original data), not all kota/kabupaten have detected fires in 2019.
-# Solution: we bring back the data to the original regional scale, and attribute emissions down to each pixel based on detected FRPs.
+# However, when looking at VIIRS data (on which is based original data), not all kota/kabupaten had detected fires in 2019.
+# Solution: we bring back the data to the original regional scale, and attribute emissions down to kota / kabupaten based on detected FRPs.
 
 
-
-#' Build support at province level
+#' Build support
 #'
 #' @return
 #' @export
@@ -24,7 +23,7 @@ data.build_forest_support <- function(){
     mutate(weight=1) %>%
     sf::st_make_valid()
 
-  # Add the kabupaten map
+  # Add the kabupaten / kota map
   g <- data.bps_map() %>%
     sf::st_make_valid()
 
@@ -43,8 +42,8 @@ data.build_forest_support <- function(){
                        extent.sp=extent.sp)
 
   fires_w_id <- fires %>%
-    select(weight=frp) %>%
-    sf::st_join(intersection %>% select(id=province))
+    sf::st_join(intersection %>% select(id)) %>%
+    rename(weight=frp)
 
   fires_w_id$acq_date <- NULL
   # sf::write tooo slow
@@ -60,19 +59,13 @@ data.forest_support <- function(){
 
 
 #' Read forest fire emission from excel
+#' and transform it (required)
 #'
 #' @return
 #' @export
 #'
 #' @examples
 data.forest_emission <- function(){
-  e <- data.sheet_to_emissions(sheet_name="Forest Fire")
-  g <- data.bps_map() %>%
-    sf::st_make_valid()
 
-  # Using province as id
-  e %>%
-    left_join(g %>% select(id, province)) %>%
-    group_by(id=province, poll, unit, year) %>%
-    summarise_at("emission", sum, na.rm=T)
+  e <- data.sheet_to_emissions(sheet_name="Forest Fire")
 }
