@@ -2,11 +2,8 @@
 #' Build simplified road network, keeping only required levels, and adding the bps id to it
 #' so that it can be merged with emission data
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_roads <- function(){
+#' @return support.sf
+transport.build_support <- function(){
 
   osm.roads <- sf::read_sf("data/transport/osm/gis_osm_roads_free_1.shp")
 
@@ -32,15 +29,21 @@ data.build_roads <- function(){
                          !!!weights)
 
   sf::st_as_sf(roads)%>%
-    sf::write_sf("data/transport/transport_spatial.shp")
+    sf::write_sf("sectors/transport/transport_spatial.shp")
 
   return(roads)
 }
 
-data.transport_support <- function(){
-  sf::read_sf("data/transport/transport_spatial.shp")
+#' Get support for transportation sector
+#'
+#' @return support sf
+transport.get_support <- function(){
+  sf::read_sf("sectors/transport/transport_spatial.shp")
 }
 
-data.transport_emission <- function(){
+#' Get emission data for transportation sector
+#'
+#' @return emission tibble
+transport.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="On-road-transportation")
 }

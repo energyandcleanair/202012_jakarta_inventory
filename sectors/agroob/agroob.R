@@ -1,17 +1,8 @@
-# Forest Fires
-# Hubert: The original data used in the report is at a provincial level.
-# Prof. Didin probably scaled it down to kota and kabupaten based on some area coverage.
-# However, when looking at VIIRS data (on which is based original data), not all kota/kabupaten have detected fires in 2019.
-# Solution: we bring back the data to the original regional scale, and attribute emissions down to each pixel based on detected FRPs.
-# Comment: ideally, we would have land cover by crop, but haven't found a relevant dataset yet.
-
-#' Building support for Agriculture burning
+#' Build support required for Agriculture open burning
+#' using land type intersection with VIIRS fires
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.build_agroob_support <- function(){
+#' @return support sf
+agroob.build_support <- function(){
 
   # Taking more than one year to get more
   # representative distribution
@@ -50,24 +41,23 @@ data.build_agroob_support <- function(){
 
   # sf::write tooo slow
   library(rgdal)
-  lapply(list.files("data/agroob","support.*", full.names = T), file.remove)
-  writeOGR(as(fires_w_id,"Spatial"), "data/agroob/","support",driver = "ESRI Shapefile")
+  lapply(list.files("sectors/agroob","support.*", full.names = T), file.remove)
+  writeOGR(as(fires_w_id,"Spatial"), "sectors/agroob/","support", driver = "ESRI Shapefile")
+
+  return(fires_w_id)
 }
 
 
-data.agroob_support <- function(){
-  sf::read_sf("data/agroob/support.shp")
+agroob.get_support <- function(){
+  sf::read_sf("sectors/agroob/support.shp")
 }
 
 
 #' Read Agriculture burning emission from excel
 #' and sum it by province
 #'
-#' @return
-#' @export
-#'
-#' @examples
-data.agroob_emission <- function(){
+#' @return emission tibble
+agroob.get_emission <- function(){
   e <- data.sheet_to_emissions(sheet_name="Agro-residual-OB")
   g <- data.bps_map() %>%
     sf::st_make_valid()
