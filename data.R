@@ -27,7 +27,7 @@ data.gadm <- function(){
 
 data.bps_map <- function(){
   sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
-    select(id=ADM2_PCODE, name=ADM2_EN, geometry) %>%
+    dplyr::select(id=ADM2_PCODE, name=ADM2_EN, province=ADM1_EN, geometry) %>%
     filter(id %in% data.region_ids())
 }
 
@@ -36,7 +36,7 @@ data.grid.edgar <- function(){
   g <- data.bps_map()
   extent <- sf::st_bbox(g)
 
-  raster::raster("data/edgar/ENE/v50_NOx_2015_1_ENE.0.1x0.1.nc") %>%
+  raster::raster("data/edgar/v50_NOx_2015_ENE.0.1x0.1.nc") %>%
     raster::raster() %>%
     raster::crop(extent)
 }
@@ -66,7 +66,7 @@ data.grid <- function(res_deg, extent=NULL){
 }
 
 data.sheet_to_emissions <- function(sheet_name){
-  
+
   s <- readxl::read_xlsx("data/Emission-2019-compilation-send.xlsx",
                          sheet=sheet_name,
                          skip = 1)
@@ -126,12 +126,12 @@ data.land_use <- function(type){
     agroob=c("Plantation", "Dryland Farming", "Mixed Dry Land Farming", "rice field")
   )
 
-  legendas <- unlist(en_to_org[sector_to_type_en[[type]]], use.names = F)
+  lu <- sf::read_sf("data/landuse/land_cover_2019.geojson")
 
-  return(sf::read_sf("data/landuse/land_cover_2019.geojson") %>%
-           filter(Legenda %in% legendas) %>%
-           filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
+  if(!is.null(type)){
+    legendas <- unlist(en_to_org[sector_to_type_en[[type]]], use.names = F)
+    lu <- lu %>% filter(Legenda %in% legendas)
+  }
+
+  return( lu %>% filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
 }
-
-
-

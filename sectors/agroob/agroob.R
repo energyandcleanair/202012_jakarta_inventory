@@ -1,0 +1,55 @@
+#' Build support required for Agriculture open burning
+#' using land type intersection with VIIRS fires
+#'
+#' @return support sf
+agroob.build_support <- function(){
+
+  # Taking more than one year to get more
+  # representative distribution
+  date_from = "2019-01-01"
+  date_to = "2019-12-31"
+
+  # Get land use with agriculture on it
+  lu <- data.land_use(type="agroob") %>%
+  # lu <- data.land_use(type=NULL) %>%
+    mutate(weight=1) %>%
+    sf::st_make_valid()
+
+  # Add the kabupaten map
+  g <- data.bps_map() %>%
+    sf::st_make_valid()
+
+  intersection <- sf::st_intersection(lu, g)
+  intersection <- intersection %>%
+    filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON"))
+
+  extent.sp <- sf::as_Spatial(intersection$geometry[!sf::st_is_empty(intersection$geometry)])
+
+  # Get fires over that region
+  creatrajs::fire.download(date_from=date_from,
+                           date_to=date_to)
+
+  fires <- creatrajs::fire.read(date_from=date_from,
+                       date_to=date_to,
+                       extent.sp=extent.sp)
+
+  fires_w_id <- fires %>%
+    sf::st_join(intersection %>% select(id)) %>%
+    rename(weight=frp)
+
+  # sf::write tooo slow
+  library(rgdal)
+  lapply(list.files("sectors/agroob","support.*", full.names = T), file.remove)
+  writeOGR(as(fires_w_id,"Spatial"), "sectors/agroob/","support", driver = "ESRI Shapefile")
+
+  return(fires_w_id)
+}
+
+
+agroob.get_support <- function(){
+  sf::read_sf("sectors/agroob/support.shp")
+}
+
+agroob.get_emission <- function(){
+  data.sheet_to_emissions(sheet_name="Agro-residual-OB")
+}
