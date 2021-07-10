@@ -16,12 +16,12 @@ lapply(list.files("sectors", "*.R", recursive=T, full.names=T), source)
 
 polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
+
 sectors <- c("agroob",
              "aviation",
              "comres",
              "forest",
              "gasdist",
-             "industry",
              "landfill",
              "power",
              "shipping",
@@ -29,11 +29,11 @@ sectors <- c("agroob",
              "transport")
 
 # Adjust grid
-grid <- data.grid.edgar()
-grid_name <- "edgar"
+grid <- data.grid.d04()
+grid_name <- "d04"
 
 
-lapply(names(sectors), function(sector){
+lapply(sectors, function(sector){
 
   message("======= ",sector," =======")
 
@@ -43,7 +43,14 @@ lapply(names(sectors), function(sector){
                                 emission>0)
 
   emission_total <- emission.data %>% group_by(poll) %>% summarise_at("emission", sum, na.rm=T)
-  support <- get(paste0(sector,".get_support"))()
+
+  tryCatch({
+    support <- get(paste0(sector,".get_support"))()
+  }, error=function(e){
+    message("Building support")
+    support <-  get(paste0(sector,".build_support"))()
+  })
+
 
   # Check emission data and support
   creainventory::check.emission.d(emission.data)
@@ -59,7 +66,6 @@ lapply(names(sectors), function(sector){
     warning("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
     emission <- emission %>% filter(!sf::st_is_empty(geometry))
   }
-
   # Create a single raster layer representing whole year
   emission.raster <- creainventory::grid.rasterize(emission, grid)
 
@@ -67,7 +73,7 @@ lapply(names(sectors), function(sector){
   dir.create("results", showWarnings = F)
   lapply(names(emission.raster), function(poll){
     raster::writeRaster(emission.raster[[poll]],
-                        file.path("results", sprintf("%s.%s.%s.tiff", s, poll, grid_name)),
+                        file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
                         overwrite=T)
 
     # Sanity check: emission conservation
@@ -77,4 +83,12 @@ lapply(names(sectors), function(sector){
       warning("Emissions not conserved: ",emission_total_poll, " != ", raster_total_poll)
     }
   })
-})
+
+  return(emission.raster)
+}) -> emission.rasters
+
+
+# Create scenarios --------------------------------------------------------
+
+
+
