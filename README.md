@@ -1,70 +1,23 @@
 # Jakarta Emissions Inventory
 
-Emission inventory in Jakarta region
+Emission inventory around Jakarta.
 
-## Variables
-- emission.d.sector: total emission data
-  - location_id (e.g. a province code, a powerplant id)
-  - total
-  - year
-  - unit
-  - sector
+## Progress
+We haven't found yet a relevant support for each sector. Progress can be tracked/updated on this [spreadsheet](https://docs.google.com/spreadsheets/d/1WU8LVqEdHLG3Orsdqgm2-d1QvUggon5mK9b8-zhPzOI/edit?usp=sharing).
 
+## Code structure
+The code is structured by sector in the `sectors` folder. The main analysis (i.e. creating the emission .nc files0 is in [analysis.R](analysis.R).
 
-- support.sp.sector: vector support
-  - location_id (matching )
-  - weight (will be normalised to 1)
-  - geometry
-  - sector
+### Emission x Support
+Support can be point, line or polygon dataframe. Each feature has an id (typically a region_id) and a weight associated with it. Many features can belong to a single id (e.g. several power plants in a kabupaten); the weight of each feature is used to distribute emission associated with that id (e.g. a kabupaten), and *NOT across all features of the support data*. The `id` field is used to match with emission data.
 
-  
-- emission.sp.sector: total emission spatial data
-  - location_id
-  - emission
-  - unit
-  - year
-  - geometry
-  - sector
+### Functions
+For each sector, there are three functions:
 
-- grid: the original grid to project on
-
-
-- emission.grid.sector: projected emissions on a raster 
-
-
-- temp.month: monthly profile
-- temp.weekly: monthly profile
-- temp.hourly: monthly profile
-
-
-- emission.stack.sector: projected emissions on a rasterstack with temporal dimensions 
-
-
-## Acronyms in code
-
-- surr: surrogate
-- sp: spatial
-- spt: spatio-temporal
-
-e.g. `surr.sp` = spatial surrogate, `surr.spt` = spatio-temporal surrogate
-
-
-`surr.sp` must be a spatial dataframe with the following fields:
-  - id (feature id)
-  - sector (sector)
-  - weight (one weight per feature)
-
-`surr.spt` must be a spatial dataframe with the following fields:
-  - id
-  - sector
-  - date
-  - weight (one weight per feature per date)
-
-`surr.stack` is a raster stack where each layer corresponds to a specific date
-
-  
-## Sector classification
+- `{sector}.build_support()`: building the support shapefile, saved as `support.shp` in the corresponding sector directory;
+- `{sector}.get_support()`: simply reads the support shapefile and return the support sf;
+- `{sector}.get_emission()`: return emission tibble.
 
 
 ## Access results
-netCDF files will be stored in [https://data.energyandcleanair.org/data/studies/202012_jakarta_inventory/](https://data.energyandcleanair.org/data/studies/202012_jakarta_inventory/)
+netCDF files are stored in [results](results) folder.
