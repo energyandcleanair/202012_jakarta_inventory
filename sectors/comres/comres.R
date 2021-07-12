@@ -13,6 +13,8 @@ comres.build_support <- function(){
 
   intersection <- sf::st_intersection(lu, g)
   intersection$weight <- 1
+  intersection <- intersection %>%
+    filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON"))
 
   sf::write_sf(intersection, "sectors/comres/support.shp")
 
