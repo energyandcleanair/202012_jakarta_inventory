@@ -11,7 +11,8 @@ landfill.build_support <- function(){
   as.vector(sf::st_bbox(g))
 
   # Use osm data
-  landfills <- opq(bbox=as.vector(sf::st_bbox(g))) %>%
+  landfills <- opq(bbox=as.vector(sf::st_bbox(g)),
+                   timeout = 300) %>%
     add_osm_feature(key = "landuse", value = "landfill") %>%
     osmdata_sf()
 
@@ -33,20 +34,21 @@ landfill.build_support <- function(){
     ) %>%
     dplyr::distinct(osm_id, .keep_all=T) %>%
     dplyr::select(osm_id) %>%
+    sf::st_set_crs(4326) %>%
     sf::st_join(g, left=F) %>%
     select(osm_id, id, geometry)
 
   landfills$weight <- 1
 
   sf::st_as_sf(landfills) %>%
-    sf::write_sf("data/landfill/landfill_support.shp")
+    sf::write_sf("sectors/landfill/support.shp")
 
   return(stations)
 }
 
 
 landfill.get_support <- function(){
-  sf::read_sf("data/landfill/landfill_support.shp")
+  sf::read_sf("sectors/landfill/support.shp")
 }
 
 

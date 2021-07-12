@@ -53,16 +53,40 @@ data.grid.d04 <- function(){
     raster::crop(extent)
 }
 
-data.grid <- function(res_deg, extent=NULL){
+#' If res_deg is specified -> EPSG:4326,
+#' if res_m is specified, we use projection from MeteoSim sample data (units=m)
+#'
+#' @param res_deg
+#' @param res_m
+#' @param extent
+#'
+#' @return
+#' @export
+#'
+#' @examples
+data.grid <- function(res_deg=NULL, res_m=NULL, extent=NULL){
 
   if(is.null(extent)){
-    extent <- data.gadm()
+    extent <- data.bps_map()
   }
 
-  raster::raster(raster::extent(extent),
-                         resolution=res_deg,
-                         crs=raster::crs(extent)) %>%
-    raster::raster()
+  if(!is.null(res_m)){
+    crs <- sf::st_crs(data.grid.d04())
+    extent <- sf::st_transform(extent, crs)
+    grid <- raster::raster(raster::extent(extent),
+                           resolution=res_m,
+                           crs=raster::crs(extent)) %>%
+      raster::raster()
+  }
+
+  if(!is.null(res_deg)){
+    grid <- raster::raster(raster::extent(extent),
+                           resolution=res_deg,
+                           crs=raster::crs(extent)) %>%
+      raster::raster()
+  }
+
+  return(grid)
 }
 
 data.sheet_to_emissions <- function(sheet_name){
@@ -123,7 +147,8 @@ data.land_use <- function(type){
 
   sector_to_type_en <- list(
     comres=c("Settlement"),
-    agroob=c("Plantation", "Dryland Farming", "Mixed Dry Land Farming", "rice field")
+    agroob=c("Plantation", "Dryland Farming", "Mixed Dry Land Farming", "rice field"),
+    forest=names(en_to_org)[grepl("Forest", names(en_to_org))]
   )
 
   lu <- sf::read_sf("data/landuse/land_cover_2019.geojson")
