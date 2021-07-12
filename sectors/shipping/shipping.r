@@ -10,7 +10,7 @@ shipping.build_support <- function(){
     "Pelabuhan Tanjung Priok",
     "Bakauheni Port, Lampung",
     "Merak, Cilegon, Banten"
-    )
+  )
 
   # Another option could have been Global ship activity
   # https://datacatalog.worldbank.org/dataset/global-shipping-traffic-density

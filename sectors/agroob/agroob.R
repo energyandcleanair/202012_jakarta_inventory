@@ -15,7 +15,7 @@ agroob.build_support <- function(){
     mutate(weight=1) %>%
     sf::st_make_valid()
 
-  # Add the kabupaten map
+  # Add the kabupaten / province map
   g <- data.bps_map() %>%
     sf::st_make_valid()
 
@@ -34,8 +34,10 @@ agroob.build_support <- function(){
                        extent.sp=extent.sp)
 
   fires_w_id <- fires %>%
-    sf::st_join(intersection %>% select(id)) %>%
+    sf::st_join(intersection %>% select(id=province)) %>%
     rename(weight=frp)
+
+  fires_w_id$acq_date <- NULL
 
   # sf::write tooo slow
   library(rgdal)
@@ -50,6 +52,19 @@ agroob.get_support <- function(){
   sf::read_sf("sectors/agroob/support.shp")
 }
 
+
+#' Read Agriculture burning emission from excel
+#' and sum it by province
+#'
+#' @return emission tibble
 agroob.get_emission <- function(){
-  data.sheet_to_emissions(sheet_name="Agro-residual-OB")
+  e <- data.sheet_to_emissions(sheet_name="Agro-residual-OB")
+  g <- data.bps_map() %>%
+    sf::st_make_valid()
+
+  # Using province as id
+  e %>%
+    left_join(g %>% select(id, province)) %>%
+    group_by(id=province, poll, unit, year) %>%
+    summarise_at("emission", sum, na.rm=T)
 }
