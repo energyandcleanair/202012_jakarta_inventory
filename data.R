@@ -42,6 +42,18 @@ data.grid.edgar <- function(){
 }
 
 
+data.created03 <- function(){
+  # Any file from METEOSIM d03 dataset
+  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/TCA_files_d03/total_column_amount_d03_2019010112.nc"
+  r <- raster(f) %>%
+    raster()
+  crs <- utils.proj4string_from_nc(f)
+  raster::crs(r) <- crs
+  raster::writeRaster(r, "data/d03.grid.tif")
+}
+
+
+
 data.grid.d04 <- function(){
   g <- data.gadm()
   grid <- raster::raster("data/d04.grid.tif") %>% raster::raster()

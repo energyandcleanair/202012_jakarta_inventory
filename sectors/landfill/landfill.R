@@ -1,8 +1,7 @@
 
 #' Build support for landfill sector
-#' #TODO: not found relevant dataset yet
-#'
-landfill.build_support <- function(){
+#' UNSUCCESFUL: Using OSM data. Not enough points
+landfill.build_support_osm <- function(){
 
   library(osmdata)
 
@@ -44,9 +43,74 @@ landfill.build_support <- function(){
   return(stations)
 }
 
+#' Build support for landfill sector
+#' Using SIPSN. Probably ok, but we received
+#' Prof. Didin data in the meantime.
+landfill.build_support_sipsn <- function(){
+  # https://sipsn.menlhk.go.id/sipsn/public/home/peta
+
+  library(jsonlite)
+  d <- jsonlite::fromJSON("sectors/landfill/tpa.json")$markers %>%
+    as.data.frame()
+
+  names(d) <- c("name", "latitude", "longitude", "url", "type", "id")
+
+  f <- "sectors/landfill/tpa.gpkg"
+  if(file.exists(f)){
+    file.remove(f)
+  }
+
+  sf::st_as_sf(d, coords=c("longitude","latitude")) %>%
+    sf::st_set_crs(4326) %>%
+    sf::st_write(f)
+}
+
 
 landfill.get_support <- function(){
-  sf::read_sf("data/landfill/landfill_support.shp")
+  # Directly use Excelsheet by Porf. Didin
+  s <- readxl::read_xlsx("sectors/landfill/landfill-inventory-2021.xlsx",
+                         sheet=1,
+                         skip = 8)
+
+  names(s) <- c("province","city","landfill","lat","lon","emission")
+  s <- s %>% tidyr::fill(province,city)
+
+  # Spread equally across landfills
+  s %>% left_join(
+    s %>% group_by(province, city) %>%
+      summarise(city_emission=sum(emission, na.rm=T),
+                city_nlandfill=n())
+  ) %>%
+    mutate(emission=city_emission/city_nlandfill) %>%
+    select(-c(city_emission, city_nlandfill))
+
+  # Remove subtotals
+  s <- s %>% filter(!grepl("total",province))
+
+  # Format to be similar to other
+  s$weight <- s$emission
+  s$id <- paste(s$province, s$city, s$landfill, sep="_")
+  s <- s %>% sf::st_as_sf(coords=c("lon","lat"))
+  s <- s %>% filter(!str_detect(location, "total"),
+                    !is.na(location))
+
+  s <- s %>%
+    tidyr::pivot_longer(names_to="poll",
+                        values_to="emission",
+                        -location) %>%
+    filter(!is.na(emission))
+
+  s$unit <- "tonnes"
+  s$year <- 2019
+
+  s$id <- utils.location_name_to_bps_id(s$location)
+
+  if(nrow(s[is.na(s$id),])>0){
+    stop("Missing ids for regions ", s[is.na(s$bps_id),] %>% distinct(location))
+  }
+
+  return(s)
+
 }
 
 

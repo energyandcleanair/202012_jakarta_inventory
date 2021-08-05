@@ -137,3 +137,11 @@ utils.nc_from_ncvars <- function(file, ncvars, rbs){
   nc_close(nc)
   return(nc)
 }
+
+utils.proj4string_from_nc <- function(f){
+  library(ncmeta)
+  ncdf4::nc_open(f) %>%
+    ncdf4::ncatt_get("proj") %>%
+    nc_gm_to_prj()
+}
+

@@ -67,7 +67,7 @@ gasdist.build_support_google <- function(){
   g <- data.bps_map()
 
   centers <- sf::st_make_grid(g,
-                   cellsize = 0.1,
+                   cellsize = 0.05,
                    what = "centers") %>%
     sf::st_intersection(sf::st_make_valid(g))
 
@@ -105,7 +105,9 @@ gasdist.build_support_google <- function(){
     })
   }
 
-  stations <- pblapply(centers, get_stations)
+  stations <- pblapply(centers %>% head(3), get_stations) %>%
+    do.call(bind_rows, .) %>%
+    distinct(place_id, .keep_all=T)
 
   sf::st_as_sf(stations) %>%
     sf::write_sf("data/sectors/support_google.shp")
