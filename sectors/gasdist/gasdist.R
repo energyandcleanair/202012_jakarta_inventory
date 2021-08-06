@@ -41,13 +41,14 @@ gasdist.build_support_osm <- function(){
 
   # Attaching region_id (from BPS) to roads
   stations <- stations.sf %>%
+    sf::st_set_crs(4326) %>%
     sf::st_join(g, left=F) %>%
     select(osm_id, id, geometry)
 
   stations$weight <- 1
 
   sf::st_as_sf(stations) %>%
-    sf::write_sf("data/sectors/support_osm.shp")
+    sf::write_sf("sectors/gasdist/support_osm.gpkg")
 
   return(stations)
 }
@@ -105,35 +106,43 @@ gasdist.build_support_google <- function(){
     })
   }
 
-  stations <- pblapply(centers %>% head(3), get_stations) %>%
-    do.call(bind_rows, .) %>%
+  stations <- pblapply(centers, get_stations)
+
+  stations.clean <- do.call(bind_rows, stations) %>%
     distinct(place_id, .keep_all=T)
 
-  sf::st_as_sf(stations) %>%
-    sf::write_sf("data/sectors/support_google.shp")
+  stations.clean$lat <- stations.clean$geometry[[1]]$lat
+  stations.clean$lng <- stations.clean$geometry[[1]]$lng
+
+  stations.clean.sf <- stations.clean %>%
+    dplyr::select(place_id, lat, lng) %>%
+    sf::st_as_sf(coords=c("lng","lat")) %>%
+    mutate(weight=1) %>%
+    # Attaching region_id (from BPS)
+    sf::st_set_crs(4326) %>%
+    sf::st_join(g, left=F)
+
+  stations.clean.sf %>%
+    sf::write_sf("sectors/gasdist/support_google.gpkg")
 
   return(stations)
 }
 
 
-#' Build gasdist support (gas stations) from both osm and Google Places
+#' Build gasdist support (gas stations) from Google Places
 #'
 #' @return support sf
 gasdist.build_support <- function(){
-
-  osm <- gasdist.build_support_osm()
-  google <- gasdist.build_support_google()
-
-  bind_rows(osm, google) %T>%
-    sf::write_sf("sectors/gasdist/support.shp")
+  gasdist.build_support_google()
 }
 
 
-#' Return osm + google support
+#' Return google support
 #'
 #' @return support sf
 gasdist.get_support <- function(){
-  sf::read_sf("sectors/gasdist/support.shp")
+  sf::read_sf("sectors/gasdist/support_google.gpkg") %>%
+    rename(geometry=geom)
 }
 
 
