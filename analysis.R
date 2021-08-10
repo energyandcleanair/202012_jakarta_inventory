@@ -18,21 +18,26 @@ polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
 
 sectors <- c(
-  # "agroob",
-  #            "aviation",
-  #            "comres",
-             # "forest",
+             "agroob",
+             "aviation",
+             "comres",
              "gasdist",
              "landfill",
              "power",
              "shipping",
              "solidwaste",
-             "transport")
+             "transport",
+             "forest")
 
 # Adjust grid
-grid <- data.grid(res_m = 1e4)
-grid_name <- "10km"
+grid <- data.grid.d03()
+grid_name <- "d03"
 
+# grid <- data.grid.d04()
+# grid_name <- "d04"
+#
+# grid <- data.grid(res_m=1e4)
+# grid_name <- "10km"
 
 lapply(sectors, function(sector){
 
