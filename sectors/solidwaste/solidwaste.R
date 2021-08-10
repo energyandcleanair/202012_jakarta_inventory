@@ -16,19 +16,20 @@ solidwaste.build_support <- function(){
     raster::raster()
   gpw <- gpw.global %>% raster::crop(sf::st_bbox(g))
 
-  sf::st_as_sf(as(gpw, "SpatialPointsDataFrame")) %>%
+  sf::st_as_sf(as(gpw, "SpatialPolygonsDataFrame")) %>%
     rename(weight=gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_2020_30_sec) %>%
     filter(weight>0) %>%
-    sf::st_join(g %>% dplyr::select(id)) %>%
+    sf::st_make_valid() %>%
+    sf::st_intersection(g %>% sf::st_make_valid() %>% dplyr::select(id)) %>%
     filter(!is.na(id)) %>%
-    sf::write_sf("sectors/solidwaste/solidwaste_support.shp")
+    sf::write_sf("sectors/solidwaste/solidwaste_support.gpkg")
 
-  return(stations)
 }
 
 
 solidwaste.get_support <- function(){
-  sf::read_sf("sectors/solidwaste/solidwaste_support.shp")
+  sf::read_sf("sectors/solidwaste/solidwaste_support.gpkg") %>%
+    rename(geometry=geom)
 }
 
 

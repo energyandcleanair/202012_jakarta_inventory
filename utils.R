@@ -137,3 +137,74 @@ utils.nc_from_ncvars <- function(file, ncvars, rbs){
   nc_close(nc)
   return(nc)
 }
+
+utils.proj4string_from_nc <- function(f){
+  library(ncmeta)
+  ncdf4::nc_open(f) %>%
+    ncdf4::ncatt_get("proj") %>%
+    nc_gm_to_prj()
+}
+
+
+
+#' Take a rasterstack with pollutant emissions as variables
+#' and transform it in a netcdf compatible with METEOSIM
+#'
+#' @param rs
+#' @param d03_or_d04
+#'
+#' @return
+#' @export
+#'
+#' @examples
+utils.geotiffs_to_nc <- function(rs,
+                                 grid_name,
+                                 nc_file){
+
+  library(ncdf4)
+
+  fs <- list(
+    "d03"="/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/CCTM_d03_CMAQv521_jakarta_disp-1km_EXP2_2019010112.nc",
+    "d04"="/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/d04/01/topdown-edgar-AGS.nc"
+  )
+
+  if(!grid_name %in% names(fs)){
+    stop("Unknown grid: ", grid_name, ". Should be in ", paste(names(fs), collapse=", "))
+  }else{
+    f <- fs[[grid_name]]
+  }
+
+  nc <- ncdf4::nc_open(f)
+
+  name_x <- intersect(nc_vars(f)$name, c("x","X"))
+  name_y <- intersect(nc_vars(f)$name, c("y","Y"))
+
+  val_x <- ncvar_get(nc, name_x)
+  val_y <- ncvar_get(nc, name_y)
+
+  dim_x <- ncdim_def(name_x, "", vals=val_x)
+  dim_y <- ncdim_def(name_y, "", vals=val_y)
+
+  #--------------------------------------
+  # Create vars along existing dimensions
+  #--------------------------------------
+  vars <- lapply(names(rs),
+                 function(varname){
+                   v <- ncvar_def(varname, "", dim = list(dim_x, dim_y))
+                 })
+  #---------------------
+  # Create the test file
+  #---------------------
+  file.remove(nc_file)
+  nc.new <- nc_create(nc_file, vars)
+
+  #----------------------------
+  # Write some data to the file
+  #----------------------------
+  lapply(names(rs),
+         function(varname){
+           ncvar_put( nc.new, varname, rs[[varname]] %>% as.matrix() %>% apply(2, rev) %>% t() %>% as.vector()) # no start or count: write all values
+         })
+
+  nc_close(nc.new)
+}
