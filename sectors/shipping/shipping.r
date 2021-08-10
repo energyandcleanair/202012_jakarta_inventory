@@ -10,7 +10,7 @@ shipping.build_support <- function(){
     "Pelabuhan Tanjung Priok",
     "Bakauheni Port, Lampung",
     "Merak, Cilegon, Banten"
-    )
+  )
 
   # Another option could have been Global ship activity
   # https://datacatalog.worldbank.org/dataset/global-shipping-traffic-density
@@ -26,14 +26,15 @@ shipping.build_support <- function(){
     dplyr::select(airport=address, id, geometry) %>%
     mutate(weight=1)
 
-  locs.sf %>% sf::write_sf("sectors/shipping/harbours.shp")
+  locs.sf %>% sf::write_sf("sectors/shipping/shipping_support.gpkg")
 
   return(locs.sf)
 }
 
 
 shipping.get_support <- function(){
-  sf::read_sf("sectors/shipping/harbours.shp")
+  sf::read_sf("sectors/shipping/shipping_support.gpkg") %>%
+    rename(geometry=geom)
 }
 
 

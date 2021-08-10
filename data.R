@@ -18,10 +18,10 @@ data.gadm <- function(){
   rbind(
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_1.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      select(id=GID_1, name=NAME_1, geometry),
+      dplyr::select(id=GID_1, name=NAME_1, geometry),
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_2.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      select(id=GID_2, name=NAME_2, geometry)
+      dplyr::select(id=GID_2, name=NAME_2, geometry)
   )
 }
 
@@ -30,7 +30,6 @@ data.bps_map <- function(){
     dplyr::select(id=ADM2_PCODE, name=ADM2_EN, province=ADM1_EN, geometry) %>%
     filter(id %in% data.region_ids())
 }
-
 
 data.grid.edgar <- function(){
   g <- data.bps_map()
@@ -44,37 +43,76 @@ data.grid.edgar <- function(){
 
 data.created03 <- function(){
   # Any file from METEOSIM d03 dataset
-  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/TCA_files_d03/total_column_amount_d03_2019010112.nc"
-  r <- raster(f) %>%
-    raster()
-  crs <- utils.proj4string_from_nc(f)
-  raster::crs(r) <- crs
-  raster::writeRaster(r, "data/d03.grid.tif")
+  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/CCTM_d03_CMAQv521_jakarta_disp-1km_EXP2_2019010112.nc"
+  nc <- ncdf4::nc_open(f)
+  x <- ncvar_get(nc, "X")
+  y <- ncvar_get(nc, "Y")
+  # crs <- utils.proj4string_from_nc(f)
+  # crs <- "+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m"
+  r <- raster::rasterFromXYZ(tidyr::crossing(x,y) %>% mutate(z=1),
+                        crs="+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m")
+  # raster::crs(r) <- crs
+  raster::writeRaster(r, "data/d03.grid.tif", overwrite=T)
 }
 
+
+data.grid.d03 <- function(){
+  # g <- data.gadm()
+  raster::raster("data/d03.grid.tif") %>% raster::raster()
+  # extent <- g %>%
+  #   sf::st_transform(raster::projection(grid)) %>%
+  #   sf::st_bbox()
+
+  # grid %>%
+  #   raster::crop(extent)
+}
 
 
 data.grid.d04 <- function(){
-  g <- data.gadm()
-  grid <- raster::raster("data/d04.grid.tif") %>% raster::raster()
-  extent <- g %>%
-    sf::st_transform(raster::projection(grid)) %>%
-    sf::st_bbox()
-
-  grid %>%
-    raster::crop(extent)
+  # g <- data.gadm()
+  raster::raster("data/d04.grid.tif") %>% raster::raster()
+  # extent <- g %>%
+  #   sf::st_transform(raster::projection(grid)) %>%
+  #   sf::st_bbox()
+  #
+  # grid %>%
+  #   raster::crop(extent)
 }
 
-data.grid <- function(res_deg, extent=NULL){
+#' If res_deg is specified -> EPSG:4326,
+#' if res_m is specified, we use projection from MeteoSim sample data (units=m)
+#'
+#' @param res_deg
+#' @param res_m
+#' @param extent
+#'
+#' @return
+#' @export
+#'
+#' @examples
+data.grid <- function(res_deg=NULL, res_m=NULL, extent=NULL){
 
   if(is.null(extent)){
-    extent <- data.gadm()
+    extent <- data.bps_map()
   }
 
-  raster::raster(raster::extent(extent),
-                         resolution=res_deg,
-                         crs=raster::crs(extent)) %>%
-    raster::raster()
+  if(!is.null(res_m)){
+    crs <- sf::st_crs(data.grid.d04())
+    extent <- sf::st_transform(extent, crs)
+    grid <- raster::raster(raster::extent(extent),
+                           resolution=res_m,
+                           crs=raster::crs(extent)) %>%
+      raster::raster()
+  }
+
+  if(!is.null(res_deg)){
+    grid <- raster::raster(raster::extent(extent),
+                           resolution=res_deg,
+                           crs=raster::crs(extent)) %>%
+      raster::raster()
+  }
+
+  return(grid)
 }
 
 data.sheet_to_emissions <- function(sheet_name){
@@ -131,11 +169,10 @@ data.land_use <- function(type){
     "Transmigration"= "Transmigrasi"
   )
 
-
-
   sector_to_type_en <- list(
     comres=c("Settlement"),
-    agroob=c("Plantation", "Dryland Farming", "Mixed Dry Land Farming", "rice field")
+    agroob=c("Plantation", "Dryland Farming", "Mixed Dry Land Farming", "rice field"),
+    forest=names(en_to_org)[grepl("Forest", names(en_to_org))]
   )
 
   lu <- sf::read_sf("data/landuse/land_cover_2019.geojson")

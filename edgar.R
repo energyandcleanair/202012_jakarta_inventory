@@ -51,12 +51,13 @@ edgar.emission <- function(sector, poll){
   })
 
   rs <- do.call("sum",rs)
-
   # Convert
   # Edgar: kg substance /m2 /s
   # Ours: tonnes / year (/ km2)
   rs <- rs * 1e6 / 1000 *3600*24*365
   names(rs) <- sprintf("EDGAR: %s", paste(edgar_sectors, sep="", collapse=", "))
 
+
+  names(rs) <- sprintf("EDGAR: %s", paste(edgar_sectors, sep="", collapse=", "))
   return(rs)
 }
