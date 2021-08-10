@@ -164,8 +164,8 @@ utils.geotiffs_to_nc <- function(rs,
   library(ncdf4)
 
   fs <- list(
-    "d03"="/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/CCTM_d03_CMAQv521_jakarta_disp-1km_EXP2_2019010112.nc",
-    "d04"="/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/d04/01/topdown-edgar-AGS.nc"
+    "d03"="data/d03.nc",
+    "d04"="data/d04.nc"
   )
 
   if(!grid_name %in% names(fs)){
