@@ -7,7 +7,7 @@ livestock.build_support <- function(){
 
   glws <- list(
     c(url="https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/GIVQ75/I5CUJS",
-      weight=(11+38.2)/2,
+      weight=(11+38.2)/2, # not sure what proportion is dairy vs beef cow. Using average
       file = "sectors/livestock/glw_cattle.tif"),
     c(url="https://dataverse.harvard.edu/api/access/datafile/:persistentId?persistentId=doi:10.7910/DVN/BLWPZN/XDIRM4",
       weight=3.4,
