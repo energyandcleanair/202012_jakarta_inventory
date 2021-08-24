@@ -43,17 +43,22 @@ forest.build_support <- function(){
     rename(weight=frp)
 
   fires_w_id$acq_date <- NULL
+
+  fires_w_id %>%
+    sf::st_write("sectors/forest/forest_support.gpkg")
+
   # sf::write tooo slow
-  library(rgdal)
-  lapply(list.files("sectors/forest","support.*", full.names = T), file.remove)
-  writeOGR(as(fires_w_id,"Spatial"), "sectors/forest/","support",driver = "ESRI Shapefile")
+  # library(rgdal)
+  # lapply(list.files("sectors/forest","support.*", full.names = T), file.remove)
+  # writeOGR(as(fires_w_id,"Spatial"), "sectors/forest/","support_forest",driver = "GPKG")
 
   return(fires_w_id)
 }
 
 
 forest.get_support <- function(){
-  sf::read_sf("sectors/forest/support.shp")
+  sf::read_sf("sectors/forest/forest_support.gpkg") %>%
+    rename(geometry=geom)
 }
 
 

@@ -5,7 +5,7 @@
 #' @return support.sf
 transport.build_support <- function(){
 
-  osm.roads <- sf::read_sf("data/transport/osm/gis_osm_roads_free_1.shp")
+  osm.roads <- sf::read_sf("sectors/transport/osm/gis_osm_roads_free_1.shp")
 
   weights <- list(
     "motorway"=0.7,

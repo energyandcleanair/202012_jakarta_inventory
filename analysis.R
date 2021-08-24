@@ -17,20 +17,25 @@ polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
 
 sectors <- c(
-  # "agroob",
-  #            "aviation",
-  #            "comres",
-             # "forest",
-             "gasdist",
-             "landfill",
-             "power",
-             "shipping",
-             "solidwaste",
-             "transport")
+  "agroob",
+  "aviation",
+  "comres",
+  "forest",
+  "gasdist",
+  "industry",
+  "landfill",
+  "livestock",
+  "power",
+  "shipping",
+  "solidwaste",
+  "transport")
 
 # Adjust grid
-grid <- data.grid(res_m = 1e4)
-grid_name <- "10km"
+# grid <- data.grid(res_m = 1e4)
+# grid_name <- "10km"
+
+grid <- data.grid.d03()
+grid_name <- "d03"
 
 
 lapply(sectors, function(sector){
@@ -67,26 +72,33 @@ lapply(sectors, function(sector){
       warning("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
       emission <- emission %>% filter(!sf::st_is_empty(geometry))
     }
-    # Create a single raster layer representing whole year
-    emission.raster <- creainventory::grid.rasterize(emission, grid)
 
-    # Save
-    dir.create("results", showWarnings = F)
-    lapply(names(emission.raster), function(poll){
-      raster::writeRaster(emission.raster[[poll]],
-                          file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
-                          overwrite=T)
-
-      # Sanity check: emission conservation
-      emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
-      raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
-      if(emission_total_poll!=raster_total_poll){
-        warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
-                        poll, emission_total_poll, raster_total_poll))
-      }
-    })
-
-    return(emission.raster)
+    # # Create a single raster layer representing whole year
+    # emission.raster <- creainventory::grid.rasterize(emission, grid)
+    #
+    # # Save GEOTIFFs
+    # dir.create("results", showWarnings = F)
+    # lapply(names(emission.raster), function(poll){
+    #   raster::writeRaster(emission.raster[[poll]],
+    #                       file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
+    #                       overwrite=T)
+    #
+    #   # Sanity check: emission conservation
+    #   emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
+    #   raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
+    #   if(emission_total_poll!=raster_total_poll){
+    #     warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
+    #                     poll, emission_total_poll, raster_total_poll))
+    #   }
+    # })
+    #
+    # # Save as a NETCDF for METEOSIM
+    # utils.geotiffs_to_nc(rs=emission.raster,
+    #                      grid_name = grid_name,
+    #                      nc_file = file.path("results", sprintf("%s.%s.nc", sector, grid_name))
+    #                      )
+    #
+    # return(emission.raster)
   }, error=function(e){
     return(NA)
   })

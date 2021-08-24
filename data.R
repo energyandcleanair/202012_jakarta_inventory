@@ -31,7 +31,6 @@ data.bps_map <- function(){
     filter(id %in% data.region_ids())
 }
 
-
 data.grid.edgar <- function(){
   g <- data.bps_map()
   extent <- sf::st_bbox(g)
@@ -42,15 +41,42 @@ data.grid.edgar <- function(){
 }
 
 
-data.grid.d04 <- function(){
-  g <- data.gadm()
-  grid <- raster::raster("data/d04.grid.tif") %>% raster::raster()
-  extent <- g %>%
-    sf::st_transform(raster::projection(grid)) %>%
-    sf::st_bbox()
+data.created03 <- function(){
+  # Any file from METEOSIM d03 dataset
+  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/CCTM_d03_CMAQv521_jakarta_disp-1km_EXP2_2019010112.nc"
+  nc <- ncdf4::nc_open(f)
+  x <- ncvar_get(nc, "X")
+  y <- ncvar_get(nc, "Y")
+  # crs <- utils.proj4string_from_nc(f)
+  # crs <- "+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m"
+  r <- raster::rasterFromXYZ(tidyr::crossing(x,y) %>% mutate(z=1),
+                        crs="+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m")
+  # raster::crs(r) <- crs
+  raster::writeRaster(r, "data/d03.grid.tif", overwrite=T)
+}
 
-  grid %>%
-    raster::crop(extent)
+
+data.grid.d03 <- function(){
+  # g <- data.gadm()
+  raster::raster("data/d03.grid.tif") %>% raster::raster()
+  # extent <- g %>%
+  #   sf::st_transform(raster::projection(grid)) %>%
+  #   sf::st_bbox()
+
+  # grid %>%
+  #   raster::crop(extent)
+}
+
+
+data.grid.d04 <- function(){
+  # g <- data.gadm()
+  raster::raster("data/d04.grid.tif") %>% raster::raster()
+  # extent <- g %>%
+  #   sf::st_transform(raster::projection(grid)) %>%
+  #   sf::st_bbox()
+  #
+  # grid %>%
+  #   raster::crop(extent)
 }
 
 #' If res_deg is specified -> EPSG:4326,
@@ -142,8 +168,6 @@ data.land_use <- function(type){
     "Secondary Swamp Forest"= "Hutan Rawa Sekunder",
     "Transmigration"= "Transmigrasi"
   )
-
-
 
   sector_to_type_en <- list(
     comres=c("Settlement"),
