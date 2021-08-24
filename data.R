@@ -18,10 +18,10 @@ data.gadm <- function(){
   rbind(
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_1.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      select(id=GID_1, name=NAME_1, geometry),
+      dplyr::select(id=GID_1, name=NAME_1, geometry),
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_2.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      select(id=GID_2, name=NAME_2, geometry)
+      dplyr::select(id=GID_2, name=NAME_2, geometry)
   )
 }
 
