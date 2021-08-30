@@ -83,13 +83,7 @@ lapply(sectors, function(sector){
     # Create a raster stack representing whole year for all polls
     emission.raster <- creainventory::grid.rasterize(emission, grid)
 
-    # Create a tibble (365-day) of raster stacks
-    emission.rasters <- creainventory::grid.rasterize(emission.raster, date_weight)
-
-
-
-
-    # # Save GEOTIFFs
+    # # Save yearly GEOTIFFs
     # dir.create("results", showWarnings = F)
     # lapply(names(emission.raster), function(poll){
     #   raster::writeRaster(emission.raster[[poll]],
@@ -105,13 +99,18 @@ lapply(sectors, function(sector){
     #   }
     # })
     #
-    # # Save as a NETCDF for METEOSIM
-    # utils.geotiffs_to_nc(rs=emission.raster,
-    #                      grid_name = grid_name,
-    #                      nc_file = file.path("results", sprintf("%s.%s.nc", sector, grid_name))
-    #                      )
-    #
-    # return(emission.raster)
+
+    # Create a tibble (365-day) of raster stacks
+    emission.rasters <- creainventory::temporal.split(emission.raster, date_weight)
+
+
+    # Save as NETCDF for METEOSIM
+    utils.ts_rasters_to_nc(rs=emission.rasters,
+                         grid_name = grid_name,
+                         nc_file = file.path("results", sprintf("%s.%s.nc", sector, grid_name))
+                         )
+
+    return(emission.rasters)
   }, error=function(e){
     return(NA)
   })
