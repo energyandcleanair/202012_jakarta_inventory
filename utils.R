@@ -157,7 +157,7 @@ utils.proj4string_from_nc <- function(f){
 #' @export
 #'
 #' @examples
-utils.geotiffs_to_nc <- function(rs,
+utils.rasters_to_nc <- function(rs,
                                  grid_name,
                                  nc_file){
 
@@ -205,6 +205,88 @@ utils.geotiffs_to_nc <- function(rs,
          function(varname){
            ncvar_put( nc.new, varname, rs[[varname]] %>% as.matrix() %>% apply(2, rev) %>% t() %>% as.vector()) # no start or count: write all values
          })
+
+  nc_close(nc.new)
+}
+
+
+
+#' Take a dated tibble of rasterstack with pollutant emissions as variables
+#' and transform it in a netcdf compatible with METEOSIM
+#'
+#' @param rs
+#' @param d03_or_d04
+#'
+#' @return
+#' @export
+#'
+#' @examples
+utils.ts_rasters_to_nc <- function(rs,
+                                grid_name,
+                                nc_file){
+
+  library(ncdf4)
+
+  fs <- list(
+    "d03"="data/d03.nc",
+    "d04"="data/d04.nc"
+  )
+
+  if(!grid_name %in% names(fs)){
+    stop("Unknown grid: ", grid_name, ". Should be in ", paste(names(fs), collapse=", "))
+  }else{
+    f <- fs[[grid_name]]
+  }
+
+  nc <- ncdf4::nc_open(f)
+
+  name_x <- intersect(nc_vars(f)$name, c("x","X"))
+  name_y <- intersect(nc_vars(f)$name, c("y","Y"))
+  name_date <- "date"
+
+  val_x <- ncvar_get(nc, name_x)
+  val_y <- ncvar_get(nc, name_y)
+
+  rs$date <- as.numeric(rs$date - lubridate::date("2019-01-01"), unit="days")
+  val_date <- unique(rs$date)
+
+  dim_x <- ncdim_def(name_x, "", vals=val_x)
+  dim_y <- ncdim_def(name_y, "", vals=val_y)
+  dim_date <- ncdim_def(name_date, "Days since 2019-01-01", vals=val_date)
+
+  #--------------------------------------
+  # Create vars along existing dimensions
+  #--------------------------------------
+  polls <- names(rs$emission.raster[[1]])
+
+  vars <- lapply(polls,
+                 function(varname){
+                   v <- ncvar_def(varname, "", dim = list(dim_x, dim_y, dim_date))
+                 })
+
+
+  #---------------------
+  # Create the file
+  #---------------------
+  file.remove(nc_file)
+  nc.new <- nc_create(nc_file, vars)
+
+  #----------------------------
+  # Write some data to the file
+  #----------------------------
+  for(poll in polls){
+    for(idate in 1:nrow(rs)){
+        ncvar_put(nc.new,
+                  varid=varname,
+                  vals=rs[[idate,"emission.raster"]][[1]][[poll]] %>%
+                      as.matrix() %>%
+                      apply(2, rev) %>%
+                      t() %>%
+                      as.vector(),
+                  count = c(-1,-1,1),
+                  start=c(1,1,idate))
+    }
+  }
 
   nc_close(nc.new)
 }
