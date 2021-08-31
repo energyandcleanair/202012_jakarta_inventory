@@ -44,8 +44,8 @@ data.grid.edgar <- function(){
 data.created02 <- function(){
   f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/topdown_d02.nc"
   nc <- ncdf4::nc_open(f)
-  x <- ncvar_get(nc, "X")
-  y <- ncvar_get(nc, "Y")
+  x <- ncvar_get(nc, "x")
+  y <- ncvar_get(nc, "y")
   r <- raster::rasterFromXYZ(tidyr::crossing(x,y) %>% mutate(z=1),
                              crs="+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m")
   raster::writeRaster(r, "data/d02.grid.tif", overwrite=T)
