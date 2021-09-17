@@ -29,7 +29,8 @@ transport.build_support <- function(){
                          !!!weights)
 
   sf::st_as_sf(roads)%>%
-    sf::write_sf("sectors/transport/transport_spatial.shp")
+    dplyr::select(osm_id, weight) %>%
+    sf::write_sf("sectors/transport/transport_spatial.gpkg")
 
   return(roads)
 }
@@ -38,7 +39,8 @@ transport.build_support <- function(){
 #'
 #' @return support sf
 transport.get_support <- function(){
-  sf::read_sf("sectors/transport/transport_spatial.shp")
+  sf::read_sf("sectors/transport/transport_spatial.gpkg") %>%
+    rename(geom=geometry)
 }
 
 #' Get emission data for transportation sector
