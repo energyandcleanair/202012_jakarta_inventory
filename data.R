@@ -66,10 +66,10 @@ data.grid.d02 <- function(){
 
 data.created03 <- function(){
   # Any file from METEOSIM d03 dataset
-  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/CCTM_d03_CMAQv521_jakarta_disp-1km_EXP2_2019010112.nc"
+  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/topdown_d03.nc"
   nc <- ncdf4::nc_open(f)
-  x <- ncvar_get(nc, "X")
-  y <- ncvar_get(nc, "Y")
+  x <- ncvar_get(nc, "x")
+  y <- ncvar_get(nc, "y")
   # crs <- utils.proj4string_from_nc(f)
   # crs <- "+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m"
   r <- raster::rasterFromXYZ(tidyr::crossing(x,y) %>% mutate(z=1),
