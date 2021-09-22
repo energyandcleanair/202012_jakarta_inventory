@@ -5,6 +5,16 @@
 #' @return support.sf
 transport.build_support <- function(){
 
+  f <- "sectors/transport/osm/gis_osm_roads_free_1.shp"
+
+  if(!file.exists(f)){
+    download.file(
+      url="http://download.geofabrik.de/asia/indonesia-latest-free.shp.zip",
+      destfile="sectors/transport/osm.zip")
+
+    unzip("sectors/transport/osm.zip")
+  }
+
   osm.roads <- sf::read_sf("sectors/transport/osm/gis_osm_roads_free_1.shp")
 
   weights <- list(
