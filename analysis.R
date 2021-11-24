@@ -59,6 +59,12 @@ lapply(sectors, function(sector){
       support <-  get(paste0(sector,".build_support"))()
     })
 
+    tryCatch({
+      date_weight <- get(paste0(sector,".get_date_weight"))()
+    }, error=function(e){
+      message("Couldn't find get_date_weight function. Using steady emission rate.")
+      date_weight <- tibble(date=seq.Date(as.Date("2019-01-01"), as.Date("2019-12-31"), by="day"), weight=1)
+    })
 
     # Check emission data and support
     creainventory::check.emission.d(emission.data)
@@ -75,32 +81,37 @@ lapply(sectors, function(sector){
       emission <- emission %>% filter(!sf::st_is_empty(geometry))
     }
 
-    # Create a single raster layer representing whole year
+    # Create a raster stack representing whole year for all polls
     emission.raster <- creainventory::grid.rasterize(emission, grid)
 
-    # Save GEOTIFFs
-    dir.create("results", showWarnings = F)
-    lapply(names(emission.raster), function(poll){
-      raster::writeRaster(emission.raster[[poll]],
-                          file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
-                          overwrite=T)
+    # # Save yearly GEOTIFFs
+    # dir.create("results", showWarnings = F)
+    # lapply(names(emission.raster), function(poll){
+    #   raster::writeRaster(emission.raster[[poll]],
+    #                       file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
+    #                       overwrite=T)
+    #
+    #   # Sanity check: emission conservation
+    #   emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
+    #   raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
+    #   if(emission_total_poll!=raster_total_poll){
+    #     warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
+    #                     poll, emission_total_poll, raster_total_poll))
+    #   }
+    # })
+    #
 
-      # Sanity check: emission conservation
-      emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
-      raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
-      if(emission_total_poll!=raster_total_poll){
-        warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
-                        poll, emission_total_poll, raster_total_poll))
-      }
-    })
+    # Create a tibble (365-day) of raster stacks
+    emission.rasters <- creainventory::temporal.split(emission.raster, date_weight)
 
-    # Save as a NETCDF for METEOSIM
-    utils.geotiffs_to_nc(rs=emission.raster,
+
+    # Save as NETCDF for METEOSIM
+    utils.ts_rasters_to_nc(rs=emission.rasters,
                          grid_name = grid_name,
                          nc_file = file.path("results", sprintf("%s.%s.nc", sector, grid_name))
                          )
 
-    return(emission.raster)
+    return(emission.rasters)
   }, error=function(e){
     return(NA)
   })

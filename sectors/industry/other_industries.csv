@@ -1,0 +1,438 @@
+Reference/ PlantID,lon,lat,Nama Perusahaan,Kab.Kota,Provinsi,distance_from_jakarta_km,Jenis Industri,General Industri Group,Capacity,Unit,Generation (MWh),Fuel,Consumption,Product/Production,Amount,Cross-Check Industry,Note,Source
+PROPER 2019,107.842339,-6.569771,PT. Dahana (Persero),Kab. Subang,West Java,117.3621174,Explosives,Heavy industry,,,,,,,,,No Information,
+PROPER 2019,107.5824015,-6.8984052,PT. Dirgantara Indonesia (Persero),Kota Bandung,West Java,111.9525059,Aero Manufacturing,Heavy industry,,,,,,,,Manufacturing,company involved in aircraft design and the development and manufacture of civilian and military regional commuter aircraft.,
+PROPER 2019,106.0227912,-5.9944299,PT. Seamless Pipe Indonesia Jaya,Kota Cilegon,Banten,94.14903024,Pipe,Heavy industry (construction),,,,,,167.000 ton pipe per year,,Construction,,
+PROPER 2019,106.6950006,-6.1601475,PT. Bakrie Building Industri,Kota Jakarta Barat,DKI Jakarta,17.52359977,Building Material Industry,Heavy industry (construction),350000,tons,57292167 KWH,Gasoline,342424 Liter,"Versa board and versa wood 
+Fiber cement building products and AC pipes",,,*Electric and gasoline consumption based on all the plant that Bakrie and Brothers have,
+PROPER 2019,107.404119,-6.415888,"PT. Asahimas Flat Glass, Tbk. Cikampek Plant",Kab. Karawang,West Java,65.95845088,Glass,Glass,"5,800,000", m2,,,,Flat Glass production capacity,420 ribu ton,,This is a new plant from PT. Asahimas Glass replacing old plant in Jakarta,
+PROPER 2019,107.1401622,-6.3074721,PT. Mulia Glass,Kab. Bekasi,West Java,34.39751221,Glass,Glass,,,,,,"Float Glass (in ton)
+ Glass Container (in ton)
+ Glass Block (in ton)","620.500
+ 164.250
+ 67.525",,,https://muliaindustrindoweb.s3.ap-southeast-1.amazonaws.com/upload/annual_report/31_blob.pdf
+PROPER 2019,106.8193445,-6.1215327,"PT. Asahimas Flat Glass, Tbk. Ancol Plant",Kota Jakarta Utara,DKI Jakarta,10.13590926,Glass,Glass,"720,000",tons,,,,Float glass,,,"This plant is in Jakarta, however since 2019, the production in this plant has stopped and moved to Cikampek, West Java.",http://www.amfg.co.id/en/investor/investor-information/annual-report/2020/06/30/annual-report-2019/
+PROPER 2019,105.6267881,-6.7489212,PT. Cibaliung Sumber Daya,Kab. Pandeglang,Banten,147.6125427,Mineral Mining,Metal & non-metallic minerals,,,,"1. Listrik (PLN)/ Supplied Electricity
+ 2. Listrik (PLTD)/Diesel Power Plant"," 1. 56.560.419 KWh
+ 2. 264.140 KWh",Gold. Total Produksi ,"1.962 kg (63.111 t.oz),",,,"https://www.antam.com/uploads/kinerja-lingkungan-energi.pdf
+ https://www.antam.com/uploads/kinerja-lingkungan-emisi.pdf"
+PROPER 2019,106.0111022,-5.9973447,PT. NS BlueScope Indonesia,Kota Cilegon,Banten,95.32032405,Metal Plating,Metal & non-metallic minerals,,,,,,,,,No specific information,https://www.nsbluescope.com/id/wp-content/uploads/sites/6/2019/05/BlueScopes-Sustainability-Report-FY2018.pdf
+PROPER 2019,106.0129685,-6.0008873,PT. Hitachi Metal Indonesia,Kota Cilegon,Banten,95.0230557,Magnet,Metal & non-metallic minerals,,,,,,ferrite magnet,,,No specific information,https://www.hitachi-metals.co.jp/e/ir/pdf/ar/2020/2020_all.pdf https://www.hitachi-metals.co.jp/e/csr/pdf/2019/detail_csr2019_11.pdf
+PROPER 2019,106.0131097,-6.0082595,PT. Pelat Timah Nusantara,Kota Cilegon,Banten,94.81073847,Metal Plating,Metal & non-metallic minerals,,,,,,,,,No specific information,http://www.latinusa.co.id/upload/module/laporan_keuangan/laporan-keuangan-tahunan-detail-1585641557-74.pdf
+PROPER 2019,106.020118,-6.0064627,PT. Karunia Berca Indonesia,Kota Cilegon,Banten,94.10480149,Metal Plating,Metal & non-metallic minerals,,,,,,"Workshop : 40.000 ton per annum
+Galvanizing : 36.000 ton per annum",,,,
+PROPER 2019,106.339588,-6.184971,PT. Astrindo Lestari Chemicals,Kab. Serang,Banten,56.06234514,Chemicals,Metal & non-metallic minerals,,,,,,,,Ports & Transportation,,
+PROPER 2019,106.4967539,-6.2078244,PT. Alko Mandiri,Kab. Tangerang,Banten,38.60565508,Metal Processing,Metal & non-metallic minerals,,,,,,Aluminium,,,No specific information,
+PROPER 2019,106.50603,-6.2193138,PT. Putra Bangun Citra Mandiri,Kab. Tangerang,Banten,37.59689736,Metal Processing,Metal & non-metallic minerals,700,tons,,,,"Installed : 700 Ton
+",,,,http://www.giamm.or.id/detail?companyid=197
+PROPER 2019,106.5393298,-6.2334194,PT. Galvindo Intiselaras,Kab. Tangerang,Banten,34.00391016,Metal Plating,Metal & non-metallic minerals,,,,,,,,,No specific information,
+PROPER 2019,106.5791039,-6.2179141,PT. YKK AP Indonesia,Kab. Tangerang,Banten,29.50942064,Metal Processing,Metal & non-metallic minerals,,,,,,Aluminium,,,No specific information,
+PROPER 2019,106.6532908,-6.2990224,PT. Zinkpower Austrindo,Kab. Tangerang,Banten,23.53302008,Metal Plating,Metal & non-metallic minerals,,,,,,"Hot-Dip Galvanizing
+ Passivation",,,"Kettle dimensions: 10.0 x 1.5 x 3.0 m as well as Kettle dimensions: 13,0 x 2,0 x 3,4 m
+ No specific information about the emissions",
+PROPER 2019,107.6469288,-6.9335175,PT. Pindad (Persero),Kota Bandung,West Java,119.8420291,Metal Processing,Metal & non-metallic minerals,,,,,,provides the needs of the weapons system’s main tools,,,No Information,
+PROPER 2019,106.5641974,-6.6633428,PT. Aneka Tambang (Persero) Tbk. Unit Bisnis Pertambangan Emas Pongkor,Kab. Bogor,West Java,59.41102257,Tambang Mineral,Metal & non-metallic minerals,1.962,kg,,,,Gold,(63.111 t.oz),,,"https://www.antam.com/uploads/kinerja-lingkungan-energi.pdf
+ https://www.antam.com/uploads/kinerja-lingkungan-emisi.pdf"
+PROPER 2019,107.3306615,-6.3821501,PT. Chunpao Steel Indonesia,Kab. Karawang,West Java,57.03635553,Metal Processing,Metal & non-metallic minerals,,,,,,,,,"No specific information, the company does not own a website",
+PROPER 2019,107.1229481,-6.3232536,PT. Walsin Lippo Industries,Kab. Bekasi,West Java,33.23108837,Metal Plating,Metal & non-metallic minerals,,,,,,Steel wires,,,"PT. Walsin Lippo Industries is a joint venture company between Walsin Lihwa Corporation of Taiwan and Lippo Group, Indonesia.","https://www.walsin.com/walsin/download/Annual%20Report_EN.pdf
+ https://www.walsin.com/csr/eng/download/walsinCSR2019EN.pdf"
+PROPER 2019,106.8788413,-6.500519,PT. Sumiden Serasi Wire Products,Kab. Bogor,West Java,32.68565473,Metal Plating,Metal & non-metallic minerals,,,,,,"Pre-stressed Concrete Materials (PC. Products), Spring Wires, Bead Wires, and Oil Tempered Wire",,,,"https://global-sei.com/csr/download/pdf/csr2020.pdf
+ https://global-sei.com/csr/environment/"
+PROPER 2019,106.9397547,-6.4472602,PT. Galvindo Ampuh,Kab. Bogor,West Java,28.52002448,Metal Plating,Metal & non-metallic minerals,,,,,,,,,"Weighing Bridge Scale with 60MT Capacity
+ 7 pairs of Overhead Crane with 5MT Capacity each
+ 12 Concrete treatment tanks
+ Steel Galvanizing Tank (12.5m X 1.5m X 2.4m)
+ 1 Steel tank for quenching",
+PROPER 2019,107.0917674,-6.2829274,PT. YKK Zipco Indonesia,oil,West Java,28.46426609,Metal Plating,Metal & non-metallic minerals,,,,,,,,,Sub group from YKK Japan. There is no specific information Indonesia,"https://www.ykkap.co.jp/company/en/download/pdf/report2020_en.pdf https://www.ykk.com/english/shared/pdf/corporate/csr/eco/report/2020/This_is_YKK_2020_data18-26_en.pdf
+https://www.ykk.com/english/shared/pdf/corporate/csr/eco/report/2020/This_is_YKK_2020_data15-17_en.pdf
+https://www.ykk.com/english/shared/pdf/corporate/csr/eco/report/2020/This_is_YKK_2020_all_en.pdf"
+PROPER 2019,107.0506636,-6.2641914,PT. Citra Galvanizing Indonesia,Kab. Bekasi,West Java,23.51648975,Metal Plating,Metal & non-metallic minerals,50000,tons,,,,,,,,
+PROPER 2019,107.0509133,-6.2594712,PT. Binder Indonesia,Kab. Bekasi,West Java,23.41103593,Metal Processing,Metal & non-metallic minerals,,,,,,No Information,,,,
+PROPER 2019,107.0006444,-6.3116831,PT. Logam Jaya Abadi Plant 1,Kota Bekasi,West Java,20.63038618,Metal Smelting,Metal & non-metallic minerals,,,,,,,,,No Information,
+PROPER 2019,106.9794826,-6.2104822,PT. Aluminium Extrusion Indonesia,Kota Bekasi,West Java,14.8176458,Metal Processing,Metal & non-metallic minerals,,,,,,Aluminium and Steel Coil,,,,
+PROPER 2019,106.9208265,-6.1862924,PT. The Master Steel Manufactory,Kota Jakarta Timur,DKI Jakarta,8.693023844,Metal Smelting,Metal & non-metallic minerals,2400000000,tons,,,,,,,"2 million tpa capacity by 2014 with the on-going modernization and expansion project of the new state-of-the-art 600,000 tpa bar mill, 500,000 tpa wire-rod and bar combi-mill.",http://www.themastersteel.com/discover.php?id=1
+PROPER 2019,106.9169687,-6.1938928,PT. Tobu Indonesia Steel,Kota Jakarta Timur,DKI Jakarta,8.069958277,Reheating Metal,Metal & non-metallic minerals,,,,,,,,,No specific information,
+PROPER 2019,105.9328049,-6.0353513,PT. Chandra Asri,Kota Cilegon,Banten,102.859909,Petrochemicals,Petrochemicals & Plastics,,,,,,,,,,"https://www.chandra-asri.com/files/About/COMPRO_CAP%20SPREAD%20FINAL.pdf
+ https://www.chandra-asri.com/files/reports/SR/Laporan%20Keberlanjutan%202019%20PT%20Chandra%20Asri%20Petrochemical%20Tbk.pdf
+ https://www.chandra-asri.com/files/attachments/reports/annual/Annual%20Report%20CAP%202019.pdf"
+PROPER 2019,105.936171,-6.0345567,PT. Lautan Otsuka Chemical,Kota Cilegon,Banten,102.5107476,Petrochemicals,Petrochemicals & Plastics,,,,,,"1. Organic blowing agent
+ 2. Inorganic blowing agent
+ 3. Masterbatch organic blowing agent
+ 4. Masterbatch inorganic blowing agnet",,,No specific information,
+PROPER 2019,105.9385074,-6.0330185,PT. Asahimas Chemical,Kota Cilegon,Banten,102.289578,Chemicals,Petrochemicals & Plastics,,,,,,,,,No specific information,
+PROPER 2019,105.9416694,-6.0384315,PT. Nippon Shokubai Indonesia,Kota Cilegon,Banten,101.8316612,Petrochemicals,Petrochemicals & Plastics,,,,,,,,,"This company is a subsidiary from Nippon Shokubai CO. Ltd
+ No specific information","https://www.shokubai.co.jp/en/ir/pdf/annual_rpt/ns_ar2018.pdf
+ https://www.shokubai.co.jp/en/csr/report/file/technoamenity_report2020.pdf"
+PROPER 2019,105.9463056,-6.0259209,PT. Indorama Polypet Indonesia (PT. Polypet Karyapersada),Kota Cilegon,Banten,101.5984826,Chemicals,Petrochemicals & Plastics,508000,tons,,,,,,,,https://sustainability.indoramaventures.com/storage/content/sustainability-report/en/sustainability-report-2019/doc.pdf; https://hub.optiwise.io/en/documents/2623/ivl-ar2019-en-02.pdf
+PROPER 2019,105.9984815,-5.963957,PT. Unggul Indah Cahaya,Kota Cilegon,Banten,97.64881799,Petrochemicals,Petrochemicals & Plastics,,,,,,,,,No specific information,http://www.uic.co.id/gallery/documents/2019/UIC_AR_2019.pdf
+PROPER 2019,105.9998522,-5.9595318,PT. Dover Chemical,Kota Cilegon,Banten,97.64232543,Chemicals,Petrochemicals & Plastics,,,,,," Formaldehyde; Paraformaldehyde; Formaldehyde Resin; Emulsion Polymer
+ Distribution; Industrial Chemicals; Specialty Products; Exterior Insulation Façade; Steel Drum",,,No specific information,
+PROPER 2019,106.0001234,-5.9613943,PT. Castrol Indonesia,Kota Cilegon,Banten,97.55466208,Lubricants,Petrochemicals & Plastics,,,,,,,,,No specific information and the company belong to BP group,https://www.bp.com/content/dam/bp/business-sites/en/global/corporate/pdfs/sustainability/alc-programme/bp-alc-case-studies-2020.pdf;  https://www.bp.com/content/dam/bp/business-sites/en/global/corporate/pdfs/sustainability/alc-programme/bp-alc-activity-table-2020.pdf;  https://www.bp.com/content/dam/bp/business-sites/en/global/corporate/pdfs/sustainability/group-reports/bp-sustainability-report-2019.pdf
+PROPER 2019,105.9999551,-5.9656915,PT. Trinseo Materials Indonesia,Kota Cilegon,Banten,97.43825401,Petrochemicals,Petrochemicals & Plastics,,,,,,"Latex, Polystyrene",,,No specific information,"https://trinseo.widen.net/s/g3y6drzvat
+ https://s21.q4cdn.com/603930022/files/doc_downloads/2020/2020-All-Pages-Web.pdf"
+PROPER 2019,106.0012995,-5.9618883,PT. Standar Toyo Polymer (Statomer),Kota Cilegon,Banten,97.41420883,Petrochemicals,Petrochemicals & Plastics,82000,tons,,,,,,,No specific information,https://www.tosoh.com/investors/annual-reports/2019/esg-data-at-a-glance
+PROPER 2019,106.003673,-5.9596453,PT. Tridomain Chemicals,Kota Cilegon,Banten,97.23328519,Plasticizer & special resin ,Petrochemicals & Plastics,174000000,tons,,,,,,,,https://drive.google.com/file/d/1_FZsJ899TFW6VmgxL-w4-vPIfkD04jYH/view
+PROPER 2019,105.9985972,-5.9778891,PT. Lotte Chemical Titan Nusantara,Kota Cilegon,Banten,97.21388097,Petrochemicals,Petrochemicals & Plastics,,,,,,,,,No information because the annual report cannot accessed,https://www.lottechem.co.id/investor/annual.asp
+PROPER 2019,106.0024324,-5.9666366,PT. MC PET Film Indonesia,Kota Cilegon,Banten,97.14553154,Chemicals (PTA & PET),Petrochemicals & Plastics,58000,tons,,,,,,,Probably these two companies are the same,
+PROPER 2019,106.0043862,-5.968670988,PT. Mitsubishi Chemical Indonesia,Kota Cilegon,Banten,96.8028485,Petrochemicals,Petrochemicals & Plastics,700000,,,,,,,,Probably these two companies are the same,
+PROPER 2019,106.003148,-5.9760128,PT. BP Petrochemicals Indonesia,Kota Cilegon,Banten,96.78402729,Petrochemicals,Petrochemicals & Plastics,,,,,,,,,No specific information and the company belong to BP group,
+PROPER 2019,105.9987602,-5.9945716,PT. Cabot Indonesia,Kota Cilegon,Banten,96.72060643,Chemicals,Petrochemicals & Plastics,,,,,,,,,No specific information,https://www.cabotcorp.com/-/media/files/reports/responsibility/cabot-corporation-sustainability-report-2019.pdf?la=en&rev=7a6c95139c554941a7a795aacc0edf33
+PROPER 2019,106.0094553,-6.0076382,PT. Clariant Indonesia - Tangerang Plant,Kota Cilegon,Banten,95.22020386,Petrochemicals,Petrochemicals & Plastics,,,,,,,,,No specific information,"http://reports.clariant.com/2019/integrated-report/servicepages/downloads/files/clariant_integrated_report_2019_en.pdf
+ http://reports.clariant.com/2019/integrated-report/"
+PROPER 2019,106.0101266,-6.0085926,PT. Archroma Indonesia,Kota Cilegon,Banten,95.1229606,Petrochemicals,Petrochemicals & Plastics,,,,,,"Chemical manufacturers for the Textile, Paper and Synthetic Emulsion Industries",,,No specific information,https://www.archroma.com/assets/uploads/files/Sustainability-report-FY2019_lowres.pdf
+PROPER 2019,106.014,-6.00322,PT. Rohm and Haas Indonesia,Kota Cilegon,Banten,94.84915168,Petrochemicals,Petrochemicals & Plastics,,,,,,polimer dispersant,,,No specific information,"https://corporate.dow.com/en-us/science-and-sustainability/reporting/sustainability-report-2019/
+ https://corporate.dow.com/content/dam/corp/documents/science-sustainability/910-00129-01-dow-sustainability-goals-2019-highlights.pdf"
+PROPER 2019,106.0665332,-5.8837743,PT. BASF Indonesia,Kab. Serang,Banten,93.52333242,Chemicals,Petrochemicals & Plastics,,,,,,dispersion dan pigment,,,No specific information,"https://www.basf.com/global/documents/en/investor-relations/basf-at-a-glance/key-financial-data/fy-2019/entire_basf_ar19.xls
+ https://www.basf.com/global/documents/en/news-and-media/publications/reports/2020/BASF_Report_2019.pdf"
+PROPER 2019,106.0658372,-5.887683,PT. Inti Everspring Indonesia,Kab. Serang,Banten,93.42677513,Pesticides,Petrochemicals & Plastics,,,,,,"Propoxur, Methomyl, Fenobucarb, Oxamyl, Isoprocarb, Carbofuran, Methiocarb",,,,
+PROPER 2019,106.067541,-5.886296,PT. Sulfindo Adiusaha,Kab. Serang,Banten,93.31193098,Chemicals,Petrochemicals & Plastics,,,,,,"annual production capacity of 320,000 DMT of Caustic Soda; 380,000 MT of EDC; 130,000 MT of VCM; and 110,000 MT of PVC",,,,
+PROPER 2019,106.071321,-5.888224,PT. Styrindo Mono Indonesia,Kab. Serang,Banten,92.84299047,Petrochemical,Petrochemicals & Plastics,,,,,,,,,merger with PT Chandra Asri Petrochemical Tbk in Banten,
+PROPER 2019,106.0716408,-5.8890458,PT. Nufarm Indonesia,Kab. Serang,Banten,92.77511585,Pesticide,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,106.0755468,-5.8910271,PT. Gajah Tunggal Div. SBR,Kab. Serang,Banten,92.29105981,Chemicals,Rubber,75000,tons/year,,,, SBR (Ton/year),,,"**) The Company acquired Filamendo Sakti at the end of June 2018.
+ Capacity utilization is calculated based on production after the acquisition date.",
+PROPER 2019,106.078804,-5.8949008,"PT. Polychem Indonesia, Tbk.",Kab. Serang,Banten,91.79284769,Chemicals,Petrochemicals,"320,000",tons/year,,,,"Polyester Production Capacity is 129.600 tons/year
+Ethylene Glycol: 188.498 Ton
+Ethylene Oxide Derivatives: 63.440 Ton",,,,
+PROPER 2019,106.3505182,-6.2615489,PT. Platinum Resins Indonesia,Kab. Serang,Banten,55.10033861,Chemicals (Resin),Petrochemicals,12000,,,,,,,,,
+PROPER 2019,106.3643969,-6.220144,PT. Sari Daya Plasindo,Kab. Serang,Banten,53.26746093,Plastizer,Petrochemicals & Plastics,,,,,,,,,No Information,
+PROPER 2019,106.541524,-6.1861221,PT. Bina Adi Daya,Kab. Tangerang,Banten,33.74590408,Paint,Paint,,,,,,Paint,,,No specific information,
+PROPER 2019,106.5663741,-6.2136329,PT. Tritunggal Multi Chemical,Kab. Tangerang,Banten,30.90546424,Chemicals,Petrochemicals & Plastics,,,,,,"producing chemicals for paper, textile and paint industries",,,no specific information,
+PROPER 2019,106.5796818,-6.2009854,PT. Propan Raya ICC Plant II,Kab. Tangerang,Banten,29.44108777,Paint,Paint,,,,,,Paint,,,No specific information,
+PROPER 2019,106.5796818,-6.2009854,PT. Propan Raya ICC Plant I,Kota Tangerang,Banten,29.44108777,Paint,Paint,,,,,,Paint,,,No specific information,
+PROPER 2019,108.4065239,-6.3933768,PT. Polytama Propindo,Kab. Indramayu,West Java,173.9299103,Plastic Ore,Petrochemicals & Plastics,200000,Ton,,,,,,,,"Ibrahim, P.A., Salsabiela, M., Octavian, S./ Jurnal Rekayasa, Teknologi, dan Sains. PENGENDALIAN DAN PENURUNAN EMISI SEBAGAI KOMITMEN. PT POLYTAMA PROPINDO TERHADAP KELESTARIAN. LINGKUNGAN.VOLUME 3 NOMOR 2, AGUSTUS 2019"
+PROPER 2019,107.4543829,-6.4434397,"PT. Indopoly Swakarsa Industry, Tbk.",Kab. Purwakarta,West Java,72.24544777,Plastic,Petrochemicals & Plastics,65000,Ton,,,,,,,,
+PROPER 2019,107.4311674,-6.4090655,PT. Clariant Kujang Catalysts,Kab. Karawang,West Java,68.51986289,Chemicals,Petrochemicals & Plastics,1100,Ton,,,,,,,,
+PROPER 2019,107.2787734,-6.3621588,PT. Indonesia Nikka Chemicals (Inkali),Kab. Karawang,West Java,50.88177191,Chemicals,Petrochemicals & Plastics,,,,,,,,,"The company is a sub-company from Japan, NICCA CHEMICAL CO.,LTD , however I can not find any specific for the emission information",
+PROPER 2019,107.1437697,-6.2733188,PT. ICI Paints Indonesia,Kab. Bekasi,West Java,33.76899274,Paint,Petrochemicals & Plastics,,,,,,,,,"I think the company is part of AkzoNobel Decorative, thus I try to find a report from AkzoNobel Decorative, however there is no clear emission number for Indonesia, but in the report there is a emission number",https://aats3-dc3257521c8b1e6fdd90db5c586da55-public.s3-eu-west-1.amazonaws.com/an_ar_2019_5.pdf
+PROPER 2019,107.1239618,-6.3188246,PT. Hanwa Chemicals Indonesia,Kab. Bekasi,West Java,33.14945769,Chemicals,Petrochemicals & Plastics,,,,,,,,,"No specific information, The emission is not specific for the Indonesia",
+PROPER 2019,107.1336365,-6.2893049,PT. International Paint Indonesia,Kab. Bekasi,West Java,33.11067466,Paint,Petrochemicals & Plastics,,,,,,,,,"I think the company is part of AkzoNobel Decorative, thus I try to find a report from AkzoNobel Decorative, however there is no clear emission number for Indonesia, but in the report there is a emission number",https://aats3-dc3257521c8b1e6fdd90db5c586da55-public.s3-eu-west-1.amazonaws.com/an_ar_2019_5.pdf
+PROPER 2019,107.1245259,-6.2871715,PT. Rudolf Chemicals Indonesia,Kab. Bekasi,West Java,32.07596147,Chemicals,Petrochemicals & Plastics,,,,,,,,,,https://www.rudolf-group.co.id/fileadmin/user_upload/rudolf_germany/documents/ecology/Environment_Report_en.pdf
+PROPER 2019,107.1052814,-6.3029158,PT. Kansai Paint Indonesia,Kab. Bekasi,West Java,30.58732262,Paint,Paint,,,,,,,,,"This company is the sub company from Japanese company Kansai Paint.
+ The information data also not specific for Indonesia","https://www.kansai.com/wp-content/uploads/2019/09/2019_ir_en.pdf
+ https://www.kansai.com/sustainability/environment.html
+ https://www.kansai.com/wp-content/uploads/2020/08/2020_ir_en.pdf#zoom=70"
+PROPER 2019,107.0942361,-6.3118892,PT. Jotun Indonesia,Kab. Bekasi,West Java,29.81206029,Paint,Paint,,,,,,,,,No specific information,https://jotunimages.azureedge.net/images/images/Jotun%20Annual%20Report%202019%20%E2%80%93%20Interactive%20%E2%80%93%202020-04-02_tcm60-201009.pdf
+PROPER 2019,107.0977893,-6.2835657,PT. Unipack Indosystems,Kab. Bekasi,West Java,29.12285873,Plastic,Petrochemicals & Plastics,,,,,,,,,No Information,
+PROPER 2019,107.0434902,-6.2591482,PT. 3M Indonesia,Kab. Bekasi,West Java,22.60574835,Plastic,Petrochemicals & Plastics,,,,,,,,,No specific information for Indonesia,https://multimedia.3m.com/mws/media/1836747O/2020-sustainability-report.pdf
+PROPER 2019,106.8463248,-6.405158,PT. Indo Lysaght,Kota Depok,West Java,21.86269436,Chemicals,Petrochemicals & Plastics,,,,,,"Zinc Oxide, Zinc Dust, Zinc Chloride",,,,
+PROPER 2019,107.0248178,-6.2609803,PT. Sumi Asih,Kab. Bekasi,West Java,20.66682697,Chemicals,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,106.863434,-6.3747141,PT. BASF Care Chemicals Indonesia,Kota Depok,West Java,18.57865325,Chemicals,Petrochemicals & Plastics,,,,,,,,,No specific information,"https://www.basf.com/global/documents/en/investor-relations/basf-at-a-glance/key-financial-data/fy-2019/entire_basf_ar19.xls
+ https://www.basf.com/global/documents/en/news-and-media/publications/reports/2020/BASF_Report_2019.pdf"
+PROPER 2019,106.9801989,-6.2476428,PT. KAO Indonesia Chemicals,Kab. Bekasi,West Java,15.51120569,Chemicals,Petrochemicals & Plastics,,,,,,,,,Sub group from KAO Japan,"https://www.kao.com/content/dam/sites/kao/www-kao-com/global/en/sustainability/pdf/klp-pr-2020-e-all.pdf
+ https://www.kao.com/content/dam/sites/kao/www-kao-com/global/en/investor-relations/pdf/reports-fy2020e-all-002.pdf"
+PROPER 2019,106.8683927,-6.3428965,PT. Huntsman Indonesia,Kota Jakarta Timur,DKI Jakarta,15.14314696,Chemicals,Petrochemicals & Plastics,,,,,,"Polyurethanes, Textile Effects",,,1Environmental data is based on 72 manufacturing facilities reporting emissions and energy data.,https://d1io3yog0oux5.cloudfront.net/_700a9e0844916c783f3bb2f2f5fda36f/huntsman/db/861/10256/pdf/2019+Sustainability+Report.pdf
+PROPER 2019,106.9216138,-6.1832075,"PT. Indonesian Acids Industry, Ltd.",Kota Jakarta Timur,DKI Jakarta,8.880507718,Chemicals,Petrochemicals & Plastics,127000,t/th,,,,,,,,"1. http://www.sulphuric-acid.com/sulphuric-acid-on-the-web/acid%20plants/PT%20Indonesian%20Acids%20.htm
+ 2. http://www.lautan-luas.com/download/sustainability-report-2019-pt-lautan-luas-tbk"
+PROPER 2019,106.9034633,-6.1936444,PT. Danapaint Indonesia,Kota Jakarta Timur,DKI Jakarta,6.621210325,Paint,Petrochemicals & Plastics,,,,,,,,,No specific information,
+PROPER 2019,106.7234347,-6.1564542,PT. BASF Indonesia Cengkareng,Kota Jakarta Barat,DKI Jakarta,14.72082568,Chemicals,Petrochemicals & Plastics,,,,,,,95000 ton1,,,
+PROPER 2019,106.5720407,-6.2207476,PT. Non Ferindo Utama,Kab. Tangerang,Banten,30.30278572,Hazardous waste treatment,Waste treatment,,,,,,,,Waste,"PT. Non Ferindo Utama is a recycling industry of used batteries. IT runs its used batteries smelting process using Rotary Kiln machines (Rotary Furnaces), which are integrated with pollution control systems.",
+PROPER 2019,108.3414002,-6.7032066,PT. Teknotama Lingkungan Internusa,Kab. Majalengka,West Java,174.3702607,Hazardous waste treatment,Waste treatment,,,,,,,,,Waste/ No information about emission,http://www.ecostargrp.com/index.php/product-services/jasa-pelayanan-lingkungan-terintegrasi/konsultasi-dan-teknisi-lingkungan-hidup
+PROPER 2019,106.9231332,-6.4699239,PT. Prasadha Pamunah Limbah Industri,Kab. Bogor,West Java,30.31143191,Hazardous waste treatment,Waste treatment,,,,,,,,,Waste/ No information about emission,http://ppli.co.id/wp-content/uploads/2020/08/PPLI-Company-Profile.pdf
+PROPER 2019,107.0951983,-6.2859581,PT. Wiraswasta Gemilang Indonesia,Kab. Bekasi,West Java,28.92616466,Hazardous waste treatment,Waste treatment,,,,,,,,,Waste/ No information about emission,"http://ptwgi.com/en/our-business/re-refinery
+ http://ptwgi.com/en/download"
+PROPER 2019,106.9995185,-6.296883,PT. Pengolahan limbah industri Bekasi,Kota Bekasi,West Java,19.65513577,Hazardous waste treatment,Waste treatment,,,,,,,,,Waste/ No information about emission,"https://plib-bekasi.com/profil-perusahaan/
+ https://plib-bekasi.com/layanan/"
+PROPER 2019,113.858299,-7.009557,Santos (Madura Offshore) Pty Ltd - Lapangan Gas Maleo,Kab. Sumenep,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,114.3691416,-8.2190944,Santos Pty Ltd. - Lapangan Oyong Kab. Banyuwangi,Kab. Sampang,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,112.9172222,-7.6394444,PT. Boma Bisma Indra (Persero),Kota Pasuruan,East Java,East Java,Metal Smelting,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6837769,-8.1746286,PT. Pindad Divisi Munisi,Kab. Malang,East Java,East Java,Metal Plating,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.8242818,-7.6056003,PT. SIER Pasuruan (PIER),Kab. Pasuruan,East Java,East Java,Kawasan Industri,Heavy industry,,,,,,,,,,
+PROPER 2019,112.7049067,-7.8462572,PT. Molindo Raya Industrial,Kab. Malang,East Java,East Java,Chemicals,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,112.7228523,-7.582799,PT. IMLI (Indra Eramulti Logam Industri),Kab. Pasuruan,East Java,East Java,Metal Smelting,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.7198232,-7.5905187,PT. Guntner Indonesia,Kab. Pasuruan,East Java,East Java,Heat transfer equipment,Heavy industry,,,,,,,,,,
+PROPER 2019,112.7637376,-7.3350604,PT. Aktif Indonesia Indah,Kab. Sidoarjo,East Java,East Java,Chemicals,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,112.7125168,-7.5628008,PT. ALP Petro Industry,Kab. Pasuruan,East Java,East Java,Hazardous waste treatment,Waste,,,,,,,,,,
+PROPER 2019,112.7597696,-7.3249915,PT. Bondi Syad Mulia,Kota Surabaya,East Java,East Java,Metal Plating,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.759348,-7.325253,PT. Steel Pipe Industry of Indonesia Surabaya Plant (unit 3),Kota Surabaya,East Java,East Java,Metal Plating,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.7581034,-7.3309838,PT. SIER (Surabaya Industrial Estate Rungkut),Kota Surabaya,East Java,East Java,Kawasan Industri,Heavy industry,,,,,,,,,,
+PROPER 2019,112.7136976,-7.4813973,PT. Unichem Candi Indonesia,Kab. Sidoarjo,East Java,East Java,Chemicals,Petrochemicals,,,,,,,,,,
+PROPER 2019,112.725357,-7.418787,PT. Avia Avian,Kab. Sidoarjo,East Java,East Java,Paint,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,112.7276862,-7.3731622,PT. Indal Alumunium Industry (Maspion Unit 1),Kab. Sidoarjo,East Java,East Java,Metal Processing,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6883969,-7.5194928,"Lapindo Brantas, Inc. (Lapangan Wunut)",Kab. Sidoarjo,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,112.7415596,-7.2054751,PT. PAL Indonesia (Persero),Kota Surabaya,East Java,East Java,Heavy industry,Heavy industry,,,,,,,,,,
+PROPER 2019,112.6663141,-7.3425224,PT. Duta Cipta Pakar Perkasa,Kota Surabaya,East Java,East Java,Metal Plating,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.681502,-7.2482868,PT. Gunawan Dianjaya Steel,Kota Surabaya,East Java,East Java,Metal Smelting,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6597255,-7.3621141,"PT. Asahimas Flat Glass, Tbk. Sidoarjo Plant",Kab. Sidoarjo,East Java,East Java,Glass,Glass,,,,,,,,,,
+PROPER 2019,112.6181664,-7.5522434,PT. Kawasan Industri Intiland (PT. Dharmala RSEA Industrial Estate (Ngoro Industrial Park)),Kab. Mojokerto,East Java,East Java,Industrial Area,Heavy industry,,,,,,,,,,
+PROPER 2019,112.6782981,-7.2495125,PT. Jaya Pari Steel,Kota Surabaya,East Java,East Java,Rolling Mill,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6559514,-7.3678028,PT. Omya Indonesia,Kab. Sidoarjo,East Java,East Java,Chemicals,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,112.6136107,-7.5598099,PT. Sky Indonesia,Kab. Mojokerto,East Java,East Java,Metal Processing,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6118535,-7.565899,PT. King Halim Jewelry,Kab. Mojokerto,East Java,East Java,Emas,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6641294,-7.1706808,PT. Pertamina Hulu Energi West Madura Offshore (PHE WMO),Kab. Gresik,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,112.62717,-7.364354,PT. Timur Megah Steel,Kab. Gresik,East Java,East Java,Steel Plating,Steel,,,,,,,,,,
+PROPER 2019,112.6591868,-7.162056,PT. Pertamina (Persero) - Bitumen Plant Gresik,Kab. Gresik,East Java,East Java,Aspal,Heavy industry (construction),,,,,,,,,,
+PROPER 2019,112.649167,-7.191576,PT. Barata Indonesia (Persero),Kab. Gresik,East Java,East Java,Metal Smelting,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6519882,-7.1652437,Camar Resources Canada Inc.,Kab. Gresik,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,112.6365423,-7.143109,PT. Petro Jordan Abadi,Kab. Gresik,East Java,East Java,Basic Chemicals,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,112.6331244,-7.1429183,PT. Smelting,Kab. Gresik,East Java,East Java,Metal Smelting,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,112.6156478,-7.1119287,PT. Saka indonesia Pangkah,Kab. Gresik,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,112.4274731,-7.5151086,PT. Sunrise Steel,Kab. Mojokerto,East Java,East Java,Steel Processing,Steel,,,,,,,,,,
+PROPER 2019,111.909529,-7.1533982,PT. Pertamina EP Asset 4 - Sukowati Field,Kab. Bojonegoro,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,110.9142622,-7.5172437,PT. Indaco Warna Dunia,Kab. Karanganyar,Central Java,Central Java,Paint,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,110.8861168,-7.5568595,PT. Hardo Soloplast,Kab. Karanganyar,Central Java,Central Java,Plastik,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,110.8852133,-7.5280466,PT. Indo Acidatama Tbk.,Kab. Karanganyar,Central Java,Central Java,Ethanol,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,110.4469889,-7.1882872,PT. Bina Guna Chemicals,Kab. Semarang,Central Java,Central Java,Chemicals,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,110.4105179,-7.0670055,PT. Raja Besi Semarang,Kota Semarang,Central Java,Central Java,Metal Plating,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,110.3889565,-7.0053739,PT. Indonesia Steel Tube Works,Kota Semarang,Central Java,Central Java,Metal Plating,Metal & non-metallic minerals,,,,,,,,,,
+PROPER 2019,110.3376377,-6.9772745,PT. Kawasan Industri Wijayakusuma (Persero),Kota Semarang,Central Java,Central Java,Kawasan Industri,Heavy industry,,,,,,,,,,
+PROPER 2019,104.5655273,-4.4963689,PT. Perkebunan Nusantara VII Unit Tulung Buyut,Kab. Way Kanan,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,105.2731935,-4.015974,PT. Silva Inhutani Lampung - Divisi Crumb Rubber,Kab. Mesuji,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,104.8103948,-4.4743231,PT. Budi Lampung Sejahtera,Kab. Way Kanan,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,109.0052228,-7.7041659,PT. Pertamina (Persero) RU IV - Kilang Cilacap,Kab. Cilacap,Central Java,Central Java,Oil and Gas Processing,Oil & Gas ,,,,,,,,,,
+PROPER 2019,105.2506958,-4.1607524,PT. Silva Inhutani Lampung - unit Reg.45 Sungai Buaya,Kab. Mesuji,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,115.9300927,-6.9587551,"Kangean Energy Indonesia, Ltd.",Kab. Sumenep,East Java,East Java,Migas EP,Power & Energy,,,,,,,,,,
+PROPER 2019,105.1414039,-4.4827222,PT. Huma Indah Mekar,Kab. Tulang Bawang Barat,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,108.796177,-7.465624,PT. Indo Java Ruber Planting Company,Kab. Cilacap,Central Java,Central Java,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,105.1210088,-5.3668096,PT. Perkebunan Nusantara VII Unit Way Berulu,Kab. Pesawaran,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,105.2008945,-5.3188164,PT. Perkebunan Nusantara VII Unit Pematang Kiwah,Kab. Lampung Selatan,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,105.260598,-5.385185,PT. Perkebunan Nusantara VII Unit Kedaton,Kab. Lampung Selatan,Lampung,Lampung,Rubber,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,105.3283199,-5.4331799,PT. Tanso Putra Asia,Kota Bandar Lampung,Lampung,Lampung,Activated Carbon,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,106.8220227,-6.1287476,PT. Nipsea Paint & Chemicals,Kab. Gresik,East Java,East Java,Paint,Petrochemicals & Plastics,,,,,,,,,,
+PROPER 2019,107.0967972,-6.2933095,PT. JFE Shoji Steel Indonesia,,,,Steel processing,Steel processing,70000,MT,,,,,,,,https://www.jfe-shoji.co.jp/en/info/news/the-installment-of-facilities-at-p-t-jfe-shoji-steel-indonesia/; https://www.jfe-holdings.co.jp/en/investor/library/group-report/2018/pdf/all.pdf
+3423486,107.1328,-6.28668,Bekasi Brake System and Wheel Manufacturing,Bekasi,West Java,-6.28668,Automotive manufacturing,Industrial Manufacturing,,,,,,,,,PT Chemco Harapan Nusantara,https://www.industrialinfo.com/
+3341096,112.725,-7.37506,Sidoarjo Alumindo Light Metal Manufacturing,Kab. Sidoarjo,East Java,-7.37506,Automotive manufacturing,Industrial Manufacturing,162000,"Aluminum Sheet, Plate & Foil",T/yr,,,,,,PT Maspion,https://www.industrialinfo.com/
+3421606,107.3332,-6.38008,Karawang Automotive Casting Manufacturing,Kab. Karawang,West Java,-6.38008,Automotive manufacturing,Industrial Manufacturing,,,,,,,,,Isuzu Motors Limited,https://www.industrialinfo.com/
+3340759,112.7273,-7.41026,Maspion II,Kab. Sidoarjo,East Java,-7.41026,Automotive manufacturing,Industrial Manufacturing,,,,,,,,,PT Maspion,https://www.industrialinfo.com/
+PROPER,106.8945605,-6.4624704,PT. Armindo Catur Pratama,Pelapisan Logam,West Java,,Metal Processing,Metals & Minerals,30000,,,,,,,,,
+PROPER,107.0379703,-6.2619082,PT. Toyogiri Iron Steel,Peleburan Baja,West Java,,Iron & Steel Plating,Metals & Minerals,500000,,,,,,,,,https://www.toyogiristeel.com/company-profile.pdf
+PROPER,,-6.22531,PT. Ispat Bukit Baja,Pengolahan Logam,West Java,107.008525,Steel Iron Bars,Metals & Minerals,120000,,,,,,,,,
+3013957,-6.03818,105.9414,Cilegon Chemical Complex,,,,,Chemical Processing (CPI),,,,,,,,,Nippon Shokubai Company Limited,https://www.industrialinfo.com/
+1053635,-6.41005,107.4313,Cikampek Formic Acid,,,,,Chemical Processing (CPI),,,,,,,,,PT Pupuk Indonesia Holding Company,https://www.industrialinfo.com/
+3078621,-6.016,106.05,Cilegon Coal Tar Pitch Complex,,,,,Chemical Processing (CPI),,,,,,,,,POSCO,https://www.industrialinfo.com/
+1039365,-7.15296,112.6381,Gresik (East Java) Fertilizer Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Pupuk Indonesia Holding Company,https://www.industrialinfo.com/
+3030935,-5.88818,106.0665,Cilegon Integrated Vinyl-Chloride,,,,,Chemical Processing (CPI),,,,,,,,,PT Sulfindo Adiusaha,https://www.industrialinfo.com/
+3111521,-6.23569,106.8674,Jakarta Timur Flavors,,,,,Chemical Processing (CPI),,,,,,,,,International Flavors and Fragrances Incorporated,https://www.industrialinfo.com/
+3026971,0.175819,117.4936,Bontang Methanol,,,,,Chemical Processing (CPI),,,,,,,,,Sojitz Corporation,https://www.industrialinfo.com/
+3124310,-6.4141,107.4413,Cikampek Carbon Disulfide,,,,,Chemical Processing (CPI),,,,,,,,,Aditya Birla Group,https://www.industrialinfo.com/
+1061821,3.461334,117.8419,Pulau Bunyu Methanol,,,12-Feb-09,,Chemical Processing (CPI),,,,,,,,,PT Pertamina Persero,https://www.industrialinfo.com/
+3033276,-6.02549,105.9469,Cilegon Purified Terephthalic Acid (PTA),,,,,Chemical Processing (CPI),,,,,,,,,Indorama Corporation,https://www.industrialinfo.com/
+1078324,-6.0333,105.9388,Cilegon Integrated Chlor-Alkali Vinyl Chloride Complex,,,,,Chemical Processing (CPI),,,,,,,,,AGC Incorporated,https://www.industrialinfo.com/
+3089718,-6.3379,107.1349,Bekasi Synthetic Resins,,,,,Chemical Processing (CPI),,,,,,,,,PT Aristek Highpolymer,https://www.industrialinfo.com/
+1057327,-5.97782,106.0012,Cilegon Purified Terephthalic Acid,,,,,Chemical Processing (CPI),,,,,,,,,PT BP Petrochemicals Indonesia,https://www.industrialinfo.com/
+3092730,-3.34101,114.5626,Banjarmasin Chemical Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Intan Wijaya International Tbk,https://www.industrialinfo.com/
+1059161,-6.48459,107.3866,Purwakarta Chemical Complex,,,,,Chemical Processing (CPI),,,,,,,,,Aditya Birla Group,https://www.industrialinfo.com/
+3096289,-7.58984,112.7471,Pasuruan Sorbitol,,,,,Chemical Processing (CPI),,,,,,,,,Mitsubishi Shoji Foodtech Company Limited,https://www.industrialinfo.com/
+3031674,3.779911,98.68896,Pulau Batam Oleochemicals,,,,,Chemical Processing (CPI),,,,,,,,,PT Ecogreen Oleochemicals,https://www.industrialinfo.com/
+3021227,-6.01688,106.0405,Cilegon Butadiene Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Barito Pacific Tbk,https://www.industrialinfo.com/
+3087341,-7.15693,112.637,Gresik Phthalic Anhydride,,,,,Chemical Processing (CPI),,,,,,,,,PT Petrowidada,https://www.industrialinfo.com/
+3085447,-6.13987,106.8812,Jakarta Chemical Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Justus Kimiaraya,https://www.industrialinfo.com/
+3118388,-6.25237,106.3503,Tangerang Masterbatch,,,,,Chemical Processing (CPI),,,,,,,,,PT Masolikalerindo Perkasa,https://www.industrialinfo.com/
+3020708,-6.03456,105.9362,Cilegon Azodicarbonamide,,,,,Chemical Processing (CPI),,,,,,,,,PT Lautan Luas Tbk,https://www.industrialinfo.com/
+3184225,-6.47971,106.8681,Cibinong Adhesives,,,,,Chemical Processing (CPI),,,,,,,,,PT Polychemie Asia Pacific Permai,https://www.industrialinfo.com/
+1065739,-6.03196,105.9378,Cilegon Petrochemical Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Barito Pacific Tbk,https://www.industrialinfo.com/
+3020474,-5.96576,106.0012,Banten Terephthalate Derivatives Complex,,,,,Chemical Processing (CPI),,,,,,,,,Mitsubishi Chemical Holdings Corporation,https://www.industrialinfo.com/
+3182350,-7.3174,110.1806,Temanggung Formaldehyde & Adhesives,,,,,Chemical Processing (CPI),,,,,,,,,PT Gelora Citra Kimia Abadi,https://www.industrialinfo.com/
+3182349,-2.90736,104.9138,Palembang Formaldehyde & Adhesives,,,,,Chemical Processing (CPI),,,,,,,,,PT Gelora Citra Kimia Abadi,https://www.industrialinfo.com/
+3182348,-3.07147,114.6668,Banjarmasin Formaldehyde & Adhesives,,,,,Chemical Processing (CPI),,,,,,,,,PT Gelora Citra Kimia Abadi,https://www.industrialinfo.com/
+1035673,-6.33153,107.3523,Karawang Purified Terephthalic Acid (PTA) Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Asia Pacific Fibers Tbk,https://www.industrialinfo.com/
+3032447,3.585242,98.6756,Medan Sinar Oleochemicals,,,,,Chemical Processing (CPI),,,,,,,,,Golden Agri-Resources Limited,https://www.industrialinfo.com/
+3020824,-5.97835,106.0004,Cilegon Lotte Petrochemical Complex,,,,,Chemical Processing (CPI),,,,,,,,,Lotte Chemical Corporation,https://www.industrialinfo.com/
+3327649,-6.15383,106.7238,Cengkareng Pigment Dispersions,,,,,Chemical Processing (CPI),,,,,,,,,BASF SE,https://www.industrialinfo.com/
+3020638,-5.89461,106.0782,Cilegon EO/EG Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Polychem Indonesia Tbk,https://www.industrialinfo.com/
+3086992,-6.20659,106.3487,Serang Plasticizers,,,,,Chemical Processing (CPI),,,,,,,,,PT Sari Sarana Kimia Group,https://www.industrialinfo.com/
+3084154,-7.14419,112.6462,Gresik Oxo Alcohol,,,,,Chemical Processing (CPI),,,,,,,,,PT Petro Oxo Nusantara,https://www.industrialinfo.com/
+3020549,-5.95824,105.9994,Cilegon Chemicals,,,,,Chemical Processing (CPI),,,,,,,,,Chemstation Asia,https://www.industrialinfo.com/
+3092306,-6.11994,106.1503,Serang Alkylbenzene,,,,,Chemical Processing (CPI),,,,,,,,,PT Unggul Indah Cahaya Tbk,https://www.industrialinfo.com/
+3087224,3.672087,98.6672,Medan Oleochemicals,,,,,Chemical Processing (CPI),,,,,,,,,Musim Mas Holdings Pte Ltd,https://www.industrialinfo.com/
+3084582,-5.88404,106.0709,Serang Styrene Monomer,,,,,Chemical Processing (CPI),,,,,,,,,PT Barito Pacific Tbk,https://www.industrialinfo.com/
+3077657,-6.12371,106.8768,Bekasi Lubricants Blending,,,,,Chemical Processing (CPI),,,,,,,,,Royal Dutch Shell Plc,https://www.industrialinfo.com/
+3018042,-7.528,110.8852,Surakarta Ethanol Integrated Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Indo Acidatama Tbk,https://www.industrialinfo.com/
+3177297,-6.95158,110.4669,Semarang Chemical Complex,,,,,Chemical Processing (CPI),,,,,,,,,PT Intan Wijaya International Tbk,https://www.industrialinfo.com/
+3090659,-6.36912,106.5584,Bogor Chemicals,,,,,Chemical Processing (CPI),,,,,,,,,PT Mega Chemical Pratama,https://www.industrialinfo.com/
+3131811,-6.27384,106.8081,Jakarta Selatan Paints,,,,,Chemical Processing (CPI),,,,,,,,,TOA Paint Thailand Company Limited,https://www.industrialinfo.com/
+3148923,-7.60128,111.9336,Pasuruan Sorbitol,,,,,Chemical Processing (CPI),,,,,,,,,Cargill Incorporated,https://www.industrialinfo.com/
+3327657,-6.37423,106.8653,Cimanggis Care Chemicals,,,,,Chemical Processing (CPI),,,,,,,,,BASF SE,https://www.industrialinfo.com/
+3327654,-6.27983,107.1406,Cikarang Pigments Dispersion,,,,,Chemical Processing (CPI),,,,,,,,,BASF SE,https://www.industrialinfo.com/
+3104238,-6.11938,106.1508,Serang Synthetic Resin,,,,,Chemical Processing (CPI),,,,,,,,,PT Tunas Sumber Idea Kreasi Kimia,https://www.industrialinfo.com/
+3031676,3.783667,98.69373,Medan Oleochemicals,,,29-Jun-18,,Chemical Processing (CPI),,,,,,,,,PT Ecogreen Oleochemicals,https://www.industrialinfo.com/
+3095650,-5.91006,106.0953,Serang Ethyl Acetate,,,22-Dec-14,,Chemical Processing (CPI),,,,,,,,,Showa Denko KK,https://www.industrialinfo.com/
+3014861,-6.017,106.04,Cilegon Chemical Complex,,,########,,Chemical Processing (CPI),,,,,,,,,PT Arrtu Mega Energie,https://www.industrialinfo.com/
+1068972,-6.167,106.8,Jakarta Flavor Enhancers,,,10-Oct-06,,Chemical Processing (CPI),,,,,,,,,Kyowa Hakko Kirin Company Limited,https://www.industrialinfo.com/
+3222560,-3.43087,104.0316,Muaraenim Paper Mill,,,,Semichemical Pulps Of Other Fibrous Cellulosic Material (Air Dry Weight),"Pulp, Paper & Wood",490000,T/yr,,,,,,,Marubeni Corporation,https://www.industrialinfo.com/
+3355033,-7.39138,112.7562,Sidoarjo Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,Integra Group Indonesia,https://www.industrialinfo.com/
+3393123,-2.68609,111.6165,Kotawaringin Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,Korindo Group,https://www.industrialinfo.com/
+3392566,-6.19704,106.3415,Cikande Nappy Plant,,,,,"Pulp, Paper & Wood",,,,,,,,,DSG International (Thailand) Public Company Limited,https://www.industrialinfo.com/
+3393574,-6.7962,110.9494,Kudus Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",94500,T/yr,,,,,,,PT Enggal Subur Kertas,https://www.industrialinfo.com/
+3394254,-6.41252,107.4367,Cikampek Paper Mill,,,,"Toilet/Facial Tissues, Towel/Napkins Stock & Similar Paper For Household/Sanitary Purposes, Cellulose Wadding & Webs Cellulose Fiber","Pulp, Paper & Wood",2800000,T/yr,,,,,,,PT Graha Bumi Hijau,https://www.industrialinfo.com/
+3393697,-7.34909,112.6734,Surabaya Paper Mill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Suparma Tbk,https://www.industrialinfo.com/
+3392411,-6.43132,106.9541,Bogor Paper Mill,,,,Pulps Of Fibers Derived From Recovered (Waste And Scrap) Paper Or Paperboard,"Pulp, Paper & Wood",105000,T/yr,,,,,,,Korindo Group,https://www.industrialinfo.com/
+3440507,-7.36726,112.6057,Gresik Paper Mill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Fajar Surya Wisesa Tbk,https://www.industrialinfo.com/
+3393121,-7.03839,107.5926,Arjasari Paper Mill (Bandung),,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",35000,T/yr,,,,,,,PT Papyrus Sakti Paper Mill,https://www.industrialinfo.com/
+3394067,-6.15143,106.6399,Tangerang Paper Mill,,,,Sanitary Food And Beverage Containers Of Corrugated Paper Or Paperboard,"Pulp, Paper & Wood",1.05E+08,T/yr,,,,,,,PT Pola Paperindo Jayatama,https://www.industrialinfo.com/
+1063507,-7.39399,112.5611,PLTU Adiprima Suraprinta,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Jawa Pos,https://www.industrialinfo.com/
+3008918,-6.27207,107.1224,Cikarang Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",883750,T/yr,,,,,,,PT Fajar Surya Wisesa Tbk,https://www.industrialinfo.com/
+3426639,-7.5658,112.6047,Mojokerto Sanitary Product,,,,,"Pulp, Paper & Wood",,,,,,,,,Unicharm Corporation,https://www.industrialinfo.com/
+3390568,-8.17422,113.1893,Lumajang Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,Mustikatama Group,https://www.industrialinfo.com/
+3124960,-2.74822,105.2784,Palembang Paper Mill (OKI),,,,Semichemical Pulps Of Other Fibrous Cellulosic Material (Air Dry Weight),"Pulp, Paper & Wood",2940000,T/yr,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3390450,-6.38303,106.9636,Bogor Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",21000,T/yr,,,,,,,PT Sinar Hoperindo,https://www.industrialinfo.com/
+3390337,-6.77211,110.9995,Pati Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",70000,T/yr,,,,,,,PT Sinar Indah Kertas,https://www.industrialinfo.com/
+3391024,-7.56421,112.6419,Mojokerto Paper Mill,,,,"Toilet/Facial Tissues, Towel/Napkins Stock & Similar Paper For Household/Sanitary Purposes, Cellulose Wadding & Webs Cellulose Fiber","Pulp, Paper & Wood",56000,T/yr,,,,,,,PT Sopanusa Tissue & Packaging Sarana Sukses,https://www.industrialinfo.com/
+1042127,0.684316,101.6224,Perawang Pulp and Paper Mill,,,,Semichemical Pulps Of Other Fibrous Cellulosic Material (Air Dry Weight),"Pulp, Paper & Wood",3080000,T/yr,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3391036,-7.5236,112.6022,Mojokerto Paper Mill,,,,"Toilet/Facial Tissues, Towel/Napkins Stock & Similar Paper For Household/Sanitary Purposes, Cellulose Wadding & Webs Cellulose Fiber","Pulp, Paper & Wood",243000,T/yr,,,,,,,PT Sopanusa Tissue & Packaging Sarana Sukses,https://www.industrialinfo.com/
+3389625,-6.1961,107.0396,Bekasi Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",49000,T/yr,,,,,,,PT Pabrik Kertas Noree Indonesia,https://www.industrialinfo.com/
+3386676,-7.58132,112.7391,Pasuruan Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",227500,T/yr,,,,,,,PT Buana Megah Paper Mills,https://www.industrialinfo.com/
+3386957,-1.82175,136.7567,Kurunui Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Sinar Wijaya Group,https://www.industrialinfo.com/
+3386765,-6.21746,106.4654,Tangerang Paper Mill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Satyamitra Kemas Lestari Tbk,https://www.industrialinfo.com/
+3386696,-7.52992,112.6106,Mojokerto Paper Mill,,,,"Corrugated Paper And Paperboard, Whether Or Not Perforated, Nesoi, In Rolls Or Sheets","Pulp, Paper & Wood",110000,T/yr,,,,,,,PT Mega Surya Eratama,https://www.industrialinfo.com/
+3386412,-7.6311,112.6782,Pasuruan Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Kreasi Indah Cemerlang,https://www.industrialinfo.com/
+3434322,-6.39532,107.1976,Cikarang Nappy Plant,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Indofood Sukses Makmur Tbk,https://www.industrialinfo.com/
+3271485,-7.18999,112.6339,Gresik Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Achmadi Pasca Perintis,https://www.industrialinfo.com/
+3432137,-6.54575,107.838,Subang Paper Mill,,,,"Corrugated Paper And Paperboard, Whether Or Not Perforated, Nesoi, In Rolls Or Sheets","Pulp, Paper & Wood",70000,T/yr,,,,,,,PT Eco Paper Indonesia,https://www.industrialinfo.com/
+3425390,-6.37182,107.2777,Cikarang Sanitary Product,,,,,"Pulp, Paper & Wood",,,,,,,,,Unicharm Corporation,https://www.industrialinfo.com/
+3397499,-6.97529,107.6887,Bandung Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",119000,T/yr,,,,,,,PT Kertas Trimitra Mandiri,https://www.industrialinfo.com/
+3374101,-6.24542,106.6485,PT Dian Swastatika Sentosa Tbk Plant Tangerang,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Dian Swastatika Sentosa Tbk.,https://www.industrialinfo.com/
+3378129,-6.32023,107.3168,Karawang Paper Mill (Pindo-1),,,,,"Pulp, Paper & Wood",,,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3378133,-6.41692,107.2268,Karawang Paper Mill (Pindo-3),,,,,"Pulp, Paper & Wood",,,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3398422,-7.52822,112.5704,Mojokerto Paper Mill,,,,"Paper And Paperboard For Writing, Printing And Other Graphic Purposes, Nesoi, Clay Coated, Nov 10% Mech Fibers, Weighing Not Over 15","Pulp, Paper & Wood",350000,T/yr,,,,,,,PT Saraswanti Paper Indah,https://www.industrialinfo.com/
+3421634,-6.21649,106.5347,Cikupa Nappy Plant,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Zensei Indonesia,https://www.industrialinfo.com/
+3421627,-7.35408,112.6291,Gresik Nappy Plant,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Zensei Indonesia,https://www.industrialinfo.com/
+1032259,0.440343,101.8896,Pelalawan Paper Mill (Kerinci),,,,Semichemical Pulps Of Other Fibrous Cellulosic Material (Air Dry Weight),"Pulp, Paper & Wood",3115000,T/yr,,,,,,,Asia Pacific Resources International Limited,https://www.industrialinfo.com/
+3398797,-7.75341,112.0263,Kediri Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",175000,T/yr,,,,,,,PT Surya Pamenang,https://www.industrialinfo.com/
+3357733,-6.93552,107.7011,Bandung Paper Mill,,,,"Corrugated Paper And Paperboard, Whether Or Not Perforated, Nesoi, In Rolls Or Sheets","Pulp, Paper & Wood",192500,T/yr,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3417604,-6.15285,106.5969,Tangerang Paper Mill,,,,"Kraft Paper And Paperboard Other Than Graphic Purposes, Clay Coated, Unbleached, In Rolls Or Sheets","Pulp, Paper & Wood",35000,T/yr,,,,,,,PT Indo Paper Prima Jaya,https://www.industrialinfo.com/
+3417217,-7.35353,112.6555,Gresik Paper Mill,,,,"Corrugated Paper And Paperboard, Whether Or Not Perforated, Nesoi, In Rolls Or Sheets","Pulp, Paper & Wood",175000,T/yr,,,,,,,PT Surabaya Mekabox,https://www.industrialinfo.com/
+3416875,-7.56686,112.6408,Mojokerto Paper Mill,,,,Pulps Of Fibers Derived From Recovered (Waste And Scrap) Paper Or Paperboard,"Pulp, Paper & Wood",35000,T/yr,,,,,,,PT Star Paper Supply,https://www.industrialinfo.com/
+3321801,-6.37686,107.3417,Karawang Paper Mill (Pindo-2),,,,,"Pulp, Paper & Wood",,,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3113042,-7.43718,112.4709,Sidoarjo Paper Mill,,,,Pulps Of Fibers Derived From Recovered (Waste And Scrap) Paper Or Paperboard,"Pulp, Paper & Wood",120000,T/yr,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3117780,-6.13374,106.2874,Serang Paper Mill,,,,"Kraft Paper And Paperboard, Uncoated, Nesoi, Unbleached, Weighing 150 G/M2, In Rolls Or Sheets","Pulp, Paper & Wood",549500,T/yr,,,,,,,Sinar Mas Group,https://www.industrialinfo.com/
+3099301,-7.47784,112.5648,Mojokerto Paper Mill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Pabrik Kertas Indonesia,https://www.industrialinfo.com/
+3118093,3.569025,98.80381,Lubukpakam Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",75600,T/yr,,,,,,,PT Evergreen International Paper,https://www.industrialinfo.com/
+3154271,-6.29818,107.274,Karawang Specialty Paper and Packaging,,,,"Cigarette Paper, Whether Or Not Cut To Size, Nesoi","Pulp, Paper & Wood",47250,T/yr,,,,,,,PT Bukit Muria Jaya,https://www.industrialinfo.com/
+3411154,-6.48315,107.5605,Subang Paper Mill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Pelita Cengkareng Paper,https://www.industrialinfo.com/
+3410672,-3.18605,104.6688,Palembang Medium-Density Fiberboard Mill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Napan Persada,https://www.industrialinfo.com/
+3410774,-2.07135,103.7359,Musi Banyuasin Medium-Density Fiberboard Mill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Indonesia Fibreboard Industry,https://www.industrialinfo.com/
+3409598,-7.60795,112.0857,Surabaya Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",52500,T/yr,,,,,,,PT Jaya Kertas,https://www.industrialinfo.com/
+3409646,-7.41959,112.7129,Sidoarjo Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,Integra Group Indonesia,https://www.industrialinfo.com/
+3406739,-8.00371,112.6286,Malang Paper Mill,,,,"Corrugated Paper And Paperboard, Whether Or Not Perforated, Nesoi, In Rolls Or Sheets","Pulp, Paper & Wood",21000,T/yr,,,,,,,PT Gaya Baru Paperindo,https://www.industrialinfo.com/
+3397843,-7.75441,112.0284,Kediri Paper Mill,,,,Semichemical Woodpulp (Air Dry Weight),"Pulp, Paper & Wood",35000,T/yr,,,,,,,PT Surya Zig Zag,https://www.industrialinfo.com/
+3405718,-4.59116,104.8804,Sukadana Paper Mill,,,,"Kraft Paper And Paperboard, Uncoated, Nesoi, Unbleached, Weighing 150 G/M2, In Rolls Or Sheets","Pulp, Paper & Wood",35000,T/yr,,,,,,,PT Pola Pulpindo Mantap,https://www.industrialinfo.com/
+3403052,-6.18634,106.5569,Tangerang Sanitary Product,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Gajah Tunggal Tbk,https://www.industrialinfo.com/
+3403049,-7.46319,112.7465,Sidoarjo Sanitary Product,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Gajah Tunggal Tbk,https://www.industrialinfo.com/
+3402371,-6.45694,106.9038,Bogor Paper Mill,,,,"Paper And Paperboard, Nesoi, Embossed Or Perforated, In Rolls Or Sheets","Pulp, Paper & Wood",70000,T/yr,,,,,,,PT Parisindo Pratama,https://www.industrialinfo.com/
+3398281,-6.50472,107.5637,Subang Paper Mill,,,,Pulps Of Fibers Derived From Recovered (Waste And Scrap) Paper Or Paperboard,"Pulp, Paper & Wood",157500,T/yr,,,,,,,PT Papertech Indonesia,https://www.industrialinfo.com/
+3271430,4.107817,96.19853,Meulaboh Sawmill,,,14-Jan-18,,"Pulp, Paper & Wood",,,,,,,,,Pt Adiguna Makmur Sentosa,https://www.industrialinfo.com/
+3275997,-7.27639,112.7413,Surabaya Sawmill,,,14-Jan-18,,"Pulp, Paper & Wood",,,,,,,,,Sitorus Sawn Timber,https://www.industrialinfo.com/
+3275996,-6.21899,106.8666,Jakarta Timur Sawmill,,,14-Jan-17,,"Pulp, Paper & Wood",,,,,,,,,PT Inrada Kayu Industri,https://www.industrialinfo.com/
+3276248,3.597643,98.6103,Medan Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Abie Import & Export,https://www.industrialinfo.com/
+3276278,-6.75477,108.5709,Cirebon Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Tri Cakrawala Putra,https://www.industrialinfo.com/
+3276273,-6.93458,110.16,Kendal Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,Bin Omar Group,https://www.industrialinfo.com/
+3276265,3.602982,98.64485,Kaluku Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,PT Karya Jaya Mandiri,https://www.industrialinfo.com/
+3271431,-5.11663,119.4136,Makassar Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,Pt Irma Sulindo,https://www.industrialinfo.com/
+3271432,-7.28834,112.7681,Surabaya Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,Pt Kahayan Jaya Utama,https://www.industrialinfo.com/
+3271288,-7.68164,108.0495,Tasikmalaya Sawmill,,,,,"Pulp, Paper & Wood",,,,,,,,,CV Buana Kayu Sejahtera,https://www.industrialinfo.com/
+3106478,-6.17859,106.5744,Tangerang Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,35000,T/yr,,,,,,,PT Calindo Damai Sejahtera Abadi,https://www.industrialinfo.com/
+3107457,-6.214,106.5674,Tangerang Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,12000,T/yr,,,,,,,PT Alumex Perkasa Jaya,https://www.industrialinfo.com/
+1058710,-0.06042,110.142,Tajan Bauxite Mine & CGA Alumina Refinery,,,,Bauxite,Metals & Minerals,850000,T/yr,,,,,,,PT Aneka Tambang Tbk,https://www.industrialinfo.com/
+3105541,-6.28346,107.0959,Cibitung Aluminium Foil & Sheets,,,,Aluminum Foundries,Metals & Minerals,200000,T/yr,,,,,,,PT Indoaluminium Intikarsa Industri,https://www.industrialinfo.com/
+3286292,1.070516,104.0204,Batam Aluminum Die Casting,,,,,Metals & Minerals,,,,,,,,,Form Technologies Incorporated,https://www.industrialinfo.com/
+3106823,-6.20727,106.4965,Tangerang Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,18000,T/yr,,,,,,,PT Alko Mandiri,https://www.industrialinfo.com/
+3089000,-7.34638,112.7432,Sidoarjo Steel Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,350000,T/yr,,,,,,,Hanil Cement Company Limited,https://www.industrialinfo.com/
+3105916,-7.33368,112.7554,Surabaya Aluminum Slug,,,,Aluminum Foundries,Metals & Minerals,18000,T/yr,,,,,,,PT Impact Indonesia,https://www.industrialinfo.com/
+3287720,-6.31406,107.0838,Cikarang Aluminum Die Casting,,,,Aluminum Foundries,Metals & Minerals,50000,T/yr,,,,,,,PT Shei Tai Industrial,https://www.industrialinfo.com/
+3105173,-6.18468,106.9196,Jakarta Timur Steel Mill,,,,Steel Wire,Metals & Minerals,400000,T/yr,,,,,,,PT The Master Steel,https://www.industrialinfo.com/
+3171178,-6.2001,106.9948,Bekasi Steel Mill,,,,Steel Making,Metals & Minerals,400000,T/yr,,,,,,,PT Afro Pacific Indah Steel,https://www.industrialinfo.com/
+3287337,-6.08386,106.7085,Tangerang Aluminum Die Casting,,,,Aluminum Foundries,Metals & Minerals,15000,T/yr,,,,,,,PT Cast Metals Indonesia,https://www.industrialinfo.com/
+3091659,-8.44943,118.7216,Dompu Iron Sand Mine & Processing,,,,Iron Ore,Metals & Minerals,1200000,T/yr,,,,,,,PT Timur Raya Mas,https://www.industrialinfo.com/
+3104579,-6.89911,107.5499,Cimahi Aluminum Extrusions,,,,Aluminum Extrusions,Metals & Minerals,10000,T/yr,,,,,,,PT Indo Extrusions,https://www.industrialinfo.com/
+3091984,-7.55864,112.6154,Mojokerto Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,36000,T/yr,,,,,,,King Modern Metal Limited,https://www.industrialinfo.com/
+3340939,-7.12566,112.6123,PT Jindal Stainless Steel,,,,Flat Rolled Stainless Steel,Metals & Minerals,150000,T/yr,,,,,,,O P Jindal Group,https://www.industrialinfo.com/
+3136512,-3.96594,115.0482,Asemasem Direct Reduced Iron (DRI),,,,Steel Bar & Rod,Metals & Minerals,100000,T/yr,,,,,,,PT Delta Prima Steel,https://www.industrialinfo.com/
+3031960,3.551939,98.10659,Langkat Bahorok Limestone Quarry,,,,"Limestone, Crushed Or Broken",Metals & Minerals,6000000,T/yr,,,,,,,PT Semen Indonesia TBK,https://www.industrialinfo.com/
+3125708,-7.37875,112.5816,Gresik Steel Bar Hot Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,45000,T/yr,,,,,,,PT Gunawan Dianjaya Steel,https://www.industrialinfo.com/
+3383013,-7.59188,112.7556,Pasuruan Aliminum Extrusion,,,,,Metals & Minerals,,,,,,,,,PT Sido Agung Alumi,https://www.industrialinfo.com/
+3105147,-6.21133,106.98,Bekasi Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,700000,T/yr,,,,,,,PT Alexindo,https://www.industrialinfo.com/
+3383363,-6.41689,106.9447,Bogor Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,30000,T/yr,,,,,,,PT Mega Persada Group,https://www.industrialinfo.com/
+3104825,-6.17768,106.92,Jakarta Utara Steel Mill,,,,Steel Making,Metals & Minerals,1500000,T/yr,,,,,,,PT The Master Steel,https://www.industrialinfo.com/
+3073782,-1.76516,109.9585,Ketapang Alumina Refinery,,,,Ketapang Smelter power station (160MW),Metals & Minerals,,,,,,,,,Shandong Weiqiao Pioneering Group Company Limited,https://www.industrialinfo.com/
+3125321,-7.24906,112.6813,Surabaya Steel Rolling Mill II,,,,Flat Rolled Steel,Metals & Minerals,1000000,T/yr,,,,,,,PT Gunawan Dianjaya Steel,https://www.industrialinfo.com/
+3089995,-6.95995,110.4528,Cilegon Steel Mill,,,,Steel Bar & Rod,Metals & Minerals,300000,T/yr,,,,,,,PT Krakatau Steel,https://www.industrialinfo.com/
+3089641,-7.24762,112.6663,Surabaya Steel Rolling Mill,,,,Flat Rolled Steel,Metals & Minerals,200000,T/yr,,,,,,,PT Jaya Pari Steel Tbk,https://www.industrialinfo.com/
+3087540,-7.35576,112.7062,Sidoarjo Steel Mill,,,,Steel Making,Metals & Minerals,700000,T/yr,,,,,,,ArcelorMittal,https://www.industrialinfo.com/
+3066485,-6.28504,107.1214,Bekasi Cibitung Barat Steel Mill,,,,Steel Bar & Rod,Metals & Minerals,300000,T/yr,,,,,,,Gunung Steel Group,https://www.industrialinfo.com/
+1054097,-2.122,133.045,Gag Island Nickel-Cobalt Mine,,,,Nickel Ore,Metals & Minerals,3000000,T/yr,,,,,,,PT Aneka Tambang Tbk,https://www.industrialinfo.com/
+3098992,-7.17455,112.6238,Gresik Steel Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,60000,T/yr,,,,,,,PT Gramitrama Jaya Steel,https://www.industrialinfo.com/
+3066942,-5.99235,106.0246,Cilegon Aluminium Deoxidizer,,,,,Metals & Minerals,,,,,,,,,POSCO,https://www.industrialinfo.com/
+3098674,-6.49944,106.8799,Cibinong Steel Wiredrawing Mill,,,,Steel Wire,Metals & Minerals,150000,T/yr,,,,,,,Sumitomo Electric Industries Limited,https://www.industrialinfo.com/
+3096460,-6.18285,106.9247,Pulogadung Steel Mill,,,,Steel Bar & Rod,Metals & Minerals,40000,T/yr,,,,,,,PT Hong Xing Steel,https://www.industrialinfo.com/
+3093732,-6.22637,107.0087,Bekasi Steel Bar & Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,120000,T/yr,,,,,,,SPS SRL,https://www.industrialinfo.com/
+3096263,-6.18741,106.3122,Tangerang Steel Billet Mill,,,,Steel Bar & Rod,Metals & Minerals,400000,T/yr,,,,,,,PT Citra Baru Steel,https://www.industrialinfo.com/
+3155940,-7.39643,112.5294,Gresik Steel Billet Mill,,,,Steel Bar & Rod,Metals & Minerals,50000,T/yr,,,,,,,PT Bromo Panuluh Steel,https://www.industrialinfo.com/
+3106283,-7.3732,112.7275,Sidoarjo Aluminum Extrusion & Sheet Coating,,,,Aluminum Extrusions,Metals & Minerals,40000,T/yr,,,,,,,Indal Aluminium Industry,https://www.industrialinfo.com/
+3098466,-7.62146,110.698,Klaten Steel Pipe Mill,,,,Steel Pipe & Tubing,Metals & Minerals,70000,T/yr,,,,,,,PT Aneka Adhilogam Karya,https://www.industrialinfo.com/
+3094590,-6.17886,106.92,Pulogadung Steel Mill,,,,Steel Bar & Rod,Metals & Minerals,750000,T/yr,,,,,,,PT The Master Steel,https://www.industrialinfo.com/
+3160465,-7.15645,112.6269,Gresik Steel Bar Mill,,,,Steel Bar & Rod,Metals & Minerals,300000,T/yr,,,,,,,ArcelorMittal,https://www.industrialinfo.com/
+3091688,-6.20002,106.5867,Banten Copper-Aluminium Cable,,,,,Metals & Minerals,,,,,,,,,PT Monaspermata Persada,https://www.industrialinfo.com/
+3093722,-6.2666,107.2495,Bekasi Iron-Steel Galvanizing,,,,Flat Rolled Steel,Metals & Minerals,900000,T/yr,,,,,,,PT Harapan Sukses Jaya,https://www.industrialinfo.com/
+3083339,-7.24817,112.6804,Surabaya Steel Rolling Mill I,,,,Flat Rolled Steel,Metals & Minerals,500000,T/yr,,,,,,,PT Gunawan Dianjaya Steel,https://www.industrialinfo.com/
+3157548,-6.42961,107.0432,Bogor Iron-Steel Rod,,,,"Structural Steel Angles, Shapes & Sections",Metals & Minerals,26000,T/yr,,,,,,,PT Era Baja Prima Sukses,https://www.industrialinfo.com/
+3160037,-6.20728,106.4935,Tangerang Steel Wire Mill,,,,Steel Wire,Metals & Minerals,150000,T/yr,,,,,,,PT Union Yashindo,https://www.industrialinfo.com/
+3263693,-6.37419,107.2662,Karawang Secondary Aluminium Ingot,,,,Secondary Aluminum,Metals & Minerals,100000,T/yr,,,,,,,Daiki Aluminum Industry Company Limited,https://www.industrialinfo.com/
+3096636,-6.19923,106.3424,Serang Steel Rebar Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,200000,T/yr,,,,,,,PT Delcoprima Pacific,https://www.industrialinfo.com/
+3090764,-6.18993,106.9175,Pulogadung Steel Rebar Mill,,,,Steel Bar & Rod,Metals & Minerals,120000,T/yr,,,,,,,PT Tobu Indonesia Steel,https://www.industrialinfo.com/
+3090882,-6.32066,107.1238,Bekasi Steel Wire,,,,Steel Wire,Metals & Minerals,20000,T/yr,,,,,,,Walsin Linhwa Corporation,https://www.industrialinfo.com/
+3091262,-7.18975,112.6407,Gresik Steel Hot Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,5000,T/yr,,,,,,,PT Indospring Tbk,https://www.industrialinfo.com/
+3250593,-0.92674,110.0432,North Kayong Bauxite Mine,,,,Bauxite,Metals & Minerals,1000000,T/yr,,,,,,,PT Panca Raja Perkasa,https://www.industrialinfo.com/
+3106624,3.572333,98.68528,Medan Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,25000,T/yr,,,,,,,PT Alfo Citra Abadi,https://www.industrialinfo.com/
+3081166,-5.9886,106.003,Cilegon Steel Beams Mill,,,,"Structural Steel Angles, Shapes & Sections",Metals & Minerals,300000,T/yr,,,,,,,Nippon Steel Corporation,https://www.industrialinfo.com/
+3092504,-2.27961,102.7023,Jambi Sarolangun Limestone Quarry,,,,"Limestone, Crushed Or Broken",Metals & Minerals,800000,T/yr,,,,,,,PT Semen Baturaja (Persero),https://www.industrialinfo.com/
+3158630,-6.19506,106.9143,Jatinegara Steel Hot Bar Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,120000,T/yr,,,,,,,PT Kyoei Steel Indonesia,https://www.industrialinfo.com/
+3096470,-6.20112,106.9139,Pulogadung Steel Aluminum Foundry,,,,Steel Bar & Rod,Metals & Minerals,700000,T/yr,,,,,,,PT Assab Steels Indonesia,https://www.industrialinfo.com/
+3105524,-6.21824,106.5798,Tangerang Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,18000,T/yr,,,,,,,YKK Corporation,https://www.industrialinfo.com/
+3085102,3.350083,99.45344,Kisaran Asahan Aluminum Smelter,,,,Primary Aluminum,Metals & Minerals,320000,T/yr,,,,,,,PT Indonesia Asahan Aluminium (Persero),https://www.industrialinfo.com/
+3368607,-7.35006,112.7024,Gresik Steel Rolling Mill,,,,Steel Making,Metals & Minerals,250000,T/yr,,,,,,,PT Jatim Taman Steel,https://www.industrialinfo.com/
+3091918,-7.41932,112.7253,Sidoarjo Aluminium Rolling Mill,,,,"Aluminum Sheet, Plate & Foil",Metals & Minerals,100000,T/yr,,,,,,,PT Maspion,https://www.industrialinfo.com/
+3091482,-7.45303,112.7173,Sidoarjo Steel Mill,,,,Steel Making,Metals & Minerals,3000000,T/yr,,,,,,,PT Tunggal Jaya Steel,https://www.industrialinfo.com/
+3080597,-5.99438,106.0439,Cilegon Automotive Steel Mill,,,,Flat Rolled Steel,Metals & Minerals,500000,T/yr,,,,,,,Nippon Steel Corporation,https://www.industrialinfo.com/
+3118282,-2.56545,110.2246,Pontianak Iron-Bauxite Mine,,,,Iron Ore,Metals & Minerals,960000,T/yr,,,,,,,Putra Mining Group,https://www.industrialinfo.com/
+3091974,-6.17095,106.5894,Tangerang Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,12000,T/yr,,,,,,,PT Makmur Jaya Saputra Perkasa,https://www.industrialinfo.com/
+3155156,-7.20392,106.509,Sukabumi Iron Mine & Smelter,,,,Iron Ore,Metals & Minerals,600000,T/yr,,,,,,,PT Bumi Citra Permai Tbk,https://www.industrialinfo.com/
+3091790,-6.35627,107.2768,Karawang Steel Galvanizing,,,,Flat Rolled Steel,Metals & Minerals,500000,T/yr,,,,,,,PT Sarana Steel Corporation,https://www.industrialinfo.com/
+3089282,-6.20571,106.512,Tangerang Aluminum Rolling Mill & Extrusion,,,,"Aluminum Sheet, Plate & Foil",Metals & Minerals,54000,T/yr,,,,,,,PT Starmas Inti Aluminium Industry,https://www.industrialinfo.com/
+3099775,3.667401,98.66666,Medan Steel Mill,,,,Steel Bar & Rod,Metals & Minerals,600000,T/yr,,,,,,,Growth Steel Group,https://www.industrialinfo.com/
+3069039,-6.15858,106.7091,Jakarta Aluminum-Copper Rolling Mill,,,,"Copper Bars, Rods & Profiles",Metals & Minerals,100000,T/yr,,,,,,,Furukawa Electric Company Limited,https://www.industrialinfo.com/
+3087379,-7.3531,112.7023,Sidoarjo Steel Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,25000,T/yr,,,,,,,PT Jatim Taman Steel,https://www.industrialinfo.com/
+3089017,-6.17044,106.9272,Jakarta Steel Mill,,,,Steel Making,Metals & Minerals,360000,T/yr,,,,,,,PT Argo Manunggal Group,https://www.industrialinfo.com/
+3089477,-7.12163,112.6192,Gresik PKM III Steel Bar & Wire Rod Mill,,,,Steel Bar & Rod,Metals & Minerals,500000,T/yr,,,,,,,PT The Master Steel,https://www.industrialinfo.com/
+3028433,-6.24213,106.8422,Cilegon Tinplate,,,,Steel Plate,Metals & Minerals,130000,T/yr,,,,,,,PT Pelat Timah Nusantara Tbk,https://www.industrialinfo.com/
+3087838,3.744327,98.70178,Medan Labuhan Steel Rolling Mill,,,,Steel Bar & Rod,Metals & Minerals,500000,T/yr,,,,,,,PT Putra Baja Deli,https://www.industrialinfo.com/
+3090399,-6.26098,107.0393,Bekasi Iron & Steel Billets Mill,,,,Steel Making,Metals & Minerals,500000,T/yr,,,,,,,PT Monde Mahkota Biscuits,https://www.industrialinfo.com/
+3032223,-6.02909,105.9546,Cilegon Pig Iron Mill,,,,Pig Iron,Metals & Minerals,550000,T/yr,,,,,,,Growth Steel Group,https://www.industrialinfo.com/
+3094022,-7.32953,112.7593,Surabaya Steel Galvanizing,,,,,Metals & Minerals,,,,,,,,,Sojitz Corporation,https://www.industrialinfo.com/
+3088869,-6.22962,107.0104,Bekasi Steel Coil Sheet,,,,Copper Sheets & Foil,Metals & Minerals,300000,T/yr,,,,,,,PT Tumbak Mas Inti Mulia,https://www.industrialinfo.com/
+3158606,-6.18809,106.9099,Pulogadung Steel Wire Rod Mill,,,,Steel Bar & Rod,Metals & Minerals,60000,T/yr,,,,,,,PT Pulogadung Steel,https://www.industrialinfo.com/
+3032232,-6.017,106.04,Cilegon Metallurgical Coke,,,,Metallurgical Coke,Metals & Minerals,1500000,T/yr,,,,,,,Growth Steel Group,https://www.industrialinfo.com/
+3080986,-8.28359,113.0816,Lumajang Iron Ore Mine & DRI,,,,Iron Ore,Metals & Minerals,2500000,T/yr,,,,,,,Asia Resources Holdings Limited,https://www.industrialinfo.com/
+3084764,-6.24265,107.0676,Bekasi Galvanized Automotive Steel Mill,,,,Flat Rolled Steel,Metals & Minerals,61000,T/yr,,,,,,,JFE Holdings Incorporated,https://www.industrialinfo.com/
+3145476,-7.50226,107.4105,Cianjur Sand Iron Mine and Smelter,,,,Iron Ore,Metals & Minerals,3000000,T/yr,,,,,,,PT Megatop Inti Selaras,https://www.industrialinfo.com/
+3073667,-3.419,115.986,Batulicin Mandan Iron & Steel Mill Complex,,,,"Other Ores And Concentrates, Nesoi",Metals & Minerals,1000000,T/yr,,,,,,,China Nickel Resources Holdings Company Limited,https://www.industrialinfo.com/
+3107541,-6.21249,106.5911,Tangerang Steel Mill,,,,Steel Making,Metals & Minerals,300000,T/yr,,,,,,,PT Interworld Steel Mills Indonesia,https://www.industrialinfo.com/
+3075851,-5.008,119.568,Morowali NPI Smelter,,,,Ferroalloys,Metals & Minerals,300000,T/yr,,,,,,,PT Central Omega Resources Tbk,https://www.industrialinfo.com/
+3131024,-4.0235,122.5379,Konawe Nickel Mine and Smelter,,,,Nickel Ore,Metals & Minerals,3000000,T/yr,,,,,,,China Hanking Holdings Limited,https://www.industrialinfo.com/
+3154628,-2.0445,112.8847,Kotawaringin Bauxite Mine & Smelter,,,,Primary Aluminum,Metals & Minerals,500000,T/yr,,,,,,,PT Indonesia Batubauksit Bajarau,https://www.industrialinfo.com/
+3083967,-7.57848,112.7283,Pasuruan Steel Pipe Mill,,,,Steel Pipe & Tubing,Metals & Minerals,120000,T/yr,,,,,,,PT Steel Pipe Industry Of Indonesia Tbk,https://www.industrialinfo.com/
+3076567,-3.3522,115.9504,Batulicin Direct Reduced Iron,,,,,Metals & Minerals,,,,,,,,,PT Krakatau Steel,https://www.industrialinfo.com/
+3091837,-6.2453,106.4954,Tangerang Iron & Steel Mill,,,,Steel Bar & Rod,Metals & Minerals,260000,T/yr,,,,,,,PT Power Steel Indonesia,https://www.industrialinfo.com/
+3028546,-6.00545,105.9829,Cilegon Steel Mill,,,,Flat Rolled Steel,Metals & Minerals,6000000,T/yr,,,,,,,POSCO,https://www.industrialinfo.com/
+3344532,-6.6868,108.4983,Cirebon Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,17000,T/yr,,,,,,,PT Hyamn Sukses Abadi,https://www.industrialinfo.com/
+3105879,3.592565,98.60231,Medan Aluminum Foil & Extrusion,,,,Aluminum Extrusions,Metals & Minerals,15000,T/yr,,,,,,,PT Damai Abadi,https://www.industrialinfo.com/
+3075388,-3.24394,116.2245,Kotabaru Sebuku Iron Mine & Sponge Iron Complex,,,,Iron Ore,Metals & Minerals,10000000,T/yr,,,,,,,PT Sebuku Iron Lateritic Ores,https://www.industrialinfo.com/
+3107646,-6.20983,106.3874,Banten Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,20000,T/yr,,,,,,,PT Aluprima Pacific Industries,https://www.industrialinfo.com/
+3109186,-7.36412,112.6696,Sidoarjo Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,12000,T/yr,,,,,,,PT Aneka Metal Industry,https://www.industrialinfo.com/
+3111319,-6.28613,107.0908,Jakarta Timur Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,13000,T/yr,,,,,,,PT Alcomex Indo,https://www.industrialinfo.com/
+3109568,-7.37277,112.645,Sidoarjo Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,17000,T/yr,,,,,,,PT Tamanaco,https://www.industrialinfo.com/
+3108906,-6.42533,107.2143,Bekasi Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,12000,T/yr,,,,,,,PT Bintang Mas Extrusion Indonesia,https://www.industrialinfo.com/
+1078323,-6.00371,106.034,Cilegon Integrated Steel Mill Complex,,,,Steel Making,Metals & Minerals,2400000,T/yr,,,,,,,PT Krakatau Steel,https://www.industrialinfo.com/
+3092757,-6.18596,106.9398,Bekasi Steel-Copper-Aluminium Wiredrawing & Casting,,,,,Metals & Minerals,,,,,,,,,PT KMI Wire and Cable Tbk,https://www.industrialinfo.com/
+3111541,-7.00369,110.3583,Semarang Aluminum Extrusion,,,,Aluminum Extrusions,Metals & Minerals,10000,T/yr,,,,,,,PT Alutama Aluminium Extrusion,https://www.industrialinfo.com/
+3107337,-6.19387,106.9175,Jakarta Timur Aluminum Extrusion,,,14-Oct-19,Aluminum Extrusions,Metals & Minerals,25000,T/yr,,,,,,,PT Alakasa Extrusindo,https://www.industrialinfo.com/
+3104814,-6.16735,106.916,Jakarta Utara Aluminum Slug,,,,Aluminum Foundries,Metals & Minerals,2500,T/yr,,,,,,,PT Inter Alumindo Sentosa,https://www.industrialinfo.com/
+3107829,-6.1565,106.658,Tangerang Aluminum Extrusion,,,12-Dec-18,Aluminum Extrusions,Metals & Minerals,18000,T/yr,,,,,,,PT Superex Raya,https://www.industrialinfo.com/
+3097637,-7.35841,112.611,Surabaya Steel Mill,,,11-Apr-18,,Metals & Minerals,,,,,,,,,PT Segoro Adidaya Steel,https://www.industrialinfo.com/
+3105375,-6.16375,106.7062,Jakarta Barat Aluminum-Copper Rod Mill,,,30-Oct-17,"Copper Bars, Rods & Profiles",Metals & Minerals,7000,T/yr,,,,,,,PT Sucaco Tbk,https://www.industrialinfo.com/
+3108047,-6.41375,106.9469,Cibinong Aluminum Extrusion,,,14-Jan-17,Aluminum Extrusions,Metals & Minerals,6000,T/yr,,,,,,,PT Intalan Works,https://www.industrialinfo.com/
+3109486,-6.15625,106.9315,Jakarta Utara Aluminum Extrusion,,,14-Dec-16,Aluminum Extrusions,Metals & Minerals,14000,T/yr,,,,,,,PT Alcarindo Prima,https://www.industrialinfo.com/
+3109713,-6.43042,106.8567,Depok Aluminum-Copper Rod,,,14-Jan-16,"Copper Bars, Rods & Profiles",Metals & Minerals,50000,T/yr,,,,,,,PT Aluco,https://www.industrialinfo.com/
+3107783,3.531219,98.81081,Medan Aluminum Extrusion,,,14-Dec-15,Aluminum Extrusions,Metals & Minerals,7000,T/yr,,,,,,,PT Sari Logam Morawa,https://www.industrialinfo.com/
+3109344,-6.18229,106.9148,Jakarta Timur Aluminum Extrusion,,,14-Dec-15,Aluminum Extrusions,Metals & Minerals,10000,T/yr,,,,,,,PT Hercules Aluminium Mfg Co,https://www.industrialinfo.com/
+3002147,0.907,104.445,Tanjung Pinang Kijang A-G Bauxite & Alumina Refinery,,,1-Jan-09,,Metals & Minerals,,,,,,,,,PT Aneka Tambang Tbk,https://www.industrialinfo.com/
+3090399,-6.261899535,107.0379773,Bekasi Iron & Steel Billets Mill,PT Monde Mahkota Biscuits,West Java,107.0393,Steel pipe and billets,Metals & Minerals,500000,,,,,,,,,
+,-6.178458866,106.9275342,Jakarta Cakratunggal Steel Mills. PT,,Jakarta,,Steel Manufacturer,Metals & Minerals,,,,,,,,,,

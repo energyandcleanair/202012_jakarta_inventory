@@ -28,14 +28,15 @@ aviation.build_support <- function(){
     dplyr::select(airport=address, id, geometry) %>%
     mutate(weight=1)
 
-  locs.sf %>% sf::write_sf("sectors/aviation/support.shp")
+  locs.sf %>% sf::write_sf("sectors/aviation/aviation_support.gpkg")
 
   return(locs.sf)
 }
 
 
 aviation.get_support <- function(){
-  sf::read_sf("sectors/aviation/support.shp")
+  sf::read_sf("sectors/aviation/aviation_support.gpkg") %>%
+    rename(geometry=geom)
 }
 
 

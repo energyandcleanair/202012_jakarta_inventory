@@ -41,12 +41,35 @@ data.grid.edgar <- function(){
 }
 
 
+data.created02 <- function(){
+  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/topdown_d02.nc"
+  nc <- ncdf4::nc_open(f)
+  x <- ncvar_get(nc, "x")
+  y <- ncvar_get(nc, "y")
+  r <- raster::rasterFromXYZ(tidyr::crossing(x,y) %>% mutate(z=1),
+                             crs="+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m")
+  raster::writeRaster(r, "data/d02.grid.tif", overwrite=T)
+}
+
+
+data.grid.d02 <- function(){
+  # g <- data.gadm()
+  raster::raster("data/d02.grid.tif") %>% raster::raster()
+  # extent <- g %>%
+  #   sf::st_transform(raster::projection(grid)) %>%
+  #   sf::st_bbox()
+
+  # grid %>%
+  #   raster::crop(extent)
+}
+
+
 data.created03 <- function(){
   # Any file from METEOSIM d03 dataset
-  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/CCTM_d03_CMAQv521_jakarta_disp-1km_EXP2_2019010112.nc"
+  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/topdown_d03.nc"
   nc <- ncdf4::nc_open(f)
-  x <- ncvar_get(nc, "X")
-  y <- ncvar_get(nc, "Y")
+  x <- ncvar_get(nc, "x")
+  y <- ncvar_get(nc, "y")
   # crs <- utils.proj4string_from_nc(f)
   # crs <- "+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m"
   r <- raster::rasterFromXYZ(tidyr::crossing(x,y) %>% mutate(z=1),
@@ -183,4 +206,23 @@ data.land_use <- function(type){
   }
 
   return( lu %>% filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
+}
+
+data.build_urban_rural <- function(){
+
+  g <- data.bps_map() %>% sf::st_make_valid()
+  # Data shared by Danny
+  f.org <- "data/landuse/Indonesia boundary - Desa kelurahan.gpkg"
+
+  sf::read_sf(f.org) %>%
+    mutate(type=ifelse(STATUS_KOT %in% c("Kota","kota","kot"), "urban", "rural")) %>%
+    dplyr::select(type) %>%
+    sf::st_make_valid() %>%
+    st_zm() %>%
+    sf::st_crop(sf::st_bbox(g)) %>%
+    sf::write_sf("data/landuse/urban_rural.gpkg")
+}
+
+data.urban_rural <- function(){
+  sf::read_sf("data/landuse/urban_rural.gpkg")
 }

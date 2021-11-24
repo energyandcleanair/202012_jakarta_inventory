@@ -123,7 +123,7 @@ gasdist.build_support_google <- function(){
     sf::st_join(g, left=F)
 
   stations.clean.sf %>%
-    sf::write_sf("sectors/gasdist/support_google.gpkg")
+    sf::write_sf("sectors/gasdist/gasdist_support.gpkg")
 
   return(stations)
 }
@@ -141,7 +141,7 @@ gasdist.build_support <- function(){
 #'
 #' @return support sf
 gasdist.get_support <- function(){
-  sf::read_sf("sectors/gasdist/support_google.gpkg") %>%
+  sf::read_sf("sectors/gasdist/gasdist_support.gpkg") %>%
     rename(geometry=geom)
 }
 

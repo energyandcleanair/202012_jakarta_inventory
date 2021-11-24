@@ -5,6 +5,16 @@
 #' @return support.sf
 transport.build_support <- function(){
 
+  f <- "sectors/transport/osm/gis_osm_roads_free_1.shp"
+
+  if(!file.exists(f)){
+    download.file(
+      url="http://download.geofabrik.de/asia/indonesia-latest-free.shp.zip",
+      destfile="sectors/transport/osm.zip")
+
+    unzip("sectors/transport/osm.zip")
+  }
+
   osm.roads <- sf::read_sf("sectors/transport/osm/gis_osm_roads_free_1.shp")
 
   weights <- list(
@@ -29,7 +39,8 @@ transport.build_support <- function(){
                          !!!weights)
 
   sf::st_as_sf(roads)%>%
-    sf::write_sf("sectors/transport/transport_spatial.shp")
+    dplyr::select(osm_id, weight) %>%
+    sf::write_sf("sectors/transport/transport_support.gpkg")
 
   return(roads)
 }
@@ -38,7 +49,8 @@ transport.build_support <- function(){
 #'
 #' @return support sf
 transport.get_support <- function(){
-  sf::read_sf("sectors/transport/transport_spatial.shp")
+  sf::read_sf("sectors/transport/transport_support.gpkg") %>%
+    rename(geometry=geom)
 }
 
 #' Get emission data for transportation sector

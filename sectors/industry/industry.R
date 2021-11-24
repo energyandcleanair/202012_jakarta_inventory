@@ -1,31 +1,95 @@
 #' Build support for industry
-#' using PROPER Industry database
-#' TODO: improve weighting
+#' using other_industries tab from Google Sheet
+#' https://docs.google.com/spreadsheets/d/1gbjo1ogvc32Dnd4MZOlQ_W5epzPDyOHbbt7JRJbr6z0/edit#gid=2051056520
 #' @return support sf
 industry.build_support <- function(){
-  s <- readxl::read_xlsx("sectors/industry/PROPER_Industry List_Work.xlsx",
-                         sheet='Full list') %>%
-    filter(`General Industri Group` != "Power & Energy") %>%
-    sf::st_as_sf(coords=c("lon","lat"), crs=4326) %>%
-    dplyr::select(facility=No, type=`General Industri Group`) %>%
-    mutate(weight=1)
+  s <- read_csv("sectors/industry/other_industries.csv") %>%
+    dplyr::select(facility_name=`Nama Perusahaan`, lon, lat, industry=`General Industri Group`) %>%
+    mutate(category=recode(industry,
+                           "Heavy industry"	= "Cement",
+                           "Heavy industry (construction)" = "Cement",
+                           "Glass" = "Cement",
+                           "Metal & non-metallic minerals" = "Cement",
+                           "Petrochemicals & Plastics" = "Petrochemicals",
+                           "Rubber" = "Manufacturing",
+                           "Petrochemicals" = "Petrochemicals",
+                           "Paint" = "Petrochemicals",
+                           "Waste treatment" = "Excluded",
+                           "Power & Energy" = "Excluded",
+                           "Waste" = "Waste",
+                           "Steel" = "Metals",
+                           "Oil & Gas" = "Petrochemicals",
+                           "Steel processing" = "Metals",
+                           "Industrial Manufacturing" = "Manufacturing",
+                           "Metals & Minerals" = "Metals",
+                           "Chemical Processing (CPI)" = "Chemicals",
+                           "Pulp, Paper & Wood" = "Pulp&Paper"
+                      )) %>%
+    filter(category != "Excluded")
+
+  weight_fuel <- tibble(
+    category = c("Cement", "Petrochemicals", "Manufacturing", "Metals", "Pulp&Paper", "Chemicals"),
+    coal     = c( 13     ,  0              ,  3             ,  5      ,  1          ,  11),
+    oil     =  c( 0      ,  1              ,  0             ,  0      ,  0          ,  0),
+    gas     =  c( 0      ,  1              ,  1             ,  0      ,  0          ,  1)
+  )
+
+  #TODO replace with future EF sent by Prof. Didin
+  weight_emission <- read_csv("sectors/industry/emission_factors.csv")
+
+  s <- weight_fuel %>%
+    tidyr::pivot_longer(-category, names_to="fuel", values_to="weight_fuel") %>%
+    left_join(weight_emission) %>%
+    tidyr::pivot_longer(cols=-c(category, fuel, weight_fuel),
+                        names_to="poll",
+                        values_to="weight_emission") %>%
+    mutate(weight=weight_fuel*weight_emission) %>%
+    group_by(category, poll) %>%
+    summarise(weight=sum(weight)) %>%
+    # tidyr::pivot_wider(names_from="poll", values_from="weight") %>%
+    right_join(s) %>%
+    filter(!is.na(lon)) %>%
+    sf::st_as_sf(coords=c("lon","lat"))
+
+
 
   # Add BPS id
   g <- data.bps_map()
 
   # Attaching gadm id to roads
   s.rich <- s %>%
+    sf::st_set_crs(sf::st_crs(g)) %>%
     sf::st_join(g, left=F)
 
-  sf::write_sf(s.rich, "sectors/industry/support.shp")
-  return(s.rich)
+
+  # There are some regions (3) without facilities, but with emissions...
+  # We distribute evenly across cells
+  emission <- industry.get_emission()
+  ids_with_emissions <- unique(emission$id[emission$emission>0])
+  missing_ids <- setdiff(ids_with_emissions, unique(s.rich$id))
+  cat("Missing facilities in regions: ", paste(missing_ids, collapse=", "))
+
+  g %>%
+    filter(id %in% missing_ids)
+
+  read_csv("sectors/industry/large_industries.csv", skip = 1)%>%
+    sf::st_as_sf(coords=c("LONGITUDE","LATITUDE")) %>%
+    sf::st_set_crs(sf::st_crs(g)) %>%
+    sf::st_join(g) %>%
+    as.data.frame() %>%
+    distinct(id) -> a
+
+  missing_ids %in% a$id
+
+  sf::write_sf(s.rich, "sectors/industry/industry_support.gpkg")
 }
 
 #' Get support for industry
 #'
 #' @return support sf
 industry.get_support <- function(){
-  sf::read_sf("sectors/industry/support.shp")
+  sf::read_sf("sectors/industry/industry_support.gpkg") %>%
+    rename(geometry=geom)
 }
 
 
