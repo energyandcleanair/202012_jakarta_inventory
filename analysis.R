@@ -6,6 +6,8 @@ library(sf)
 library(tidyverse)
 library(creatrajs)
 library(eixport)
+library(ncdf4)
+library(ncmeta)
 
 source('utils.R')
 source('edgar.R')
