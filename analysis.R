@@ -37,8 +37,18 @@ sectors <- c(
 # grid <- data.grid(res_m = 1e4)
 # grid_name <- "10km"
 
-grid <- data.grid.d03()
-grid_name <- "d03"
+# grid <- data.grid.d02()
+# grid_name <- "d02"
+
+# grid <- data.grid.d03()
+# grid_name <- "d03"
+
+grid <- data.grid.d04()
+grid_name <- "d04"
+
+# grid <- data.grid.edgar()
+# grid_name <- "edgar"
+
 
 lapply(sectors, function(sector){
 
@@ -85,25 +95,23 @@ lapply(sectors, function(sector){
     emission.raster <- creainventory::grid.rasterize(emission, grid)
 
     # # Save yearly GEOTIFFs
-    # dir.create("results", showWarnings = F)
-    # lapply(names(emission.raster), function(poll){
-    #   raster::writeRaster(emission.raster[[poll]],
-    #                       file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
-    #                       overwrite=T)
-    #
-    #   # Sanity check: emission conservation
-    #   emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
-    #   raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
-    #   if(emission_total_poll!=raster_total_poll){
-    #     warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
-    #                     poll, emission_total_poll, raster_total_poll))
-    #   }
-    # })
-    #
+    dir.create("results", showWarnings = F)
+    lapply(names(emission.raster), function(poll){
+      raster::writeRaster(emission.raster[[poll]],
+                          file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
+                          overwrite=T)
+
+      # Sanity check: emission conservation
+      emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
+      raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
+      if(emission_total_poll!=raster_total_poll){
+        warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
+                        poll, emission_total_poll, raster_total_poll))
+      }
+    })
 
     # Create a tibble (365-day) of raster stacks
     emission.rasters <- creainventory::temporal.split(emission.raster, date_weight)
-
 
     # Save as NETCDF for METEOSIM
     utils.ts_rasters_to_nc(rs=emission.rasters,
