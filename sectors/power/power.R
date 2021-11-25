@@ -17,7 +17,7 @@ power.get_support <- function(){
     select(id.plant=`Tracker ID`,
            weight=`Capacity (MW)`)
 
-  s %>% sf::write_sf("sectors/power/January 2021 Global Coal Plant Tracker.shp")
+  s %>% sf::write_sf("sectors/power/January 2021 Global Coal Plant Tracker.gpkg")
 
   # Add BPS id
   g <- data.bps_map()

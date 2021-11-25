@@ -16,7 +16,7 @@ comres.build_support <- function(){
   intersection <- intersection %>%
     filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON"))
 
-  sf::write_sf(intersection, "sectors/comres/support.shp")
+  sf::write_sf(intersection, "sectors/comres/comres_support.gpkg")
 
   return(intersection)
 }
@@ -26,7 +26,7 @@ comres.build_support <- function(){
 #'
 #' @return support sf
 comres.get_support <- function(){
-  sf::read_sf("sectors/comres/support.shp")
+  sf::read_sf("sectors/comres/comres_support.gpkg") %>% rename(geometry=geom)
 }
 
 

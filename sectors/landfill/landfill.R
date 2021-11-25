@@ -40,7 +40,7 @@ landfill.build_support_osm <- function(){
   landfills$weight <- 1
 
   sf::st_as_sf(landfills) %>%
-    sf::write_sf("sectors/landfill/support.shp")
+    sf::write_sf("sectors/landfill/landfill_support_osm.gpkg")
 
   return(stations)
 }
@@ -99,11 +99,13 @@ landfill.read_xls <- function(){
   return(s)
 }
 
+
 landfill.build_support <- function(){
   s <- landfill.read_xls() %>%
     dplyr::select(id, geometry, weight)
   s %>% sf::st_write("sectors/landfill/landfill_support.gpkg")
 }
+
 
 landfill.get_support <- function(){
   sf::read_sf("sectors/landfill/landfill_support.gpkg") %>%
