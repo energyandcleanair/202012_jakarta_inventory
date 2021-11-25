@@ -1,4 +1,3 @@
-,,,,,,,,,,,,,,,,
 Reference,PLANT_ID,PLANT_NAME,IND_DESC,PARENTNAME,LATITUDE,LONGITUDE,Province,CAPACITY (T/yr),PRODUCT_DESC,PROPER NAME,Source,,,,,
 Industry Info,3060411,Banyuwangi Cement Grinding,Cement,Bosowa Corporation,-8.17696,114.3833,,1200000,Portland Cement,,,,,,,
 Industry Info,3130645,Karawang Cement & Limestone Quarry,Cement,PT Jui Shin Indonesia,-6.46149,107.2126,,2000000,Portland Cement,,,,,,,
@@ -56,5 +55,5 @@ PROPER 2019,,PT. Pertamina Hulu Energi Offshore North West Java (PHE ONWJ),Oil &
 PROPER 2019,,PT. Pertamina EP Asset 3 - Subang Field,Oil & Gas refining,,-6.5330855,107.7469509,West Java,,Migas EP,"Kab. Subang, Kab. Karawang",,,,,,
 PROPER 2019,,PT. Pertamina Hulu Energi OSES,Oil & Gas refining,,-6.3001592,106.8331102,DKI Jakarta,11649382,Migas EP,Kota Jakarta Selatan,"http://phe.pertamina.com/Upload/File/82e4f2be-cf84-4165-9cb3-5875b0d5edc614IRPHE2019FULLFS191020.pdf
 http://phe.pertamina.com/ContentView.aspx?MenuID=5iI8NvAvmYV/ZdipUw3e0Q==&TypeGroupContent=mELirpUhRYksFj7k8/XBcQ==&NewsCatID=9OYR9kUytIsLilKZieD5xg==",,,,,
-PROPER 2019,,PT. Solusi Bangun Indonesia,Cement,,109.0223212,-7.6878249,Central Java,,,Kab. Cilacap,,,,,,
-PROPER 2019,,PT. Sinar Tambang Arthalestari (Semen Bima),Cement,,109.0715874,-7.4353857,Central Java,,,Kab. Banyumas,,,,,,
+PROPER 2019,,PT. Solusi Bangun Indonesia,Cement,,-7.6878249,109.0223212,Central Java,,,Kab. Cilacap,,,,,,
+PROPER 2019,,PT. Sinar Tambang Arthalestari (Semen Bima),Cement,,-7.4353857,109.0715874,Central Java,,,Kab. Banyumas,,,,,,
