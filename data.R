@@ -78,6 +78,18 @@ data.created03 <- function(){
   raster::writeRaster(r, "data/d03.grid.tif", overwrite=T)
 }
 
+data.created02 <- function(){
+  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/CCTM_d03_CMAQv521_jakarta_disp-1km_EXP2_2019010112.nc"
+  nc <- ncdf4::nc_open(f)
+  x <- ncvar_get(nc, "X")
+  y <- ncvar_get(nc, "Y")
+  # crs <- utils.proj4string_from_nc(f)
+  # crs <- "+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m"
+  r <- raster::rasterFromXYZ(tidyr::crossing(x,y) %>% mutate(z=1),
+                             crs="+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m")
+  # raster::crs(r) <- crs
+  raster::writeRaster(r, "data/d03.grid.tif", overwrite=T)
+}
 
 data.grid.d03 <- function(){
   # g <- data.gadm()
