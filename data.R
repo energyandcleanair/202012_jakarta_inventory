@@ -18,17 +18,20 @@ data.gadm <- function(){
   rbind(
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_1.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      dplyr::select(id=GID_1, name=NAME_1, geometry),
+      dplyr::select(id=GID_1, name=NAME_1, geometry) %>%
+      mutate(level=1),
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_2.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      dplyr::select(id=GID_2, name=NAME_2, geometry)
+      dplyr::select(id=GID_2, name=NAME_2, geometry)  %>%
+      mutate(level=2)
   )
 }
 
 data.bps_map <- function(){
   sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
     dplyr::select(id=ADM2_PCODE, name=ADM2_EN, province=ADM1_EN, geometry) %>%
-    filter(id %in% data.region_ids())
+    filter(id %in% data.region_ids()) %>%
+    sf::st_make_valid()
 }
 
 data.grid.edgar <- function(){

@@ -36,6 +36,7 @@ industry.build_support <- function(){
 
   #TODO replace with future EF sent by Prof. Didin
   weight_emission <- read_csv("sectors/industry/emission_factors.csv")
+  weight_emission$PM <- weight_emission$PM10
 
   s <- weight_fuel %>%
     tidyr::pivot_longer(-category, names_to="fuel", values_to="weight_fuel") %>%
@@ -54,9 +55,10 @@ industry.build_support <- function(){
 
 
   # Add BPS id
-  g <- data.bps_map()
+  g <- data.bps_map() %>%
+    sf::st_make_valid()
 
-  # Attaching gadm id to roads
+  # Attaching gadm id to plants
   s.rich <- s %>%
     sf::st_set_crs(sf::st_crs(g)) %>%
     sf::st_join(g, left=F)
@@ -72,7 +74,7 @@ industry.build_support <- function(){
   g %>%
     filter(id %in% missing_ids)
 
-  read_csv("sectors/industry/large_industries.csv", skip = 1)%>%
+  read_csv("sectors/industry/large_industries.csv") %>%
     sf::st_as_sf(coords=c("LONGITUDE","LATITUDE")) %>%
     sf::st_set_crs(sf::st_crs(g)) %>%
     sf::st_join(g) %>%
