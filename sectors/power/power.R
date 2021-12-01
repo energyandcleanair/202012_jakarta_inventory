@@ -10,14 +10,19 @@ power.build_support <- function(){
 #' @return support sf
 power.get_support <- function(){
 
-  s <- readxl::read_xlsx("sectors/power/January 2021 Global Coal Plant Tracker.xlsx",
-                    sheet='Units')  %>% filter(Country %in% c("Indonesia"),
-               Status %in% "Operating") %>%
-    sf::st_as_sf(coords=c("Longitude","Latitude"), crs=4326) %>%
-    select(id.plant=`Tracker ID`,
-           weight=`Capacity (MW)`)
+  s <- readr::read_csv("sectors/power/global_power_plant_database_sea.csv") %>%
+    filter(is.na(commissioning_year) | commissioning_year <= 2019,
+           primary_fuel %in% c("Coal","Gas")) %>%
+    sf::st_as_sf(coords=c("longitude", "latitude"), crs=4326) %>%
+    select(id.plant=gppd_idnr)
+  # s <- readxl::read_xlsx("sectors/power/January 2021 Global Coal Plant Tracker.xlsx",
+  #                   sheet='Units')  %>% filter(Country %in% c("Indonesia"),
+  #              Status %in% "Operating") %>%
+  #   sf::st_as_sf(coords=c("Longitude","Latitude"), crs=4326) %>%
+  #   select(id.plant=`Tracker ID`,
+  #          weight=`Capacity (MW)`)
 
-  s %>% sf::write_sf("sectors/power/January 2021 Global Coal Plant Tracker.gpkg")
+  # s %>% sf::write_sf("sectors/power/January 2021 Global Coal Plant Tracker.gpkg")
 
   # Add BPS id
   g <- data.bps_map()
