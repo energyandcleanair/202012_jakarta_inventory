@@ -19,37 +19,30 @@ polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
 
 sectors <- c(
-  "agroob",
-  "aviation",
-  "comres",
-  "forest",
-  "gasdist",
-  "industry",
-  "landfill",
-  "livestock",
-  "power",
-  "shipping",
+#  "agroob",
+#  "aviation",
+#  "comres",
+ # "forest",
+ # "gasdist",
+ # "industry",
+ # "landfill",
+ # "livestock",
+ # "power",
+ # "shipping",
   "solidwaste",
-  "transport")
-
-# Adjust grid
-# grid <- data.grid(res_m = 1e4)
-# grid_name <- "10km"
-
-# grid <- data.grid.d02()
-# grid_name <- "d02"
-
-# grid <- data.grid.d03()
-# grid_name <- "d03"
-
-grid <- data.grid.d04()
-grid_name <- "d04"
-
-# grid <- data.grid.edgar()
-# grid_name <- "edgar"
+  "transport"
+  )
 
 
-lapply(sectors, function(sector){
+grids <- list(
+ "d02"=data.grid.d02(),
+ "d03"=data.grid.d03(),
+ "d04"=data.grid.d04(),
+ "edgar"=data.grid.edgar()
+)
+
+
+prepare_sector <- function(sector, polls, grid, grid_name){
 
   message("======= ",sector," =======")
 
@@ -88,6 +81,8 @@ lapply(sectors, function(sector){
     if(length(missing_ids)>0){
       warning("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
       emission <- emission %>% filter(!sf::st_is_empty(geometry))
+      g <- data.bps_map()
+      ggplot(g) + geom_sf(aes(fill=id %in% missing_ids))
     }
 
     # Create a raster stack representing whole year for all polls
@@ -120,26 +115,36 @@ lapply(sectors, function(sector){
 
     return(emission.rasters)
   }, error=function(e){
+    print(e)
     return(NA)
+  })
+}
+
+lapply(sectors, function(sector){
+  lapply(names(grids), function(grid_name){
+    prepare_sector(sector, polls, grids[[grid_name]], grid_name)
   })
 }) -> emission.rasters
 
 
-# Create scenarios --------------------------------------------------------
-create_scenario <- function(sector_omitted, grid_name){
-  d <- tibble(file=list.files("results", ".*")) %>%
-    tidyr::separate(file, c("sector", "poll", "grid"), extra = "drop", remove=F) %>%
-    filter(grid==!!grid_name,
-           sector!=sector_omitted)
 
-  # Sum by poll and stack
-  rs <- lapply(split(d$file, d$poll),
-               function(fs){do.call(raster::stack, as.list(file.path("results", fs))) %>%
-                   raster::calc(sum, na.rm=T)}) %>%
-    raster::stack()
 
-  # Export into one netcdf (n polls -> n layers)
-  raster::writeRaster(rs, file.path("results", sprintf("scenario_wo_%s.%s.nc", sector_omitted, grid_name)))
-}
 
+# # Create scenarios --------------------------------------------------------
+# create_scenario <- function(sector_omitted, grid_name){
+#   d <- tibble(file=list.files("results", ".*")) %>%
+#     tidyr::separate(file, c("sector", "poll", "grid"), extra = "drop", remove=F) %>%
+#     filter(grid==!!grid_name,
+#            sector!=sector_omitted)
+#
+#   # Sum by poll and stack
+#   rs <- lapply(split(d$file, d$poll),
+#                function(fs){do.call(raster::stack, as.list(file.path("results", fs))) %>%
+#                    raster::calc(sum, na.rm=T)}) %>%
+#     raster::stack()
+#
+#   # Export into one netcdf (n polls -> n layers)
+#   raster::writeRaster(rs, file.path("results", sprintf("scenario_wo_%s.%s.nc", sector_omitted, grid_name)))
+# }
+#
 

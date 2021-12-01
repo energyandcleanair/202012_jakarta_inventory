@@ -39,7 +39,7 @@ transport.build_support <- function(){
                          !!!weights)
 
   sf::st_as_sf(roads)%>%
-    dplyr::select(osm_id, weight) %>%
+    dplyr::select(osm_id, weight, id) %>%
     sf::write_sf("sectors/transport/transport_support.gpkg")
 
   return(roads)

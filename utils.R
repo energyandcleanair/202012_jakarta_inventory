@@ -277,7 +277,7 @@ utils.ts_rasters_to_nc <- function(rs,
   for(poll in polls){
     for(idate in 1:nrow(rs)){
         ncvar_put(nc.new,
-                  varid=varname,
+                  varid=poll,
                   vals=rs[[idate,"emission.raster"]][[1]][[poll]] %>%
                       as.matrix() %>%
                       apply(2, rev) %>%

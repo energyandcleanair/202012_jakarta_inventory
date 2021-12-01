@@ -21,10 +21,9 @@ forest.build_support <- function(){
     sf::st_make_valid()
 
   # Add the kabupaten / kota map
-  g <- data.bps_map() %>%
-    sf::st_make_valid()
+  g <- data.bps_map()
 
-  intersection <- sf::st_intersection(lu, g)
+  intersection <- sf::st_intersection(lu %>% filter(sf::st_is_valid(geometry)), g)
   intersection <- intersection %>%
     filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON"))
 
@@ -36,21 +35,21 @@ forest.build_support <- function(){
 
   fires <- creatrajs::fire.read(date_from=date_from,
                        date_to=date_to,
-                       extent.sp=extent.sp)
+                       extent.sp=extent.sp,
+                       show.progress = F)
 
   fires_w_id <- fires %>%
-    sf::st_join(intersection %>% select(id)) %>%
+    sf::st_join(intersection %>%
+                  filter(sf::st_is_valid(geometry)) %>%
+                  select(id=province)) %>%
     rename(weight=frp)
 
   fires_w_id$acq_date <- NULL
 
+  f <- "sectors/forest/forest_support.gpkg"
+  if(file.exists(f)) file.remove(f)
   fires_w_id %>%
-    sf::st_write("sectors/forest/forest_support.gpkg")
-
-  # sf::write tooo slow
-  # library(rgdal)
-  # lapply(list.files("sectors/forest","support.*", full.names = T), file.remove)
-  # writeOGR(as(fires_w_id,"Spatial"), "sectors/forest/","support_forest",driver = "GPKG")
+    sf::st_write(f)
 
   return(fires_w_id)
 }
@@ -67,6 +66,7 @@ forest.get_support <- function(){
 #'
 #' @return emission tibble
 forest.get_emission <- function(){
+
   e <- data.sheet_to_emissions(sheet_name="Forest Fire")
   g <- data.bps_map() %>%
     sf::st_make_valid()

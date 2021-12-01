@@ -31,24 +31,28 @@ agroob.build_support <- function(){
 
   fires <- creatrajs::fire.read(date_from=date_from,
                        date_to=date_to,
-                       extent.sp=extent.sp)
+                       extent.sp=extent.sp,
+                       show.progress = F)
 
   fires_w_id <- fires %>%
-    sf::st_join(intersection %>% select(id=province)) %>%
+    sf::st_join(intersection %>%
+                  filter(sf::st_is_valid(geometry)) %>%
+                  select(id=province)) %>%
     rename(weight=frp)
 
   fires_w_id$acq_date <- NULL
 
-  fires_w_id %>%
-    sf::st_write("sectors/agroob/agroob_support.gpkg")
+  # sf::write tooo slow
+  library(rgdal)
+  lapply(list.files("sectors/agroob","support.*", full.names = T), file.remove)
+  writeOGR(as(fires_w_id,"Spatial"), "sectors/agroob/","support", driver = "ESRI Shapefile")
 
   return(fires_w_id)
 }
 
 
 agroob.get_support <- function(){
-  sf::read_sf("sectors/agroob/agroob_support.gpkg") %>%
-    rename(geometry=geom)
+  sf::read_sf("sectors/agroob/support.shp")
 }
 
 
