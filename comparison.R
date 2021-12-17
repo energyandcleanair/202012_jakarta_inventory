@@ -8,24 +8,35 @@ library(eixport)
 lapply(list.files(".", "data.*.R"),source)
 source('utils.R')
 source('edgar.R')
+source('data.R')
 
 
-sectors <- c("power","industry","comres","agroob","shipping","aviation")
+sectors <- c("power","industry","comres","agroob","shipping","aviation","landfill")
 # names(edgar.local_to_edgar_sectors())
 
 compare_sector <- function(sector){
   print(paste0("=================", sector, "================="))
 
-  polls <- c("NOx","SO2","BC","OC","PM","NMVOC","NH3")
+  polls <- c("NOx","SO2","BC","OC","PM","NMVOC","NH3","CH4")
   polls.edgar <- gsub("PM", "PM10", polls)
 
   # Get CREA results
-  r.crea <- lapply(polls, function(poll) raster::raster(sprintf("results/%s.%s.edgar.tif", sector, poll)))
+  r.crea <- purrr::map(polls, function(poll){
+    f <- sprintf("results/%s.%s.edgar.tif", sector, poll)
+    if(file.exists(f)) raster::raster(f) else data.grid.edgar() %>% setValues(0)
+  })
+
   names(r.crea) <- polls
   r.crea.tonne <- lapply(r.crea, function(r) raster::cellStats(r, sum))
 
   # Get EDGAR results
-  r.edgar <- lapply(polls.edgar, function(poll) edgar.emission(sector=sector, poll=poll))
+  r.edgar <- lapply(polls.edgar, function(poll){
+    tryCatch({edgar.emission(sector=sector, poll=poll)},
+             error=function(e){
+               return(data.grid.edgar() %>% setValues(0))
+             })
+  })
+
   names(r.edgar) <- polls
   r.edgar.tonne <- lapply(r.crea, function(r) raster::cellStats(r, sum))
 

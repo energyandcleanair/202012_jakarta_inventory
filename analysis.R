@@ -19,26 +19,26 @@ polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
 
 sectors <- c(
-#  "agroob",
-#  "aviation",
-#  "comres",
- # "forest",
- # "gasdist",
- # "industry",
- # "landfill",
- # "livestock",
- # "power",
- # "shipping",
-  "solidwaste",
+# "agroob",
+# "aviation",
+# "comres",
+#"forest",
+#"gasdist",
+#"industry",
+# "landfill",
+# "livestock",
+ #"power",
+ #"shipping"
+ #   "solidwaste"
   "transport"
   )
 
 
 grids <- list(
- "d02"=data.grid.d02(),
- "d03"=data.grid.d03(),
- "d04"=data.grid.d04(),
  "edgar"=data.grid.edgar()
+# "d02"=data.grid.d02(),
+# "d03"=data.grid.d03(),
+# "d04"=data.grid.d04()
 )
 
 
@@ -87,7 +87,7 @@ prepare_sector <- function(sector, polls, grid, grid_name){
 
     # Create a raster stack representing whole year for all polls
     emission.raster <- creainventory::grid.rasterize(emission, grid)
-
+    sf::st_set_crs(emission, "EPSG4326")
     # # Save yearly GEOTIFFs
     dir.create("results", showWarnings = F)
     lapply(names(emission.raster), function(poll){
