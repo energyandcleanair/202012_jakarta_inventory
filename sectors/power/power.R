@@ -10,22 +10,8 @@ power.build_support <- function(){
     select(id.plant=gppd_idnr,
            weight=capacity_mw)
 
-
-  # s.additional <- readxl::read_xlsx("sectors/power/January 2021 Global Coal Plant Tracker.xlsx",
-  #                        sheet='Units')  %>% filter(Country %in% c("Indonesia"),
-  #                                                   # !is.na(Latitude)
-  #                                                   Status %in% "Operating"
-  #                                                   ) %>%
-  #   sf::st_as_sf(coords=c("Longitude","Latitude"), crs=4326) %>%
-  #   select(id.plant=`Tracker ID`,
-  #          weight=`Capacity (MW)`)
-
-  # s %>% sf::write_sf("sectors/power/January 2021 Global Coal Plant Tracker.gpkg")
-
-
   # Add BPS id
   g <- data.bps_map() %>% sf::st_make_valid()
-
 
   # Move power plants inside provinces
 
