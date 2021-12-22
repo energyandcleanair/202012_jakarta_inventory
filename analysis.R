@@ -86,9 +86,11 @@ prepare_sector <- function(sector, polls, grid, grid_name){
     }
 
     # Create a raster stack representing whole year for all polls
-    emission.raster <- creainventory::grid.rasterize(emission, grid)
+    geom_unique_id <- if("osm_id" %in% names(emission)) "osm_id" else NULL
+    emission.raster <- creainventory::grid.rasterize(emission, grid, geom_unique_id=geom_unique_id)
     sf::st_set_crs(emission, "EPSG4326")
-    # # Save yearly GEOTIFFs
+
+    # Save yearly GEOTIFFs
     dir.create("results", showWarnings = F)
     lapply(names(emission.raster), function(poll){
       raster::writeRaster(emission.raster[[poll]],
