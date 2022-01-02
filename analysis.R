@@ -1,5 +1,8 @@
 # remotes::install_github("energyandcleanair/creainventory", upgrade=F)
 # devtools::reload(pkgload::inst("creainventory"))
+library(remotes)
+install_github("statnmap/cartomisc")
+library(cartomisc)
 library(creainventory)
 library(raster)
 library(sf)
@@ -29,9 +32,9 @@ sectors <- c(
 # "livestock",
  #"power",
  #"shipping"
- #   "solidwaste"
-  "transport"
-  )
+    "solidwaste"
+  # "transport"
+)
 
 
 grids <- list(
@@ -94,7 +97,7 @@ prepare_sector <- function(sector, polls, grid, grid_name){
     dir.create("results", showWarnings = F)
     lapply(names(emission.raster), function(poll){
       raster::writeRaster(emission.raster[[poll]],
-                          file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
+                          file.path("results", sprintf("%s.%s.%s.tif", sector, poll, grid_name)),
                           overwrite=T)
 
       # Sanity check: emission conservation

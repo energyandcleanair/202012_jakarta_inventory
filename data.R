@@ -27,20 +27,49 @@ data.gadm <- function(){
   )
 }
 
-data.bps_map <- function(){
-  sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
+data.bps_map <- function(buffer_km=0){
+
+  file_cache <- sprintf("data/boundaries/bps/geom_%skm.RDS",buffer_km)
+  if(file.exists(file_cache)) return(readRDS(file_cache))
+
+  g <- sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
     dplyr::select(id=ADM2_PCODE, name=ADM2_EN, province=ADM1_EN, geometry) %>%
     filter(id %in% data.region_ids()) %>%
     sf::st_make_valid()
+
+  if(buffer_km>0){
+    g_coast <- cartomisc::regional_seas(g %>% sf::st_transform(3857),
+                                        group="id",
+                                        dist=buffer_km*1000) %>%
+      left_join(g %>% as.data.frame() %>% dplyr::select(id, name, province))
+
+    g <-  bind_rows(g %>% sf::st_transform(3857),
+                             g_coast
+                             ) %>%
+      # st_snap(x = ., y = ., tolerance = 0.0001) %>% # for sliver polygons but too slow
+      group_by(id, name, province) %>%
+      sf::st_transform(sf::st_crs(g)) %>%
+      summarise()
+  }
+
+  saveRDS(g, file_cache)
+  return(g)
 }
 
-data.grid.edgar <- function(){
+
+data.createedgar <- function(){
   g <- data.bps_map()
   extent <- sf::st_bbox(g)
 
-  raster::raster("data/edgar/v50_NOx_2015_ENE.0.1x0.1.nc") %>%
+  r <- raster::raster("data/edgar/v50_NOx_2015_ENE.0.1x0.1.nc") %>%
     raster::raster() %>%
     raster::crop(extent)
+
+  raster::writeRaster(r, "data/edgar.grid.tif", overwrite=T)
+}
+
+data.grid.edgar <- function(){
+  raster::raster("data/edgar.grid.tif")
 }
 
 

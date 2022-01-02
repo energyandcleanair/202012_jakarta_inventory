@@ -11,21 +11,13 @@ power.build_support <- function(){
            weight=capacity_mw)
 
   # Add BPS id
-  g <- data.bps_map() %>% sf::st_make_valid()
+  # Add a buffer cause some locations are closed to the coast
+  g <- data.bps_map(buffer_km=10)
 
-  # Move power plants inside provinces
-
-  # Identify points outside the polygons
-  # s$outside <- sapply(st_intersects(s, g), function(x){length(x)==0})
-  # ggplot() + geom_sf(data=g) + geom_sf(data=s, aes(col=outside))
-
-  s.rich <- s %>%
+  s_wid <- s %>%
     sf::st_join(g, left=F)
-#
-#   s.rich.additional <- s.additional %>%
-#     sf::st_join(g, left=F)
 
-  sf::write_sf(s.rich, "sectors/power/power_support.gpkg")
+  sf::write_sf(s_wid, "sectors/power/power_support.gpkg")
 }
 
 #' Get support for power plants
