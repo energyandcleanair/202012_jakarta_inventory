@@ -8,6 +8,31 @@ data.region_ids <- function(gadm=T, bps=T){
   return(unique(ids))
 }
 
+data.sector_name <- function(sector=NULL){
+  corr <-  list(
+    power="Power generation",
+    transport="Road transportation",
+    agroob="Agro-residual open burning",
+    shipping="Harbour",
+    aviation="Air transportation (LTO)",
+    forest="Forest fire",
+    comres="Residential and commercial",
+    industry="Manufacturing industry",
+    landfill="Landfill (methane)",
+    solidwaste="Solid waste open burning",
+    gasdist="Fugitive emissions from fuels",
+    livestock="Livestock"
+  )
+
+  if(is.null(sector)){
+    return(corr)
+  }else{
+    return(corr[sector] %>% unlist(use.names=F))
+  }
+}
+
+
+
 #' Build region shapefiles to be used later on.
 #'
 #' @return
@@ -34,8 +59,13 @@ data.bps_map <- function(buffer_km=0){
 
   g <- sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
     dplyr::select(id=ADM2_PCODE, name=ADM2_EN, province=ADM1_EN, geometry) %>%
-    filter(id %in% data.region_ids()) %>%
     sf::st_make_valid()
+
+  # We want neighbour regions as well so that the buffering
+  # only goes into the sea, and does not extend on other regions
+  # So we can't filter yet with data.region_ids()
+  bbox <- sf::st_bbox(data.grid.d02() %>% raster::projectExtent(4326))
+  g <- g %>% sf::st_crop(bbox + c(-1,-1,1,1))
 
   if(buffer_km>0){
     g_coast <- cartomisc::regional_seas(g %>% sf::st_transform(3857),
@@ -44,13 +74,18 @@ data.bps_map <- function(buffer_km=0){
       left_join(g %>% as.data.frame() %>% dplyr::select(id, name, province))
 
     g <-  bind_rows(g %>% sf::st_transform(3857),
-                             g_coast
-                             ) %>%
+                    g_coast) %>%
       # st_snap(x = ., y = ., tolerance = 0.0001) %>% # for sliver polygons but too slow
       group_by(id, name, province) %>%
+      summarise() %>%
       sf::st_transform(sf::st_crs(g)) %>%
-      summarise()
+      sf::st_make_valid()
   }
+
+  # Now we can limit to region of interest
+  ids <- data.region_ids()
+  g <- g %>%
+    filter(id %in% ids)
 
   saveRDS(g, file_cache)
   return(g)

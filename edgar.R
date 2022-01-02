@@ -16,17 +16,19 @@ edgar.local_to_edgar_sectors <- function(sector=NULL){
     agroob=c("AWB"),
     shipping=c("TNR_Ship"),
     aviation=c("TNR_Aviation_LTO"),
-    forest=NULL,
     comres=c("RCO"),
     industry=c("IND"),
     landfill=c("SWD_LDF"),
-    solidwaste=c("SWD_INC")
+    solidwaste=c("SWD_INC"),
+    forest=NULL,
+    gasdist=NULL,
+    livestock=NULL
   )
 
   if(is.null(sector)){
     return(corr)
   }else{
-    return(corr[[sector]])
+    return(corr[sector] %>% unlist(use.names=F))
   }
 }
 

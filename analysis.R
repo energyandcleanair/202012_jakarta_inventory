@@ -1,4 +1,4 @@
-# remotes::install_github("energyandcleanair/creainventory", upgrade=F)
+remotes::install_github("energyandcleanair/creainventory", upgrade=F)
 # devtools::reload(pkgload::inst("creainventory"))
 library(remotes)
 install_github("statnmap/cartomisc")
@@ -90,7 +90,7 @@ prepare_sector <- function(sector, polls, grid, grid_name){
 
     # Create a raster stack representing whole year for all polls
     geom_unique_id <- if("osm_id" %in% names(emission)) "osm_id" else NULL
-    emission.raster <- creainventory::grid.rasterize(emission, grid, geom_unique_id=geom_unique_id)
+    emission.raster <- creainventory::rasterize(emission, grid, geom_unique_id=geom_unique_id)
     sf::st_set_crs(emission, "EPSG4326")
 
     # Save yearly GEOTIFFs
