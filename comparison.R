@@ -62,12 +62,12 @@ compare_sector <- function(sector){
                    function(p) cbind(g,
                                      emission_tonne=raster::extract(r.crea[[p]], g, fun=sum, na.rm=T),
                                      poll=p,
-                                     source="CREA"))
+                                     source="CREA (2019)"))
   e.edgar <- lapply(polls,
                     function(p) cbind(g,
                                       emission_tonne=raster::extract(r.edgar[[p]], g, fun=sum, na.rm=T),
                                       poll=p,
-                                      source="EDGAR"))
+                                      source="EDGAR (2015)"))
 
 
   (plt2 <- bind_rows(
@@ -241,8 +241,7 @@ compare_sectors <- function(sectors){
       scale_y_continuous(expand=expansion(mult=c(0,0.1))) +
       labs(subtitle="All sectors - Comparison between CREA and EDGAR total emissions",
            y="Tonne",
-           x=NULL,
-           caption=sprintf("Sectors covered: %s", paste(sectors, collapse=", "))))
+           x=NULL))
 
   ggsave(sprintf("comparison/all_total.png"), plt3, width=10, height=5)
 
@@ -259,9 +258,11 @@ compare_sectors <- function(sectors){
       scale_y_continuous(expand=expansion(mult=c(0,0.1))) +
       labs(subtitle="All sectors - Comparison between CREA and EDGAR total emissions",
            y="Tonne",
-           x=NULL,
-           caption=sprintf("Sectors covered: %s", paste(sectors, collapse=", "))))
+           x=NULL))
+           # caption=sprintf("Sectors covered: %s", paste(sectors, collapse=", "))))
 
   ggsave(sprintf("comparison/all_total_sectors.png"), plt4, width=10, height=10)
 
 }
+
+compare_sectors(sectors)

@@ -66,7 +66,7 @@ edgar.emission <- function(sector, poll){
     if(all(file.exists(f_months))){
       r <- lapply(f_months,
                   function(f){raster::raster(f) %>% raster::crop(grid)}) %>%
-        do.call("sum", .)
+        do.call("mean", .)
     }else{
       r <- raster::raster(f) %>%
         raster::crop(grid)
