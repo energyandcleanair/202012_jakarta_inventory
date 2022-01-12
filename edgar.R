@@ -35,7 +35,7 @@ edgar.local_to_edgar_sectors <- function(sector=NULL){
 edgar.download_emissions <- function(edgar_sector, poll){
 
   # edgar_sectors <- edgar.local_to_edgar_sectors(sector)
-  eixport::get_edgar(dataset = "v50_AP",
+  eixport::get_edgar(dataset = ifelse(tolower(poll)=="ch4", "v50_GHG", "v50_AP"),
             pol = poll,
             sector = edgar_sector,
             year = 2015,
@@ -46,6 +46,8 @@ edgar.download_emissions <- function(edgar_sector, poll){
   fs <- list.files("data/edgar", "*.zip", full.names=T)
   lapply(fs, unzip, exdir="data/edgar")
   file.remove(fs)
+
+
 }
 
 edgar.emission <- function(sector, poll){
@@ -54,11 +56,21 @@ edgar.emission <- function(sector, poll){
   grid <- data.grid.edgar()
   rs <- lapply(edgar_sectors, function(s){
     f <- file.path("data/edgar", sprintf("v50_%s_2015_%s.0.1x0.1.nc", poll, s))
-    if(!file.exists(f)){
+    # GHG (i.e. CH4) is only available by month
+    f_months <- file.path("data/edgar", sprintf("v50_%s_2015_%d_%s.0.1x0.1.nc", poll, seq(1,12), s))
+
+    if(!file.exists(f) & !all(file.exists(f_months))){
       edgar.download_emissions(edgar_sector=s, poll)
     }
-    r <- raster::raster(f) %>%
-      raster::crop(grid)
+
+    if(all(file.exists(f_months))){
+      r <- lapply(f_months,
+                  function(f){raster::raster(f) %>% raster::crop(grid)}) %>%
+        do.call("sum", .)
+    }else{
+      r <- raster::raster(f) %>%
+        raster::crop(grid)
+    }
   })
 
   rs <- do.call("sum",rs)
