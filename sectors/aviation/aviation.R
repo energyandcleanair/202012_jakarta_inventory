@@ -52,3 +52,12 @@ aviation.get_emission <- function(){
            )
   return(e)
 }
+
+#
+# aviation.get_date_weight <- function(){
+#   s <- aviation.get_support
+#
+#   t <- readxl::read_xlsx("sectors/aviation/timeseries.xlsx",
+#                          sheet='Sheet2')
+#
+# }
