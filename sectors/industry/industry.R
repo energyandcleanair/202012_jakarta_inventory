@@ -65,23 +65,39 @@ industry.build_support <- function(){
 
 
   # There are some regions (3) without facilities, but with emissions...
-  # We distribute evenly across cells
+  # We distribute evenly across these provinces
   emission <- industry.get_emission()
   ids_with_emissions <- unique(emission$id[emission$emission>0])
   missing_ids <- setdiff(ids_with_emissions, unique(s.rich$id))
   cat("Missing facilities in regions: ", paste(missing_ids, collapse=", "))
 
-  g %>%
-    filter(id %in% missing_ids)
 
-  read_csv("sectors/industry/large_industries.csv") %>%
-    sf::st_as_sf(coords=c("LONGITUDE","LATITUDE")) %>%
-    sf::st_set_crs(sf::st_crs(g)) %>%
-    sf::st_join(g) %>%
-    as.data.frame() %>%
-    distinct(id) -> a
+  additional_points <- sf::st_as_sf(sf::st_centroid(g %>% sf::st_make_grid(cellsize=0.1))) %>%
+    sf::st_join(
+      g %>% filter(id %in% missing_ids),
+      left=F
+    ) %>%
+    mutate(category="Province",
+           weight=1) %>%
+    as.data.frame()
 
-  missing_ids %in% a$id
+  additional_points_w_poll <- lapply(unique(s.rich$poll), function(poll) additional_points %>% mutate(poll=!!poll)) %>%
+    do.call(bind_rows, .)
+
+  s.rich <- bind_rows(
+    s.rich,
+    additional_points_w_poll)
+
+
+
+  # read_csv("sectors/industry/large_industries.csv") %>%
+  #   sf::st_as_sf(coords=c("LONGITUDE","LATITUDE")) %>%
+  #   sf::st_set_crs(sf::st_crs(g)) %>%
+  #   sf::st_join(g) %>%
+  #   as.data.frame() %>%
+  #   distinct(id) -> a
+  #
+  # missing_ids %in% a$id
 
   sf::write_sf(s.rich, "sectors/industry/industry_support.gpkg")
 }
@@ -100,7 +116,7 @@ industry.get_support <- function(){
 #' @return emission tibble
 industry.get_emission <- function(){
 
-  e <- data.sheet_to_emissions(sheet_name='Power-generation')
+  e <- data.sheet_to_emissions(sheet_name='Manufacturing Industry')
 
   if(sum(e[e$location=="Kota Semarang","emission"])==0 & sum(e[e$location=="Kab. Semarang","emission"])>0){
     e[e$location=="Kota Semarang","location"] <- "tmp"
