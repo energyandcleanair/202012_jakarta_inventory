@@ -15,23 +15,34 @@ solidwaste.build_support <- function(){
   gpw.global <- creahelpers::get_population_path("gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_2020_30_sec.tif") %>%
     raster::raster()
   gpw <- gpw.global %>% raster::crop(sf::st_bbox(g))
+  names(gpw) <- "gpw"
 
-  sf::st_as_sf(as(gpw, "SpatialPolygonsDataFrame")) %>%
-    rename(weight=gpw_v4_population_density_adjusted_to_2015_unwpp_country_totals_rev11_2020_30_sec) %>%
+  # Version 2
+  # breaks <- seq(0,1,0.05)
+  # gpw_quantiles <- raster::quantile(gpw, breaks)
+  gpw_cut <- raster::cut(gpw, breaks=20)
+  gpw_cut_pol <- raster::rasterToPolygons(gpw_cut, dissolve=T)
+  gpw_cut_pol$weight <- raster::extract(gpw, gpw_cut_pol, fun=mean)
+
+
+  s <- sf::st_as_sf(gpw_cut_pol) %>%
+    dplyr::select(weight) %>%
     filter(weight>0) %>%
     sf::st_make_valid() %>%
     sf::st_intersection(g %>% sf::st_make_valid() %>% dplyr::select(id)) %>%
     filter(!is.na(id)) %>%
-    filter(sf::st_geometry_type(geometry)=="POLYGON") %>%
-    sf::write_sf("sectors/solidwaste/solidwaste_support.gpkg")
+    sf::st_collection_extract() %>%
+    filter(grepl("POLYGON", sf::st_geometry_type(geometry))) %>%
+    sf::st_cast("POLYGON")
+
+  sf::write_sf(s, "sectors/solidwaste/solidwaste_support.gpkg")
 
 }
 
 
 solidwaste.get_support <- function(){
   sf::read_sf("sectors/solidwaste/solidwaste_support.gpkg") %>%
-    rename(geometry=geom) %>%
-    filter(sf::st_geometry_type(geometry)=="POLYGON")
+    rename(geometry=geom)
 }
 
 
