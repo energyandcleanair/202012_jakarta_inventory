@@ -24,15 +24,15 @@ polls <- c("SO2", "NOx", "CO", "NMVOC",
 sectors <- c(
 # "agroob",
 # "aviation",
-# "comres",
+"comres",
 #"forest",
 #"gasdist",
 #"industry",
 # "landfill",
 # "livestock",
- #"power",
+ "power",
  #"shipping"
-    "solidwaste"
+    # "solidwaste"
   # "transport"
 )
 
@@ -136,20 +136,20 @@ lapply(sectors, function(sector){
 
 
 # # Create scenarios --------------------------------------------------------
-# create_scenario <- function(sector_omitted, grid_name){
-#   d <- tibble(file=list.files("results", ".*")) %>%
-#     tidyr::separate(file, c("sector", "poll", "grid"), extra = "drop", remove=F) %>%
-#     filter(grid==!!grid_name,
-#            sector!=sector_omitted)
-#
-#   # Sum by poll and stack
-#   rs <- lapply(split(d$file, d$poll),
-#                function(fs){do.call(raster::stack, as.list(file.path("results", fs))) %>%
-#                    raster::calc(sum, na.rm=T)}) %>%
-#     raster::stack()
-#
-#   # Export into one netcdf (n polls -> n layers)
-#   raster::writeRaster(rs, file.path("results", sprintf("scenario_wo_%s.%s.nc", sector_omitted, grid_name)))
-# }
-#
+create_scenario <- function(sector_omitted, grid_name){
+  d <- tibble(file=list.files("results", ".*")) %>%
+    tidyr::separate(file, c("sector", "poll", "grid"), extra = "drop", remove=F) %>%
+    filter(grid==!!grid_name,
+           sector!=sector_omitted)
+
+  # Sum by poll and stack
+  rs <- lapply(split(d$file, d$poll),
+               function(fs){do.call(raster::stack, as.list(file.path("results", fs))) %>%
+                   raster::calc(sum, na.rm=T)}) %>%
+    raster::stack()
+
+  # Export into one netcdf (n polls -> n layers)
+  raster::writeRaster(rs, file.path("results", sprintf("scenario_wo_%s.%s.nc", sector_omitted, grid_name)))
+}
+
 
