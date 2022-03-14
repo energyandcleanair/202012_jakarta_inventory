@@ -13,6 +13,7 @@ utils.location_name_to_bps_id <- function(l){
     pull(bps_id)
 }
 
+
 utils.equal_date_weights <- function(frequency="h"){
   d <- seq(as.POSIXct("2019-01-01", tz="Asia/Jakarta"),
            as.POSIXct("2019-12-31", tz="Asia/Jakarta"),
@@ -20,7 +21,6 @@ utils.equal_date_weights <- function(frequency="h"){
   tibble(date=d,
          weight=1/length(d))
 }
-
 
 
 utils.date_to_time_dimension <- function(d){

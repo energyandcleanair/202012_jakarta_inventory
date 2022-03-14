@@ -158,6 +158,8 @@ data.created02 <- function(){
   raster::writeRaster(r, "data/d03.grid.tif", overwrite=T)
 }
 
+
+
 data.grid.d03 <- function(){
   # g <- data.gadm()
   raster::raster("data/d03.grid.tif") %>% raster::raster()
@@ -219,7 +221,7 @@ data.grid <- function(res_deg=NULL, res_m=NULL, extent=NULL){
 
 data.sheet_to_emissions <- function(sheet_name){
 
-  s <- readxl::read_xlsx("data/Emission-2019-compilation-send.xlsx",
+  s <- readxl::read_xlsx("data/Emission-2019-compilation-Feb2022-send.xlsx",
                          sheet=sheet_name,
                          skip = 1)
   s <- s %>% rename(location=`Province/Cities`)
