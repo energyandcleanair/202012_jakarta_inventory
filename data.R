@@ -8,6 +8,31 @@ data.region_ids <- function(gadm=T, bps=T){
   return(unique(ids))
 }
 
+data.sector_name <- function(sector=NULL){
+  corr <-  list(
+    power="Power generation",
+    transport="Road transportation",
+    agroob="Agro-residual open burning",
+    shipping="Harbour",
+    aviation="Air transportation (LTO)",
+    forest="Forest fire",
+    comres="Residential and commercial",
+    industry="Manufacturing industry",
+    landfill="Landfill (methane)",
+    solidwaste="Solid waste open burning",
+    gasdist="Fugitive emissions from fuels",
+    livestock="Livestock"
+  )
+
+  if(is.null(sector)){
+    return(corr)
+  }else{
+    return(corr[sector] %>% unlist(use.names=F))
+  }
+}
+
+
+
 #' Build region shapefiles to be used later on.
 #'
 #' @return
@@ -18,26 +43,68 @@ data.gadm <- function(){
   rbind(
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_1.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      dplyr::select(id=GID_1, name=NAME_1, geometry),
+      dplyr::select(id=GID_1, name=NAME_1, geometry) %>%
+      mutate(level=1),
     sf::read_sf(file.path("data","boundaries","gadm","gadm36_IDN_2.shp")) %>%
       filter(GID_1 %in% data.region_ids()) %>%
-      dplyr::select(id=GID_2, name=NAME_2, geometry)
+      dplyr::select(id=GID_2, name=NAME_2, geometry)  %>%
+      mutate(level=2)
   )
 }
 
-data.bps_map <- function(){
-  sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
+data.bps_map <- function(buffer_km=0){
+
+  file_cache <- sprintf("data/boundaries/bps/geom_%skm.RDS",buffer_km)
+  if(file.exists(file_cache)) return(readRDS(file_cache))
+
+  g <- sf::read_sf(file.path("data","boundaries","bps","idn_admbnda_adm2_bps_20200401.shp")) %>%
     dplyr::select(id=ADM2_PCODE, name=ADM2_EN, province=ADM1_EN, geometry) %>%
-    filter(id %in% data.region_ids())
+    sf::st_make_valid()
+
+  # We want neighbour regions as well so that the buffering
+  # only goes into the sea, and does not extend on other regions
+  # So we can't filter yet with data.region_ids()
+  bbox <- sf::st_bbox(data.grid.d02() %>% raster::projectExtent(4326))
+  g <- g %>% sf::st_crop(bbox + c(-1,-1,1,1))
+
+  if(buffer_km>0){
+    g_coast <- cartomisc::regional_seas(g %>% sf::st_transform(3857),
+                                        group="id",
+                                        dist=buffer_km*1000) %>%
+      left_join(g %>% as.data.frame() %>% dplyr::select(id, name, province))
+
+    g <-  bind_rows(g %>% sf::st_transform(3857),
+                    g_coast) %>%
+      # st_snap(x = ., y = ., tolerance = 0.0001) %>% # for sliver polygons but too slow
+      group_by(id, name, province) %>%
+      summarise() %>%
+      sf::st_transform(sf::st_crs(g)) %>%
+      sf::st_make_valid()
+  }
+
+  # Now we can limit to region of interest
+  ids <- data.region_ids()
+  g <- g %>%
+    filter(id %in% ids)
+
+  saveRDS(g, file_cache)
+  return(g)
 }
 
-data.grid.edgar <- function(){
+
+data.createedgar <- function(){
   g <- data.bps_map()
   extent <- sf::st_bbox(g)
 
-  raster::raster("data/edgar/v50_NOx_2015_ENE.0.1x0.1.nc") %>%
+  r <- raster::raster("data/edgar/v50_NOx_2015_ENE.0.1x0.1.nc") %>%
     raster::raster() %>%
     raster::crop(extent)
+
+  raster::writeRaster(r, "data/edgar.grid.tif", overwrite=T)
+}
+
+data.grid.edgar <- function(){
+  raster::raster("data/edgar.grid.tif")
 }
 
 
@@ -97,6 +164,8 @@ data.created02 <- function(){
   # raster::crs(r) <- crs
   raster::writeRaster(r, "data/d03.grid.tif", overwrite=T)
 }
+
+
 
 data.grid.d03 <- function(){
   # g <- data.gadm()
@@ -159,7 +228,7 @@ data.grid <- function(res_deg=NULL, res_m=NULL, extent=NULL){
 
 data.sheet_to_emissions <- function(sheet_name){
 
-  s <- readxl::read_xlsx("data/Emission-2019-compilation-send.xlsx",
+  s <- readxl::read_xlsx("data/Emission-2019-compilation-Feb2022-send.xlsx",
                          sheet=sheet_name,
                          skip = 1)
   s <- s %>% rename(location=`Province/Cities`)

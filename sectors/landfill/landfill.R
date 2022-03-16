@@ -116,5 +116,7 @@ landfill.get_support <- function(){
 landfill.get_emission <- function(){
   landfill.read_xls() %>%
     as.data.frame() %>%
-    dplyr::select(-c(geometry))
+    dplyr::select(-c(geometry)) %>%
+    filter(!is.na(emission)) %>%
+    select(id, unit, year, poll, emission)
 }

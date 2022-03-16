@@ -1,11 +1,16 @@
-# remotes::install_github("energyandcleanair/creainventory", upgrade=F)
+remotes::install_github("energyandcleanair/creainventory", upgrade=F)
 # devtools::reload(pkgload::inst("creainventory"))
+library(remotes)
+install_github("statnmap/cartomisc")
+library(cartomisc)
 library(creainventory)
 library(raster)
 library(sf)
 library(tidyverse)
 library(creatrajs)
 library(eixport)
+library(ncdf4)
+library(ncmeta)
 
 source('utils.R')
 source('edgar.R')
@@ -17,28 +22,30 @@ polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
 
 sectors <- c(
-  "agroob",
-  "aviation",
-  "comres",
-  "forest",
-  "gasdist",
-  "industry",
-  "landfill",
-  "livestock",
-  "power",
-  "shipping",
-  "solidwaste",
-  "transport")
-
-# Adjust grid
-# grid <- data.grid(res_m = 1e4)
-# grid_name <- "10km"
-
-grid <- data.grid.d03()
-grid_name <- "d03"
+# "agroob",
+# "aviation",
+"comres",
+#"forest",
+#"gasdist",
+#"industry",
+# "landfill",
+# "livestock",
+ "power",
+ #"shipping"
+    # "solidwaste"
+  # "transport"
+)
 
 
-lapply(sectors, function(sector){
+grids <- list(
+ "edgar"=data.grid.edgar()
+# "d02"=data.grid.d02(),
+# "d03"=data.grid.d03(),
+# "d04"=data.grid.d04()
+)
+
+
+prepare_sector <- function(sector, polls, grid, grid_name){
 
   message("======= ",sector," =======")
 
@@ -77,31 +84,33 @@ lapply(sectors, function(sector){
     if(length(missing_ids)>0){
       warning("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
       emission <- emission %>% filter(!sf::st_is_empty(geometry))
+      g <- data.bps_map()
+      ggplot(g) + geom_sf(aes(fill=id %in% missing_ids))
     }
 
     # Create a raster stack representing whole year for all polls
-    emission.raster <- creainventory::grid.rasterize(emission, grid)
+    geom_unique_id <- if("osm_id" %in% names(emission)) "osm_id" else NULL
+    emission.raster <- creainventory::rasterize(emission, grid, geom_unique_id=geom_unique_id)
+    sf::st_set_crs(emission, "EPSG4326")
 
-    # # Save yearly GEOTIFFs
-    # dir.create("results", showWarnings = F)
-    # lapply(names(emission.raster), function(poll){
-    #   raster::writeRaster(emission.raster[[poll]],
-    #                       file.path("results", sprintf("%s.%s.%s.tiff", sector, poll, grid_name)),
-    #                       overwrite=T)
-    #
-    #   # Sanity check: emission conservation
-    #   emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
-    #   raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
-    #   if(emission_total_poll!=raster_total_poll){
-    #     warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
-    #                     poll, emission_total_poll, raster_total_poll))
-    #   }
-    # })
-    #
+    # Save yearly GEOTIFFs
+    dir.create("results", showWarnings = F)
+    lapply(names(emission.raster), function(poll){
+      raster::writeRaster(emission.raster[[poll]],
+                          file.path("results", sprintf("%s.%s.%s.tif", sector, poll, grid_name)),
+                          overwrite=T)
+
+      # Sanity check: emission conservation
+      emission_total_poll <- emission_total[emission_total$poll==poll, "emission"]
+      raster_total_poll <- raster::cellStats(emission.raster[[poll]], "sum")
+      if(emission_total_poll!=raster_total_poll){
+        warning(sprintf("Emissions not conserved for poll %s: (from data) %.0f != %.0f (from raster)",
+                        poll, emission_total_poll, raster_total_poll))
+      }
+    })
 
     # Create a tibble (365-day) of raster stacks
     emission.rasters <- creainventory::temporal.split(emission.raster, date_weight)
-
 
     # Save as NETCDF for METEOSIM
     utils.ts_rasters_to_nc(rs=emission.rasters,
@@ -111,12 +120,22 @@ lapply(sectors, function(sector){
 
     return(emission.rasters)
   }, error=function(e){
+    print(e)
     return(NA)
+  })
+}
+
+lapply(sectors, function(sector){
+  lapply(names(grids), function(grid_name){
+    prepare_sector(sector, polls, grids[[grid_name]], grid_name)
   })
 }) -> emission.rasters
 
 
-# Create scenarios --------------------------------------------------------
+
+
+
+# # Create scenarios --------------------------------------------------------
 create_scenario <- function(sector_omitted, grid_name){
   d <- tibble(file=list.files("results", ".*")) %>%
     tidyr::separate(file, c("sector", "poll", "grid"), extra = "drop", remove=F) %>%

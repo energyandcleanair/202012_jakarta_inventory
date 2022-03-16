@@ -13,6 +13,7 @@ utils.location_name_to_bps_id <- function(l){
     pull(bps_id)
 }
 
+
 utils.equal_date_weights <- function(frequency="h"){
   d <- seq(as.POSIXct("2019-01-01", tz="Asia/Jakarta"),
            as.POSIXct("2019-12-31", tz="Asia/Jakarta"),
@@ -20,7 +21,6 @@ utils.equal_date_weights <- function(frequency="h"){
   tibble(date=d,
          weight=1/length(d))
 }
-
 
 
 utils.date_to_time_dimension <- function(d){
@@ -176,8 +176,8 @@ utils.rasters_to_nc <- function(rs,
 
   nc <- ncdf4::nc_open(f)
 
-  name_x <- intersect(nc_vars(f)$name, c("x","X"))
-  name_y <- intersect(nc_vars(f)$name, c("y","Y"))
+  name_x <- intersect(ncmeta::nc_vars(f)$name, c("x","X"))
+  name_y <- intersect(ncmeta::nc_vars(f)$name, c("y","Y"))
 
   val_x <- ncvar_get(nc, name_x)
   val_y <- ncvar_get(nc, name_y)
@@ -195,7 +195,7 @@ utils.rasters_to_nc <- function(rs,
   #---------------------
   # Create the test file
   #---------------------
-  file.remove(nc_file)
+  file.remove(nc_file, showWarnings=F)
   nc.new <- nc_create(nc_file, vars)
 
   #----------------------------
@@ -277,7 +277,7 @@ utils.ts_rasters_to_nc <- function(rs,
   for(poll in polls){
     for(idate in 1:nrow(rs)){
         ncvar_put(nc.new,
-                  varid=varname,
+                  varid=poll,
                   vals=rs[[idate,"emission.raster"]][[1]][[poll]] %>%
                       as.matrix() %>%
                       apply(2, rev) %>%

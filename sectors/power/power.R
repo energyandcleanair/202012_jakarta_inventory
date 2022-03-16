@@ -3,31 +3,31 @@
 #' @return support sf
 power.build_support <- function(){
 
+  s <- readr::read_csv("sectors/power/global_power_plant_database_sea.csv") %>%
+    filter(is.na(commissioning_year) | commissioning_year <= 2019,
+           primary_fuel %in% c("Coal","Gas")) %>%
+    sf::st_as_sf(coords=c("longitude", "latitude"), crs=4326) %>%
+    select(id.plant=gppd_idnr,
+           weight=capacity_mw)
+
+  # Add BPS id
+  # Add a buffer cause some locations are closed to the coast
+  g <- data.bps_map(buffer_km=10)
+
+  s_wid <- s %>%
+    sf::st_join(g, left=F)
+
+  sf::write_sf(s_wid, "sectors/power/power_support.gpkg")
 }
 
 #' Get support for power plants
 #'
 #' @return support sf
 power.get_support <- function(){
-
-  s <- readxl::read_xlsx("sectors/power/January 2021 Global Coal Plant Tracker.xlsx",
-                    sheet='Units')  %>% filter(Country %in% c("Indonesia"),
-               Status %in% "Operating") %>%
-    sf::st_as_sf(coords=c("Longitude","Latitude"), crs=4326) %>%
-    select(id.plant=`Tracker ID`,
-           weight=`Capacity (MW)`)
-
-  s %>% sf::write_sf("sectors/power/January 2021 Global Coal Plant Tracker.gpkg")
-
-  # Add BPS id
-  g <- data.bps_map()
-
-  # Attaching gadm id to roads
-  s.rich <- s %>%
-    sf::st_join(g, left=F)
-
-  return(s.rich)
+  sf::read_sf("sectors/power/power_support.gpkg") %>%
+    rename(geometry=geom)
 }
+
 
 
 #' Read power emission from excel

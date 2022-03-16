@@ -22,6 +22,7 @@ solidwaste.build_support <- function(){
     sf::st_make_valid() %>%
     sf::st_intersection(g %>% sf::st_make_valid() %>% dplyr::select(id)) %>%
     filter(!is.na(id)) %>%
+    filter(sf::st_geometry_type(geometry)=="POLYGON") %>%
     sf::write_sf("sectors/solidwaste/solidwaste_support.gpkg")
 
 }
@@ -29,7 +30,8 @@ solidwaste.build_support <- function(){
 
 solidwaste.get_support <- function(){
   sf::read_sf("sectors/solidwaste/solidwaste_support.gpkg") %>%
-    rename(geometry=geom)
+    rename(geometry=geom) %>%
+    filter(sf::st_geometry_type(geometry)=="POLYGON")
 }
 
 
