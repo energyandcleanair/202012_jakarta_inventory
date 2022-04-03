@@ -228,6 +228,7 @@ utils.ts_rasters_to_nc <- function(rs,
   library(ncdf4)
 
   fs <- list(
+    "d02"="data/d02.nc",
     "d03"="data/d03.nc",
     "d04"="data/d04.nc"
   )
@@ -240,9 +241,12 @@ utils.ts_rasters_to_nc <- function(rs,
 
   nc <- ncdf4::nc_open(f)
 
-  name_x <- intersect(nc_vars(f)$name, c("x","X"))
-  name_y <- intersect(nc_vars(f)$name, c("y","Y"))
+  name_x <- intersect(nc_vars(f)$name, c("x","X","easting"))
+  name_y <- intersect(nc_vars(f)$name, c("y","Y","northing"))
   name_date <- "date"
+
+  name_x_new <- 'X'
+  name_y_new <- 'Y'
 
   val_x <- ncvar_get(nc, name_x)
   val_y <- ncvar_get(nc, name_y)
@@ -250,8 +254,8 @@ utils.ts_rasters_to_nc <- function(rs,
   rs$date <- as.numeric(rs$date - lubridate::date("2019-01-01"), unit="days")
   val_date <- unique(rs$date)
 
-  dim_x <- ncdim_def(name_x, "", vals=val_x)
-  dim_y <- ncdim_def(name_y, "", vals=val_y)
+  dim_x <- ncdim_def(name_x_new, "", vals=val_x)
+  dim_y <- ncdim_def(name_y_new, "", vals=val_y)
   dim_date <- ncdim_def(name_date, "Days since 2019-01-01", vals=val_date)
 
   #--------------------------------------
