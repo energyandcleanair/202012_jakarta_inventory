@@ -134,7 +134,7 @@ data.grid.d02 <- function(){
 
 data.created03 <- function(){
   # Any file from METEOSIM d03 dataset
-  f <- "/Volumes/ext1/studies/202012_jakarta_emissions/meteosim/topdown_d03.nc"
+  f <- "/Volumes/ext1/crea/studies_data/202012_jakarta_emissions/meteosim/topdown_d03.nc"
   nc <- ncdf4::nc_open(f)
   x <- ncvar_get(nc, "x")
   y <- ncvar_get(nc, "y")
@@ -144,6 +144,13 @@ data.created03 <- function(){
                         crs="+proj=merc +a=6370000.0 +b=6370000.0 +lat_ts=-4.0 +lon_0=108.35 +units=m")
   # raster::crs(r) <- crs
   raster::writeRaster(r, "data/d03.grid.tif", overwrite=T)
+
+  # Recreate d03.nc
+  file.remove("data/d03.nc")
+  dim_x <- ncdim_def("x", "", vals=x)
+  dim_y <- ncdim_def("y", "", vals=y)
+  nc_new <- ncdf4::nc_create("data/d03.nc", vars=ncvar_def("dummy", "", dim = list(dim_x, dim_y)))
+  nc_close(nc_new)
 }
 
 data.created02 <- function(){
