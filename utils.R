@@ -243,7 +243,8 @@ utils.ts_rasters_to_nc <- function(rs,
 
   name_x <- intersect(nc_vars(f)$name, c("x","X","easting"))
   name_y <- intersect(nc_vars(f)$name, c("y","Y","northing"))
-  name_date <- "date"
+  # name_date <- "date"
+  name_date <- "datetime"
 
   name_x_new <- 'X'
   name_y_new <- 'Y'
@@ -251,13 +252,16 @@ utils.ts_rasters_to_nc <- function(rs,
   val_x <- ncvar_get(nc, name_x)
   val_y <- ncvar_get(nc, name_y)
 
-  dates <- as.numeric(as.Date(names(rs)) - lubridate::date("2019-01-01"), unit="days")
+  # dates <- as.numeric(as.Date(names(rs)) - lubridate::date("2019-01-01"), unit="days")
+  dates <- as.numeric(as.POSIXct(names(rs)) - lubridate::as_datetime("2019-01-01 00:00:00", tz='Asia/Jakarta'),
+                      unit="hours")
   val_date <- unique(dates)
 
 
   dim_x <- ncdim_def(name_x_new, "", vals=val_x)
   dim_y <- ncdim_def(name_y_new, "", vals=val_y)
-  dim_date <- ncdim_def(name_date, "Days since 2019-01-01", vals=val_date)
+  # dim_date <- ncdim_def(name_date, "Days since 2019-01-01", vals=val_date)
+  dim_date <- ncdim_def(name_date, "Hours since 2019-01-01 00:00:00", vals=val_date)
 
   #--------------------------------------
   # Create vars along existing dimensions
