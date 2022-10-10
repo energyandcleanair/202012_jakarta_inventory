@@ -12,7 +12,7 @@ power.build_support <- function(){
 
   # Add BPS id
   # Add a buffer cause some locations are closed to the coast
-  g <- data.bps_map(buffer_km=10)
+  g <- data.bps_map(buffer_km=10) %>% st_make_valid()
 
   s_wid <- s %>%
     sf::st_join(g, left=F)
