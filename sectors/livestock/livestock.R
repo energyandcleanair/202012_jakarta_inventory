@@ -28,8 +28,8 @@ livestock.build_support <- function(){
 
 
   rs <- lapply(glws, function(glw){
-    if(!file.exists(glw[["file"]])) download.file(url=glw[["url"]],destfile=glw[["file"]])
-    raster::raster(glw[["file"]]) * as.numeric(glw[["weight"]])
+    if(!file.exists(unlist(glw)[["file"]])) download.file(url=unlist(glw)[["url"]],destfile=unlist(glw)[["file"]])
+    raster::raster(unlist(glw)[["file"]]) * as.numeric(unlist(glw)[["weight"]])
   })
 
   glw <- raster::stack(rs) %>% raster::calc(sum)
@@ -43,7 +43,7 @@ livestock.build_support <- function(){
     rename(weight=layer) %>%
     filter(weight>0) %>%
     sf::st_intersection(g %>% dplyr::select(id)) %>%
-    filter(!is.na(id)) %>%
+    filter(!is.na(id), st_geometry_type(geometry) %in% c('POLYGON', 'MULTIPOLYGON')) %>%
     sf::write_sf("sectors/livestock/livestock_support.gpkg")
 
 }
