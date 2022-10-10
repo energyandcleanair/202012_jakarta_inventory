@@ -21,9 +21,9 @@ agroob.build_support <- function(){
 
   intersection <- sf::st_intersection(lu, g)
   intersection <- intersection %>%
-    filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON"))
+    filter(sf::st_geometry_type(geom) %in% c("MULTIPOLYGON","POLYGON"))
 
-  extent.sp <- sf::as_Spatial(intersection$geometry[!sf::st_is_empty(intersection$geometry)])
+  extent.sp <- sf::as_Spatial(intersection$geom[!sf::st_is_empty(intersection$geom)])
 
   # Get fires over that region
   creatrajs::fire.download(date_from=date_from,
@@ -45,14 +45,14 @@ agroob.build_support <- function(){
   # sf::write tooo slow
   library(rgdal)
   lapply(list.files("sectors/agroob","support.*", full.names = T), file.remove)
-  writeOGR(as(fires_w_id,"Spatial"), "sectors/agroob/","support", driver = "ESRI Shapefile")
+  writeOGR(as(fires_w_id,"Spatial"), "sectors/agroob/","agroob_support", driver = "GPKG")
 
   return(fires_w_id)
 }
 
 
 agroob.get_support <- function(){
-  sf::read_sf("sectors/agroob/support.shp")
+  sf::read_sf("sectors/agroob/agroob_support.gpkg")
 }
 
 
