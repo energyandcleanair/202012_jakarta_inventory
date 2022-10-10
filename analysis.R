@@ -1,4 +1,4 @@
-remotes::install_github("energyandcleanair/creainventory", upgrade=F)
+remotes::install_github("energyandcleanair/creainventory", upgrade=T)
 # devtools::reload(pkgload::inst("creainventory"))
 library(remotes)
 install_github("statnmap/cartomisc")
@@ -67,11 +67,19 @@ prepare_sector <- function(sector, polls, grid, grid_name){
       return(get(paste0(sector,".build_support"))())
     })
 
+    # date_weight <- tryCatch({
+    #    get(paste0(sector,".get_date_weight"))()
+    # }, error=function(e){
+    #   message("Couldn't find get_date_weight function. Using steady emission rate.")
+    #   return(tibble(date=seq.Date(as.Date("2019-01-01"), as.Date("2019-12-31"), by="day"), weight=1))
+    # })
+
     date_weight <- tryCatch({
-       get(paste0(sector,".get_date_weight"))()
+      get(paste0(sector,".get_datetime_weight"))()
     }, error=function(e){
-      message("Couldn't find get_date_weight function. Using steady emission rate.")
-      return(tibble(date=seq.Date(as.Date("2019-01-01"), as.Date("2019-12-31"), by="day"), weight=1))
+      message("Couldn't find get_datetime_weight function. Using steady emission rate.")
+      return(tibble(date=seq(as.POSIXct("2019-01-01 00:00:00"),
+                             as.POSIXct("2019-12-31 23:00:00"), by="hour"), weight=1))
     })
 
     # Check emission data and support
