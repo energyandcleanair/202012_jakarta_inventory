@@ -5,17 +5,19 @@
 #' @return support.sf
 transport.build_support <- function(){
 
-  f <- "sectors/transport/osm/gis_osm_roads_free_1.shp"
+  # f <- "sectors/transport/osm/gis_osm_roads_free_1.shp"
+  f <- 'sectors/transport/indonesia-latest.osm.pbf'
 
   if(!file.exists(f)){
     download.file(
-      url="http://download.geofabrik.de/asia/indonesia-latest-free.shp.zip",
-      destfile="sectors/transport/osm.zip")
-
-    unzip("sectors/transport/osm.zip")
+      url="https://download.geofabrik.de/asia/indonesia-latest.osm.pbf",
+      destfile="sectors/transport/indonesia-latest.osm.pbf")
   }
 
-  osm.roads <- sf::read_sf("sectors/transport/osm/gis_osm_roads_free_1.shp")
+  # osm.roads <- sf::read_sf("sectors/transport/osm/gis_osm_roads_free_1.shp")
+  osm.roads <- rgdal::readOGR(f, layer = 'lines') %>%
+    sf::st_as_sf() %>%
+    mutate(fclass = highway)
 
   weights <- list(
     "motorway"=0.7,
@@ -58,4 +60,18 @@ transport.get_support <- function(){
 #' @return emission tibble
 transport.get_emission <- function(){
   data.sheet_to_emissions(sheet_name="On-road-transportation")
+}
+
+#' Get date-time weight for transportation sector
+#'
+#' @return
+transport.get_datetime_weight <- function(){
+  weight_data <- read.csv('sectors/transport/hourly_weight.csv', fileEncoding='UTF-8-BOM') %>%
+    pivot_longer(2:8, names_to='day', values_to='weight')
+  weight <- tibble(date=seq(as.POSIXct("2019-01-01 00:00:00"),
+                            as.POSIXct("2019-12-31 23:00:00"), by="hour")) %>%
+    mutate(day=lubridate::wday(date, label=T, abbr=F),
+           hour=lubridate::hour(date)) %>%
+    left_join(weight_data, by=c('day', 'hour')) %>%
+    select(-day, -hour)
 }
