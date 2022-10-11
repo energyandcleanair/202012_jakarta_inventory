@@ -16,6 +16,9 @@ source('utils.R')
 source('edgar.R')
 source('data.R')
 
+select <- dplyr::select
+sf::sf_use_s2(F)
+
 lapply(list.files("sectors", "*.R$", recursive=T, full.names=T), source)
 
 polls <- c("SO2", "NOx", "CO", "NMVOC",
