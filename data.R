@@ -229,7 +229,7 @@ data.grid <- function(res_deg=NULL, res_m=NULL, extent=NULL){
 
 data.sheet_to_emissions <- function(sheet_name){
 
-  s <- readxl::read_xlsx("data/Emission-2019-compilation-Feb2022-send.xlsx",
+  s <- readxl::read_xlsx("data/Emission-2019-compilation-Apr2022-send.xlsx",
                          sheet=sheet_name,
                          skip = 1)
   s <- s %>% rename(location=`Province/Cities`)
@@ -294,7 +294,7 @@ data.land_use <- function(type){
     lu <- lu %>% filter(Legenda %in% legendas)
   }
 
-  return( lu %>% filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
+  return(lu %>% filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON")))
 }
 
 data.build_urban_rural <- function(){
