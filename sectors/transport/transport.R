@@ -7,17 +7,25 @@ transport.build_support <- function(){
 
   # f <- "sectors/transport/osm/gis_osm_roads_free_1.shp"
   f <- 'sectors/transport/indonesia-latest.osm.pbf'
+  r <- 'sectors/transport/line.gpkg'
 
   if(!file.exists(f)){
     download.file(
       url="https://download.geofabrik.de/asia/indonesia-latest.osm.pbf",
-      destfile="sectors/transport/indonesia-latest.osm.pbf")
+      destfile=f)
   }
 
   # osm.roads <- sf::read_sf("sectors/transport/osm/gis_osm_roads_free_1.shp")
-  osm.roads <- rgdal::readOGR(f, layer = 'lines') %>%
-    sf::st_as_sf() %>%
-    mutate(fclass = highway)
+  osm.roads <- if(!file.exists(r)){
+    warning('rgdal::readOGR() function was not able to extract the lines properly.
+            Please use QGIS to open the downloaded file and extract the line layer
+            to "line.gpkg"')
+    return(NA)
+  } else {
+    terra::vect(r) %>%
+      sf::st_as_sf() %>%
+      mutate(fclass = highway)
+  }
 
   weights <- list(
     "motorway"=0.7,
