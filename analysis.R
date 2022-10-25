@@ -172,7 +172,7 @@ lapply(names(grids), function(grid_name){
 
 # # Create scenarios --------------------------------------------------------
 create_scenario <- function(sector_omitted, grid_name){
-  d <- tibble(path=list.files("results", ".*\\.nc", full.names = T)) %>%
+  d <- tibble(path=list.files("results", ".*\\.nc$", full.names = T)) %>%
     mutate(filename=basename(path)) %>%
     tidyr::separate(filename, c("sector", "grid"), extra = "drop", remove=F) %>%
     filter(grid==!!grid_name,
@@ -195,7 +195,7 @@ create_scenario <- function(sector_omitted, grid_name){
 
   filepath <- file.path("results", sprintf("scenario_wo_%s.%s.nc", sector_omitted, grid_name))
   if(file.exists(filepath)) file.remove(filepath)
-  file.copy(d$path[1], filepath)
+  file.copy(d$path[1], filepath, overwrite=T)
   try_to_set_nan_to_zero(filepath)
 
   for(i in seq(2,nrow(d))){
@@ -203,7 +203,7 @@ create_scenario <- function(sector_omitted, grid_name){
     # print(sprintf("Adding %s", d$path[i]))
     tmp_file <- "tmp.nc"
     if(file.exists(tmp_file)) file.remove(tmp_file)
-    file.copy(d$path[i], tmp_file)
+    file.copy(d$path[i], tmp_file, overwrite=T)
     try_to_set_nan_to_zero(tmp_file)
     tmp_bc <- ncdf4::nc_open(tmp_file) %>% ncdf4::ncvar_get("BC") %>% sum(na.rm=T)
     cmd <- sprintf("ncbo --op_typ=add --overwrite %s %s %s", tmp_file, filepath, filepath)
@@ -216,7 +216,7 @@ create_scenario <- function(sector_omitted, grid_name){
 
 
   # Double check sum is equal to sum
-  vars <- c("date", polls)
+  vars <- c("datetime", polls)
 
   # Sum 1: original NC files
   sum1 <- lapply(vars, function(v){
