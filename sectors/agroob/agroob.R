@@ -41,9 +41,6 @@ agroob.build_support <- function(){
                   select(id=province)) %>%
     rename(weight=frp)
 
-
-<<<<<<< HEAD
-
   # Use dates to save monthly patterns
   date_weight = fires_w_id %>%
     as.data.frame() %>%
