@@ -17,6 +17,24 @@ power.build_support <- function(){
   s_wid <- s %>%
     sf::st_join(g, left=F)
 
+  # Adding power plant in missing regions
+  emission <- power.get_emission()
+  ids_with_emissions <- unique(emission$id[emission$emission>0])
+  missing_ids <- setdiff(ids_with_emissions, unique(s_wid$id))
+  cat("Missing power plants in regions: ", paste(missing_ids, collapse=", "))
+
+  additional_points <- sf::st_as_sf(sf::st_centroid(g %>% sf::st_make_grid(cellsize=0.05))) %>%
+    sf::st_join(
+      g %>% filter(id %in% missing_ids),
+      left=F
+    ) %>%
+    rename(geometry='...1') %>%
+    mutate(weight=1)
+
+  s_wid <- bind_rows(
+    s_wid,
+    additional_points)
+
   sf::write_sf(s_wid, "sectors/power/power_support.gpkg")
 }
 

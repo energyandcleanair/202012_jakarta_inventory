@@ -53,12 +53,11 @@ industry.build_support <- function(){
     sf::st_as_sf(coords=c("lon","lat"))
 
 
-
   # Add BPS id
   g <- data.bps_map() %>%
     sf::st_make_valid()
 
-  # Attaching gadm id to plants
+  # Attaching gadm id to facilities
   s.rich <- s %>%
     sf::st_set_crs(sf::st_crs(g)) %>%
     sf::st_join(g, left=F)
@@ -72,7 +71,7 @@ industry.build_support <- function(){
   cat("Missing facilities in regions: ", paste(missing_ids, collapse=", "))
 
 
-  additional_points <- sf::st_as_sf(sf::st_centroid(g %>% sf::st_make_grid(cellsize=0.1))) %>%
+  additional_points <- sf::st_as_sf(sf::st_centroid(g %>% sf::st_make_grid(cellsize=0.05))) %>%
     sf::st_join(
       g %>% filter(id %in% missing_ids),
       left=F
