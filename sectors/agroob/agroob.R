@@ -42,6 +42,7 @@ agroob.build_support <- function(){
     rename(weight=frp)
 
 
+<<<<<<< HEAD
 
   # Use dates to save monthly patterns
   date_weight = fires_w_id %>%
