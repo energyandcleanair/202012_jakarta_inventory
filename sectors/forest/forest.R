@@ -12,8 +12,8 @@ forest.build_support <- function(){
 
   # Taking more than one year to get more
   # representative distribution
-  date_from = "2019-01-01"
-  date_to = "2019-12-31"
+  date_from = "2016-01-01"
+  date_to = "2020-12-31"
 
   # Get land use with agriculture on it
   lu <- data.land_use(type="forest") %>%
@@ -33,16 +33,27 @@ forest.build_support <- function(){
   creatrajs::fire.download(date_from=date_from,
                            date_to=date_to)
 
-  fires <- creatrajs::fire.read(date_from=date_from,
-                       date_to=date_to,
-                       extent.sp=extent.sp,
-                       show.progress = F)
+  dates <- seq(as.Date(date_from), as.Date(date_to), by="day")
+  fires <- lapply(split(dates, lubridate::floor_date(dates, 'month')), function(year_dates){
+    creatrajs::fire.read(date_from=min(year_dates),
+                         date_to=max(year_dates),
+                         extent.sp=extent.sp,
+                         parallel = F,
+                         show.progress = F)
+  }) %>% do.call(bind_rows, .)
 
   fires_w_id <- fires %>%
     sf::st_join(intersection %>%
                   filter(sf::st_is_valid(geometry)) %>%
                   select(id=province)) %>%
     rename(weight=frp)
+
+  # Use dates to save monthly patterns
+  date_weight = fires_w_id %>%
+    as.data.frame() %>%
+    group_by(id, date=lubridate::floor_date(acq_date, 'day')) %>%
+    summarise(weight=sum(weight))
+  saveRDS(date_weight, "sectors/forest/forest_date_weight.RDS")
 
   fires_w_id$acq_date <- NULL
 
@@ -76,4 +87,10 @@ forest.get_emission <- function(){
     left_join(g %>% select(id, province)) %>%
     group_by(id=province, poll, unit, year) %>%
     summarise_at("emission", sum, na.rm=T)
+}
+
+
+
+forest.get_date_weight <- function(){
+  readRDS("sectors/forest/forest_date_weight.RDS")
 }

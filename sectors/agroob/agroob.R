@@ -9,6 +9,7 @@ agroob.build_support <- function(){
   date_from = "2019-01-01"
   date_to = "2019-12-31"
 
+  sf::sf_use_s2(FALSE)
   # Get land use with agriculture on it
   lu <- data.land_use(type="agroob") %>%
   # lu <- data.land_use(type=NULL) %>%
@@ -40,19 +41,24 @@ agroob.build_support <- function(){
                   select(id=province)) %>%
     rename(weight=frp)
 
+
+  # Use dates to save monthly patterns
+  date_weight = fires_w_id %>%
+    as.data.frame() %>%
+    group_by(id, date=lubridate::floor_date(acq_date, 'day')) %>%
+    summarise(weight=sum(weight))
+  saveRDS(date_weight, "sectors/agroob/agroob_date_weight.RDS")
+
   fires_w_id$acq_date <- NULL
 
-  # sf::write tooo slow
-  library(rgdal)
-  lapply(list.files("sectors/agroob","support.*", full.names = T), file.remove)
-  writeOGR(as(fires_w_id,"Spatial"), "sectors/agroob/","support", driver = "ESRI Shapefile")
-
+  sf::write_sf(fires_w_id, "sectors/agroob/agroob_support.gpkg")
   return(fires_w_id)
 }
 
 
 agroob.get_support <- function(){
-  sf::read_sf("sectors/agroob/support.shp")
+  sf::read_sf("sectors/agroob/agroob_support.gpkg") %>%
+    rename(geometry=geom)
 }
 
 
@@ -70,4 +76,9 @@ agroob.get_emission <- function(){
     left_join(g %>% select(id, province)) %>%
     group_by(id=province, poll, unit, year) %>%
     summarise_at("emission", sum, na.rm=T)
+}
+
+
+agroob.get_date_weight <- function(){
+  readRDS("sectors/agroob/agroob_date_weight.RDS")
 }

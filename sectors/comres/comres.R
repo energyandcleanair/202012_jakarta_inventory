@@ -3,20 +3,25 @@
 #' @return support sf
 comres.build_support <- function(){
 
+  sf::sf_use_s2(FALSE)
   lu <- data.land_use(type="comres") %>%
     mutate(weight=1) %>%
     sf::st_make_valid()
+
+  lu_0_01 <- st_simplify(lu, preserveTopology = T, dTolerance = 0.01)
+  # lu_0_05 <- st_simplify(lu, preserveTopology = T, dTolerance = 0.05)
 
   # Add the kabupaten map
   g <- data.bps_map() %>%
     sf::st_make_valid()
 
-  intersection <- sf::st_intersection(lu, g)
-  intersection$weight <- 1
+  intersection <- sf::st_intersection(lu_0_01 %>%  sf::st_make_valid(),
+                                      g)
+
   intersection <- intersection %>%
     filter(sf::st_geometry_type(geometry) %in% c("MULTIPOLYGON","POLYGON"))
-
-  sf::write_sf(intersection, "sectors/comres/comres_support.gpkg")
+  intersection$weight <- sf::st_area(intersection)
+  sf::write_sf(intersection %>% select(id, weight, name, province), "sectors/comres/comres_support.gpkg")
 
   return(intersection)
 }
