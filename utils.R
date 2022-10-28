@@ -317,10 +317,22 @@ utils.temporal_split <- function (emission.raster, date_weight) {
 
 
     date_weight <- date_weight[!is.na(date_weight$id),]
-    date_weight <- tidyr::crossing(date=seq(as.Date("2019-01-01"), as.Date("2019-12-31"), by="day"),
-                    id=unique(date_weight$id)) %>%
-      left_join(date_weight) %>%
-      mutate(weight=tidyr::replace_na(weight, 0))
+    # date_weight <- tidyr::crossing(date=seq(as.Date("2019-01-01"), as.Date("2019-12-31"), by="hour"),
+    #                 id=unique(date_weight$id)) %>%
+    #   left_join(date_weight) %>%
+    #   mutate(weight=tidyr::replace_na(weight, 0))
+
+    # check if not hourly or not complete
+    if(nrow(date_weight)<((365*24) * (date_weight %>% distinct(id) %>% nrow()))){
+      date_weight <- tidyr::crossing(date=seq(as.POSIXct("2019-01-01 00:00:00"),
+                                              as.POSIXct("2019-12-31 23:00:00"), by="hour"),
+                                     id=unique(date_weight$id)) %>%
+        mutate(date_only=lubridate::date(date)) %>%
+        left_join(date_weight, by=c('date_only'='date', 'id')) %>%
+        select(-date_only) %>%
+        mutate(weight=tidyr::replace_na(weight, 0))
+    }
+
 
     r <- sapply(g, function(x) all(unique(date_weight$id) %in% x))
     id_refers_to <- names(which(r))
@@ -354,11 +366,21 @@ utils.temporal_split <- function (emission.raster, date_weight) {
 
   }else{
     # Temporal split is uniform
+    # check if not hourly or not complete
+    if(nrow(date_weight)<(365*24)){
+      date_weight <- tibble(date=seq(as.POSIXct("2019-01-01 00:00:00"),
+                                     as.POSIXct("2019-12-31 23:00:00"), by="hour"),
+                            date_only=lubridate::date(date)) %>%
+        left_join(date_weight, by=c('date_only'='date')) %>%
+        select(-date_only) %>%
+        mutate(weight=tidyr::replace_na(weight, 0))
+    }
+
     w <- date_weight %>%
       mutate(weight=weight/sum(weight)) %>%
       arrange(date)
 
-   result <- as.list(w$weight) %>% `names<-`(w$date) %>%
+    result <- as.list(w$weight) %>% `names<-`(w$date) %>%
       lapply(function(date_weight) emission.raster * date_weight)
   }
 
