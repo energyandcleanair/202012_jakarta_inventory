@@ -25,23 +25,23 @@ polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
 
 sectors <- c(
-"agroob",
-"aviation",
-"comres",
-"forest",
-"gasdist",
-"industry",
-"landfill",
-"livestock",
- "power",
- "shipping",
-    "solidwaste",
+  "agroob",
+  "aviation",
+  "comres",
+  "forest",
+  "gasdist",
+  "industry",
+  "landfill",
+  "livestock",
+  "power",
+  "shipping",
+  "solidwaste",
   "transport"
 )
 
 
 grids <- list(
- # "edgar"=data.grid.edgar()
+  # "edgar"=data.grid.edgar()
   "d02"=data.grid.d02(),
   "d03"=data.grid.d03(),
   "d04"=data.grid.d04()
@@ -80,9 +80,14 @@ prepare_sector <- function(sector, polls, grid, grid_name){
     date_weight <- tryCatch({
       get(paste0(sector,".get_datetime_weight"))()
     }, error=function(e){
-      message("Couldn't find get_datetime_weight function. Using steady emission rate.")
-      return(tibble(date=seq(as.POSIXct("2019-01-01 00:00:00"),
-                             as.POSIXct("2019-12-31 23:00:00"), by="hour"), weight=1))
+      message("Couldn't find get_datetime_weight function. Trying get_date_weight.")
+      tryCatch({
+        get(paste0(sector,".get_date_weight"))()
+      }, error=function(e){
+        message("Couldn't find get_datetime_weight or get_date_weight function. Using steady emission rate.")
+        return(tibble(date=seq(as.POSIXct("2019-01-01 00:00:00"),
+                               as.POSIXct("2019-12-31 23:00:00"), by="hour"), weight=1))
+      })
     })
 
     # Check emission data and support
@@ -96,10 +101,10 @@ prepare_sector <- function(sector, polls, grid, grid_name){
     ids_with_emissions <- unique(emission.data$id[emission.data$emission>0])
     missing_ids <- setdiff(ids_with_emissions, unique(support$id))
     if(length(missing_ids)>0){
-      warning("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
       # emission <- emission %>% filter(!sf::st_is_empty(geometry))
       g <- data.bps_map()
       ggplot(g) + geom_sf(aes(fill=id %in% missing_ids))
+      stop("Missing ",length(missing_ids), " support locations: ", paste(missing_ids, collapse=", "))
     }
 
     # Create a raster stack representing whole year for all polls
@@ -236,10 +241,10 @@ create_scenario <- function(sector_omitted, grid_name){
     sum(unlist(lapply(sprintf("results/%s.%s.%s.tif", d$sector, p, grid_name), function(f){
       if(file.exists(f)){
         raster(f) %>% cellStats(sum)
-        }else{
-          0
-        }})))
-      }) %>%
+      }else{
+        0
+      }})))
+  }) %>%
     `names<-`(polls)
 
   # Sum 3: created filepath
