@@ -71,7 +71,7 @@ industry.build_support <- function(){
   cat("Missing facilities in regions: ", paste(missing_ids, collapse=", "))
 
 
-  additional_points <- sf::st_as_sf(sf::st_centroid(g %>% sf::st_make_grid(cellsize=0.05))) %>%
+  additional_points <- sf::st_as_sf(sf::st_centroid(g %>% sf::st_make_grid(cellsize=0.025))) %>%
     sf::st_join(
       g %>% filter(id %in% missing_ids),
       left=F
