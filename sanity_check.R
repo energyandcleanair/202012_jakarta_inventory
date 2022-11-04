@@ -16,8 +16,6 @@ sectors <- c(
 polls <- c("SO2", "NOx", "CO", "NMVOC",
            "NH3", "PM", "CH4", "BC", "OC")
 
-grids <- c('d02', 'd03', 'd04')
-
 all_emissions <- lapply(sectors, function(sector){
   get(paste0(sector, '.get_emission'))() %>%
     mutate(sector = sector)
@@ -31,7 +29,7 @@ all_poll <- all_emissions %>% group_by(poll) %>%
   summarise(value = sum(emission, na.rm = T)) %>%
   ungroup()
 
-nc_table <- lapply(grids, function(grid){
+nc_table <- lapply(c('d02', 'd03', 'd04'), function(grid){
   lapply(sectors, function(sector){
     if(file.exists(glue::glue('results/{sector}.{grid}.nc'))){
       nc <- terra::rast(glue::glue('results/{sector}.{grid}.nc'))
@@ -59,7 +57,7 @@ comp <- nc_table %>% left_join(all_sector %>% filter(grid == 'd02'),
 write.csv(comp, 'diagnosis/nc_diagnosis.csv')
 
 
-nc_table_temporal <- lapply(grids, function(grid){
+nc_table_temporal <- lapply(c('d02', 'd03', 'd04'), function(grid){
   lapply(sectors, function(sector){
     tryCatch({
       nc <- terra::rast(glue::glue('results/{sector}.{grid}.nc'))
@@ -93,7 +91,7 @@ lapply(c('d02', 'd03', 'd04'), function(grid_){
 
 nc_poll <- nc_table %>% group_by(poll, grid) %>%
   summarise(value = sum(value))
-wo_table <- lapply(grids, function(grid){
+wo_table <- lapply(c('d02', 'd03', 'd04'), function(grid){
   lapply(sectors, function(sector){
     if(file.exists(glue::glue('results/scenario_wo_{sector}.{grid}.nc'))){
       nc <- terra::rast(glue::glue('results/scenario_wo_{sector}.{grid}.nc'))
