@@ -48,7 +48,8 @@ nc_table <- lapply(grids, function(grid){
 }) %>% bind_rows()
 
 # compare nc and emission table
-comp <- nc_table %>% left_join(all_sector, by = c('poll', 'sector'),
+comp <- nc_table %>% left_join(all_sector %>% filter(grid == 'd02'),
+                               by = c('poll', 'sector'),
                                suffix = c('_nc', '_tab')) %>%
   mutate(diff_ratio = abs(value_nc - value_tab)/value_tab,
          status = case_when(diff_ratio < 0.05 | value_nc == 0 ~ 'PASS',
@@ -58,36 +59,36 @@ comp <- nc_table %>% left_join(all_sector, by = c('poll', 'sector'),
 write.csv(comp, 'diagnosis/nc_diagnosis.csv')
 
 
-# nc_table_temporal <- lapply(grids, function(grid){
-#   lapply(sectors, function(sector){
-#     tryCatch({
-#       nc <- terra::rast(glue::glue('results/{sector}.{grid}.nc'))
-#       summary <- lapply(polls, function(poll){
-#         subset <- nc[paste0('^', poll, '_datetime')]
-#         lapply(1:365, function(day){
-#           temp_subset <- subset[[((day-1)*24 + 1):(day*24)]]
-#           terra::global(sum(temp_subset, na.rm = T), fun = 'sum', na.rm = T)
-#         }) %>% unlist() %>%
-#           as_tibble() %>%
-#           mutate(sector = sector, poll = poll, grid = grid, day = 1:365)
-#       })
-#     }, error = function(e){
-#       message('File not found. Continuing...')
-#     })
-#   }) %>% bind_rows()
-# }) %>% bind_rows()
-#
-#
-# ggplot(nc_table_temporal %>% filter(sector == 'forest')) +
-#   geom_line(aes(day, value, colour = poll)) +
-#   labs(title = 'forest') +
-#   rcrea::theme_crea()
+nc_table_temporal <- lapply(grids, function(grid){
+  lapply(sectors, function(sector){
+    tryCatch({
+      nc <- terra::rast(glue::glue('results/{sector}.{grid}.nc'))
+      summary <- lapply(polls, function(poll){
+        subset <- nc[paste0('^', poll, '_datetime')]
+        lapply(1:365, function(day){
+          temp_subset <- subset[[((day-1)*24 + 1):(day*24)]]
+          terra::global(sum(temp_subset, na.rm = T), fun = 'sum', na.rm = T)
+        }) %>% unlist() %>%
+          as_tibble() %>%
+          mutate(sector = sector, poll = poll, grid = grid, day = 1:365)
+      })
+    }, error = function(e){
+      message('File not found. Continuing...')
+    })
+  }) %>% bind_rows()
+}) %>% bind_rows()
 
 
-
-
-
-
+# plotting temporal variation
+lapply(c('d02', 'd03', 'd04'), function(grid_){
+  lapply(sectors, function(sect){
+    ggplot(nc_table_temporal %>% filter(sector == sect, grid == grid_)) +
+      geom_line(aes(day, value, colour = poll)) +
+      labs(title = glue::glue('{sect}_{grid}')) +
+      rcrea::theme_crea()
+    ggsave(glue::glue('{sect}_{grid}.png', width = 8, height = 6))
+  })
+})
 
 
 nc_poll <- nc_table %>% group_by(poll, grid) %>%
