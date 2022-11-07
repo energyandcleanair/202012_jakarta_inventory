@@ -87,7 +87,7 @@ lapply(c('d02', 'd03', 'd04'), function(grid_){
       geom_line(aes(day, value, colour = poll)) +
       labs(title = glue::glue('{sect}_{grid_}')) +
       rcrea::theme_crea()
-    ggsave(glue::glue('{sect}_{grid}.png', width = 8, height = 6))
+    ggsave(glue::glue('{sect}_{grid_}.png'), width = 8, height = 6)
   })
 })
 
