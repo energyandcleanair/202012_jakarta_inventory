@@ -45,10 +45,11 @@ nc_table <- lapply(c('d02', 'd03', 'd04'), function(grid){
   })
 }) %>% bind_rows()
 
+write.csv(nc_table,  'nc_table.csv')
+
 # compare nc and emission table
-comp <- nc_table %>% left_join(all_sector %>% filter(grid == 'd02'),
-                               by = c('poll', 'sector'),
-                               suffix = c('_nc', '_tab')) %>%
+comp <- nc_table %>% filter(grid == 'd02') %>%
+  left_join(all_sector, by = c('poll', 'sector'), suffix = c('_nc', '_tab')) %>%
   mutate(diff_ratio = abs(value_nc - value_tab)/value_tab,
          status = case_when(diff_ratio < 0.05 | value_nc == 0 ~ 'PASS',
                             T ~ 'FAIL')) %>%
@@ -76,13 +77,15 @@ nc_table_temporal <- lapply(c('d02', 'd03', 'd04'), function(grid){
   }) %>% bind_rows()
 }) %>% bind_rows()
 
+write.csv(nc_table_temporal, 'diagnosis/nc_table_temporal.csv')
+
 
 # plotting temporal variation
 lapply(c('d02', 'd03', 'd04'), function(grid_){
   lapply(sectors, function(sect){
     ggplot(nc_table_temporal %>% filter(sector == sect, grid == grid_)) +
       geom_line(aes(day, value, colour = poll)) +
-      labs(title = glue::glue('{sect}_{grid}')) +
+      labs(title = glue::glue('{sect}_{grid_}')) +
       rcrea::theme_crea()
     ggsave(glue::glue('{sect}_{grid}.png', width = 8, height = 6))
   })
@@ -106,6 +109,8 @@ wo_table <- lapply(c('d02', 'd03', 'd04'), function(grid){
     }
   })
 }) %>% bind_rows()
+
+write.csv(wo_table, 'diagnosis/wo_table.csv')
 
 # compare scenario and original nc
 scen_check <- wo_table %>%
