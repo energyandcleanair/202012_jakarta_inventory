@@ -57,6 +57,17 @@ comp <- nc_table %>% filter(grid == 'd02') %>%
 
 write.csv(comp, 'diagnosis/nc_diagnosis.csv')
 
+# plotting comparison in grid
+d <- read.csv('diagnosis/nc_diagnosis.csv')
+d %>%
+  select(sector, poll, value_tab, value_nc) %>%
+  tidyr::gather('variable', 'value', value_nc, value_tab) %>%
+  ggplot() +
+  geom_bar(stat='identity',
+           aes(variable, value, fill=variable)) +
+  facet_grid(poll~sector, scales='free_y')
+ggsave(glue::glue('diagnosis/comparison_grid.png'), width = 12, height = 12)
+
 
 nc_table_temporal <- lapply(c('d02', 'd03', 'd04'), function(grid){
   lapply(sectors, function(sector){
@@ -78,7 +89,6 @@ nc_table_temporal <- lapply(c('d02', 'd03', 'd04'), function(grid){
 }) %>% bind_rows()
 
 write.csv(nc_table_temporal, 'diagnosis/nc_table_temporal.csv')
-
 
 # plotting temporal variation
 lapply(c('d02', 'd03', 'd04'), function(grid_){
