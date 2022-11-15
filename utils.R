@@ -253,7 +253,9 @@ utils.ts_rasters_to_nc <- function(rs,
   val_y <- ncvar_get(nc, name_y)
 
   # dates <- as.numeric(as.Date(names(rs)) - lubridate::date("2019-01-01"), unit="days")
-  dates <- as.numeric(as.POSIXct(names(rs)) - lubridate::as_datetime("2019-01-01 00:00:00", tz='Asia/Jakarta'),
+  # specify timezone to prevent timezone issues
+  dates <- as.numeric(as.POSIXct(names(rs), tz='Asia/Jakarta') -
+                        lubridate::as_datetime("2019-01-01 00:00:00", tz='Asia/Jakarta'),
                       unit="hours")
   val_date <- unique(dates)
 
