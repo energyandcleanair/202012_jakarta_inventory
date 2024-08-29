@@ -17,7 +17,7 @@ sectors <- names(edgar.local_to_edgar_sectors())
 compare_sector <- function(sector){
   print(paste0("=================", sector, "================="))
 
-  polls <- c("NOx","SO2","BC","OC","PM","NMVOC","NH3","CH4")
+  polls <- c("NOx","SO2","BC","OC","PM","NMVOC","NH3","CH4","CO")
   polls.edgar <- gsub("PM", "PM10", polls)
   sector_name <- data.sector_name(sector)
 
@@ -212,7 +212,7 @@ compare_sectors <- function(sectors){
       theme(legend.position = "top") +
       guides(fill = guide_legend(nrow = 1)) +
       scale_fill_manual(name="",
-                        values=unname(rcrea::pal_crea[c("Dark.blue","Blue","Orange")])) +
+                        values=unname(rcrea::pal_crea[c("Dark.blue","Blue","Orange","Red")])) +
       scale_y_continuous(expand=expansion(mult=c(0,0.1)),
                          labels=scales::comma) +
       scale_x_discrete(guide = guide_axis(n.dodge = 2)) +
@@ -237,7 +237,7 @@ compare_sectors <- function(sectors){
       theme(legend.position = "top") +
       guides(fill = guide_legend(nrow = 1)) +
       scale_fill_manual(name="",
-                        values=unname(rcrea::pal_crea[c("Dark.blue","Blue","Orange")])) +
+                        values=unname(rcrea::pal_crea[c("Dark.blue","Blue","Orange","Red")])) +
       scale_y_continuous(expand=expansion(mult=c(0,0.1))) +
       labs(subtitle="All sectors - Comparison between CREA and EDGAR total emissions",
            y="Tonne",
@@ -266,3 +266,4 @@ compare_sectors <- function(sectors){
 }
 
 compare_sectors(sectors)
+
